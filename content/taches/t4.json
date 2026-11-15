@@ -11,13 +11,13 @@
       "type": "texte",
       "id": "t4-intro",
       "titre": "",
-      "corps": "À partir des connaissances acquises dans les trois premières tâches, vous allez enrichir une tâche existante de ***dis donc ! 7*** ou ***dis donc ! 8*** afin qu’elle permette également aux élèves de développer leurs compétences interculturelles.\n\nVous vous appuierez sur le matériel et les ressources disponibles. Il s’agit de faire **évoluer une tâche du manuel en lui donnant une dimension interculturelle explicite**, tout en conservant son objectif communicatif. Vous montrerez également comment cet enrichissement contribue à l’**ÉDD**.\n\nVous mettrez ensuite votre proposition à l’essai en binôme en y introduisant une **carte-incident** (*= Störkarte*) : une situation susceptible de compliquer la réalisation de la tâche et de solliciter les compétences interculturelles des élèves."
+      "corps": "À partir des connaissances acquises dans les trois premières tâches, vous allez enrichir une tâche existante de ***dis donc ! 7*** ou ***dis donc ! 8*** afin qu’elle permette également aux élèves de développer leurs compétences interculturelles.\n\nVous vous appuierez sur le matériel et les ressources disponibles. Il s’agit de faire **évoluer une tâche du manuel en lui donnant une dimension interculturelle explicite**, tout en conservant son objectif communicatif. Vous montrerez également comment cet enrichissement contribue à l’**éducation au développement durable (ÉDD)**.\n\nVous mettrez ensuite votre proposition à l’essai en binôme en y introduisant une **carte-incident** (*= Störkarte*) : une situation susceptible de compliquer la réalisation de la tâche et de solliciter les compétences interculturelles des élèves."
     },
     {
       "type": "schema",
       "id": "t4-intro-carte",
       "modele": "carte-incident",
-      "legende": "La carte-incident (Störkarte) : une situation brève, des rôles, et des questions pour analyser — jamais la solution. Vous la créerez à l’étape 4, dans l’atelier de cartes."
+      "legende": "La carte-incident (Störkarte) : une situation brève, des rôles, et des questions pour analyser — jamais la solution. Vous la créerez à l’étape 3, dans l’atelier de cartes."
     },
     {
       "type": "consigne",
@@ -241,7 +241,7 @@
       "accroche": "Jouez, arrêtez-vous, rejouez.",
       "duree": "1 h",
       "modalite": "Binôme, hors de l’application",
-      "corps": "Parcourez d’abord votre tâche enrichie en vous plaçant du point de vue des élèves. Vérifiez les consignes, les ressources et les possibilités d’interaction.\n\nAu moment prévu, introduisez votre carte-incident et jouez la scène. Explorez d’abord les réactions spontanées possibles, puis marquez une pause pour analyser la situation :\n\n- Que savons-nous réellement et quelles intentions supposons-nous ?\n- Quelles autres interprétations sont possibles ?\n- Quelles questions permettraient de mieux comprendre la situation ?\n- Quels moyens linguistiques ou quelles interventions pourraient faciliter la poursuite de la tâche ?\n\nDéfinissez **au moins deux pistes de résolution**, puis rejouez la scène en les essayant. Inversez les rôles si cela permet d’examiner un autre point de vue.\n\nDistinguez ce que les élèves pourraient faire eux-mêmes de ce qui demanderait une intervention de la personne enseignante. Il n’est pas nécessaire d’aboutir à un accord complet : une clarification, une adaptation ou un désaccord exprimé avec respect peuvent constituer une issue pertinente.\n\n*Cet essai entre adultes sert à examiner votre dispositif ; il ne permet pas de démontrer les effets qu’il aurait dans une classe.*",
+      "corps": "Parcourez d’abord votre tâche enrichie en vous plaçant du point de vue des élèves. Vérifiez les consignes, les ressources et les possibilités d’interaction.\n\nAu moment prévu, introduisez votre carte-incident et jouez la scène. Explorez d’abord les réactions spontanées possibles, puis marquez une pause pour analyser la situation :\n\n- Que savons-nous réellement et quelles intentions supposons-nous ?\n- Quelles autres interprétations sont possibles ?\n- Quelles questions permettraient de mieux comprendre la situation ?\n- Quels moyens linguistiques ou quelles interventions pourraient faciliter la poursuite de la tâche ?\n\nDéfinissez **au moins deux pistes de résolution**, puis rejouez la scène en essayant ces pistes. Inversez les rôles si cela permet d’examiner un autre point de vue.\n\nDistinguez ce que les élèves pourraient faire eux-mêmes de ce qui demanderait une intervention de la personne enseignante. Il n’est pas nécessaire d’aboutir à un accord complet : une clarification, une adaptation ou un désaccord exprimé avec respect peuvent constituer une issue pertinente.\n\n*Cet essai entre adultes sert à examiner votre dispositif ; il ne permet pas de démontrer les effets qu’il aurait dans une classe.*",
       "repliee": false
     },
     {

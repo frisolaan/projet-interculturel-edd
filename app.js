@@ -389,7 +389,7 @@ function stepHeader(id, steps, idx) {
   const bar = steps.map((s, i) => `<a href="#/${id}/${i}" class="seg ${i < idx ? 'done' : i === idx ? 'now' : ''}" title="${esc(s.titre.replace(/[*_]/g, ''))}" aria-label="Étape ${i + 1} : ${esc(s.titre.replace(/[*_]/g, ''))}"></a>`).join('');
   const dur = steps[idx] && steps[idx].consigne && steps[idx].consigne.duree;
   return el('header', { class: 'step-head' }, `
-    <span class="eyebrow">${esc(tacheLabel(t))} · étape ${idx + 1} / ${steps.length}${dur ? ` · ${esc(dur)}` : idx === 0 ? ` · tâche : ${esc(t.duree)}` : ''}</span>
+    <span class="eyebrow">${esc(tacheLabel(t))}${steps[idx].intro ? ' · introduction' : ''}${dur ? ` · ${esc(dur)}` : idx === 0 ? ` · tâche : ${esc(t.duree)}` : ''}</span>
     <nav class="segbar" aria-label="Étapes">${bar}</nav>`);
 }
 
@@ -1188,7 +1188,7 @@ function renderAtelier(main) {
   const cfg = acConfig(b.id);
   const saveCfg = () => setA(b.id, JSON.parse(JSON.stringify(cfg)));
   let current = 0; let side = 'recto';
-  main.append(el('section', { class: 'tache-hero' }, `${motif('t4', 'hero-motif')}<div><p class="eyebrow">Tâche finale · étape 4</p><h1>Atelier de cartes</h1>
+  main.append(el('section', { class: 'tache-hero' }, `${motif('t4', 'hero-motif')}<div><p class="eyebrow">Tâche finale · étape 3</p><h1>Atelier de cartes</h1>
     <p class="lead">Mettez en forme votre carte-incident (Störkarte) et les cartes de rôle, puis imprimez-les ou projetez-les.</p></div>`));
   const grid = el('div', { class: 'ac-grid' });
   const form = el('div', { class: 'ac-form' });
