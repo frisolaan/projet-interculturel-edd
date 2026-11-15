@@ -48,7 +48,7 @@ collections:
     label: Tâche 1 · Qu’est-ce que la culture ?
     file: content/taches/t1.json
     format: json
-    fields: &id010
+    fields:
     - label: ID (nicht ändern)
       name: id
       widget: string
@@ -80,63 +80,68 @@ collections:
         name: consigne
         widget: object
         fields:
-        - &id006
-          label: ID (nicht ändern)
+        - label: ID (nicht ändern)
           name: id
           widget: string
           hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
         - label: Titel
           name: titre
           widget: string
-        - &id002 label: Einstiegsfrage (kursiv, kurz und einladend)
-          &id003 name: accroche
-          &id004 widget: &id008 string
-          &id005 required: &id001 false
+        - label: Einstiegsfrage (kursiv, kurz und einladend)
+          name: accroche
+          widget: string
+          required: false
         - label: Dauer
           name: duree
           widget: string
-          required: *id001
+          required: false
         - label: Sozialform
           name: modalite
           widget: string
-          required: *id001
+          required: false
         - label: Text
           name: corps
           widget: markdown
-        - *id002: Text zugeklappt anzeigen («Consigne détaillée»)
-          *id003: repliee
-          *id004: boolean
-          *id005: *id001
-          default: *id001
+        - label: Text zugeklappt anzeigen («Consigne détaillée»)
+          name: repliee
+          widget: boolean
+          required: false
+          default: false
       - label: Text (Lesetext, Situation, Gedicht)
         name: texte
         widget: object
         fields:
-        - *id006
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
         - label: Titel
           name: titre
           widget: string
-          required: *id001
+          required: false
         - label: Text
           name: corps
           widget: markdown
         - label: Zugeklappt anzeigen
           name: repliable
           widget: boolean
-          required: *id001
-          default: *id001
+          required: false
+          default: false
       - label: Antwortfeld
         name: reponse
         widget: object
         fields:
-        - *id006
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
         - label: Beschriftung
           name: label
           widget: string
         - label: Platzhalter / Hilfe im Feld
           name: aide
           widget: text
-          required: *id001
+          required: false
         - label: Grösse
           name: longueur
           widget: select
@@ -153,12 +158,15 @@ collections:
         - label: Privat (bleibt lokal, nicht im Dossier)
           name: prive
           widget: boolean
-          default: *id001
+          default: false
       - label: Tabelle
         name: tableau
         widget: object
         fields:
-        - *id006
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
         - label: Beschriftung
           name: label
           widget: string
@@ -168,7 +176,7 @@ collections:
         - label: Beispielzeilen (je Zeile eine Liste der Zellen)
           name: exemples
           widget: list
-          required: *id001
+          required: false
           field:
             label: Zeile
             name: ligne
@@ -182,7 +190,10 @@ collections:
         name: tri
         widget: object
         fields:
-        - *id006
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
         - label: Anweisung
           name: consigne
           widget: string
@@ -211,22 +222,24 @@ collections:
           - label: Erklärung (wird nach dem Prüfen gezeigt)
             name: explication
             widget: string
-            required: *id001
+            required: false
         - label: Eigene Beispiele erlauben
           name: ajout_libre
           widget: boolean
-          default: *id001
-        - &id007
-          label: Redaktionsstatus (nur im Redaktionsmodus sichtbar)
+          default: false
+        - label: Redaktionsstatus (nur im Redaktionsmodus sichtbar)
           name: statut_contenu
           widget: string
-          required: *id001
+          required: false
           hint: z. B. «Entwurf – à valider». Leeren, sobald der Inhalt freigegeben ist.
       - label: Selbstcheck (Checkliste + Beispiel)
         name: autocontrole
         widget: object
         fields:
-        - *id006
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
         - label: Titel
           name: titre
           widget: string
@@ -236,28 +249,35 @@ collections:
         - label: Titel des Beispiels
           name: exemple_titre
           widget: string
-          required: *id001
+          required: false
         - label: Beispiel / Musterlösung
           name: exemple
           widget: markdown
-          required: *id001
-        - *id007
+          required: false
+        - label: Redaktionsstatus (nur im Redaktionsmodus sichtbar)
+          name: statut_contenu
+          widget: string
+          required: false
+          hint: z. B. «Entwurf – à valider». Leeren, sobald der Inhalt freigegeben ist.
       - label: Externe Ressource (ILIAS, Lehrmittel …)
         name: externe
         widget: object
         fields:
-        - *id006
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
         - label: Titel
           name: titre
           widget: string
         - label: Text
           name: corps
           widget: markdown
-          required: *id001
+          required: false
         - label: Links
           name: liens
           widget: list
-          required: *id001
+          required: false
           fields:
           - label: Beschriftung
             name: label
@@ -265,19 +285,22 @@ collections:
           - label: URL
             name: url
             widget: string
-            required: *id001
+            required: false
       - label: Lehrplan-Fenster
         name: lehrplan
         widget: object
         fields:
-        - *id006
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
         - label: Titel
           name: titre
           widget: string
         - label: Text
           name: corps
           widget: markdown
-          required: *id001
+          required: false
         - label: Schaltflächen
           name: liens
           widget: list
@@ -289,44 +312,47 @@ collections:
           - label: Suchwort
             name: recherche
             widget: string
-            required: *id001
+            required: false
           - label: URL
             name: url
             widget: string
-            required: *id001
-      - *id002: Weiterführender Bezug (z. B. A Rounder Sense of Purpose)
-        *id003: repere
-        *id004: object
-        &id009 fields:
-        - *id002: ID (nicht ändern)
-          *id003: id
-          *id004: *id008
-        - *id002: Titel
-          *id003: titre
-          *id004: *id008
-        - *id002: Text
-          *id003: corps
-          *id004: markdown
-          *id005: *id001
-        - *id002: Links
-          *id003: liens
-          *id004: list
-          *id009:
-          - *id002: Beschriftung
-            *id003: *id002
-            *id004: *id008
-          - *id002: URL
-            *id003: url
-            *id004: *id008
-        - *id002: Quelle / Lizenz
-          *id003: source
-          *id004: *id008
-          *id005: *id001
+            required: false
+      - label: Weiterführender Bezug (z. B. A Rounder Sense of Purpose)
+        name: repere
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Text
+          name: corps
+          widget: markdown
+          required: false
+        - label: Links
+          name: liens
+          widget: list
+          fields:
+          - label: Beschriftung
+            name: label
+            widget: string
+          - label: URL
+            name: url
+            widget: string
+        - label: Quelle / Lizenz
+          name: source
+          widget: string
+          required: false
       - label: Rückblick (zeigt eine frühere Antwort)
         name: rappel
         widget: object
         fields:
-        - *id006
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
         - label: Titel
           name: titre
           widget: string
@@ -336,12 +362,15 @@ collections:
         - label: Text darunter
           name: corps
           widget: markdown
-          required: *id001
+          required: false
       - label: Silhouette (Wörter platzieren)
         name: silhouette
         widget: object
         fields:
-        - *id006
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
         - label: Privat
           name: prive
           widget: boolean
@@ -350,7 +379,10 @@ collections:
         name: carte
         widget: object
         fields:
-        - *id006
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
         - label: Titel
           name: titre
           widget: string
@@ -361,14 +393,1034 @@ collections:
     label: Tâche 2 · Une personne, plusieurs facettes
     file: content/taches/t2.json
     format: json
-    fields: *id010
+    fields:
+    - label: ID (nicht ändern)
+      name: id
+      widget: string
+    - label: Nummer
+      name: numero
+      widget: string
+    - label: Titel
+      name: titre
+      widget: string
+    - label: Kurztitel (Navigation)
+      name: titre_court
+      widget: string
+    - label: Dauer
+      name: duree
+      widget: string
+    - label: Sozialform
+      name: modalite
+      widget: string
+    - label: Resultat / Produkte
+      name: resultat
+      widget: text
+    - label: Blöcke
+      name: blocs
+      widget: list
+      label_singular: Block
+      summary: '{{fields.id}} · {{fields.titre}}{{fields.label}}'
+      types:
+      - label: Konsigne (Aufgabenstellung)
+        name: consigne
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Einstiegsfrage (kursiv, kurz und einladend)
+          name: accroche
+          widget: string
+          required: false
+        - label: Dauer
+          name: duree
+          widget: string
+          required: false
+        - label: Sozialform
+          name: modalite
+          widget: string
+          required: false
+        - label: Text
+          name: corps
+          widget: markdown
+        - label: Text zugeklappt anzeigen («Consigne détaillée»)
+          name: repliee
+          widget: boolean
+          required: false
+          default: false
+      - label: Text (Lesetext, Situation, Gedicht)
+        name: texte
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+          required: false
+        - label: Text
+          name: corps
+          widget: markdown
+        - label: Zugeklappt anzeigen
+          name: repliable
+          widget: boolean
+          required: false
+          default: false
+      - label: Antwortfeld
+        name: reponse
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Beschriftung
+          name: label
+          widget: string
+        - label: Platzhalter / Hilfe im Feld
+          name: aide
+          widget: text
+          required: false
+        - label: Grösse
+          name: longueur
+          widget: select
+          options:
+          - court
+          - moyen
+          - long
+          default: long
+        - label: Zielwortzahl (0 = keine)
+          name: mots_cible
+          widget: number
+          value_type: int
+          default: 0
+        - label: Privat (bleibt lokal, nicht im Dossier)
+          name: prive
+          widget: boolean
+          default: false
+      - label: Tabelle
+        name: tableau
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Beschriftung
+          name: label
+          widget: string
+        - label: Spalten
+          name: colonnes
+          widget: list
+        - label: Beispielzeilen (je Zeile eine Liste der Zellen)
+          name: exemples
+          widget: list
+          required: false
+          field:
+            label: Zeile
+            name: ligne
+            widget: list
+        - label: Anzahl leere Zeilen
+          name: lignes
+          widget: number
+          value_type: int
+          default: 3
+      - label: Sortierübung (mit Selbstcheck)
+        name: tri
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Anweisung
+          name: consigne
+          widget: string
+        - label: Kategorien
+          name: categories
+          widget: list
+          fields:
+          - label: Kennung
+            name: id
+            widget: string
+            hint: kurz, ohne Leerzeichen, z. B. racines
+          - label: Beschriftung
+            name: label
+            widget: string
+        - label: Elemente
+          name: elements
+          widget: list
+          summary: '{{fields.texte}} → {{fields.solution}}'
+          fields:
+          - label: Text
+            name: texte
+            widget: string
+          - label: Lösung (Kategorie-Kennung oder «les-deux»)
+            name: solution
+            widget: string
+          - label: Erklärung (wird nach dem Prüfen gezeigt)
+            name: explication
+            widget: string
+            required: false
+        - label: Eigene Beispiele erlauben
+          name: ajout_libre
+          widget: boolean
+          default: false
+        - label: Redaktionsstatus (nur im Redaktionsmodus sichtbar)
+          name: statut_contenu
+          widget: string
+          required: false
+          hint: z. B. «Entwurf – à valider». Leeren, sobald der Inhalt freigegeben ist.
+      - label: Selbstcheck (Checkliste + Beispiel)
+        name: autocontrole
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Prüfpunkte
+          name: points
+          widget: list
+        - label: Titel des Beispiels
+          name: exemple_titre
+          widget: string
+          required: false
+        - label: Beispiel / Musterlösung
+          name: exemple
+          widget: markdown
+          required: false
+        - label: Redaktionsstatus (nur im Redaktionsmodus sichtbar)
+          name: statut_contenu
+          widget: string
+          required: false
+          hint: z. B. «Entwurf – à valider». Leeren, sobald der Inhalt freigegeben ist.
+      - label: Externe Ressource (ILIAS, Lehrmittel …)
+        name: externe
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Text
+          name: corps
+          widget: markdown
+          required: false
+        - label: Links
+          name: liens
+          widget: list
+          required: false
+          fields:
+          - label: Beschriftung
+            name: label
+            widget: string
+          - label: URL
+            name: url
+            widget: string
+            required: false
+      - label: Lehrplan-Fenster
+        name: lehrplan
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Text
+          name: corps
+          widget: markdown
+          required: false
+        - label: Schaltflächen
+          name: liens
+          widget: list
+          hint: Entweder ein Suchwort (öffnet die Lehrplan-Suche) oder eine URL auf tg.lehrplan.ch.
+          fields:
+          - label: Beschriftung
+            name: label
+            widget: string
+          - label: Suchwort
+            name: recherche
+            widget: string
+            required: false
+          - label: URL
+            name: url
+            widget: string
+            required: false
+      - label: Weiterführender Bezug (z. B. A Rounder Sense of Purpose)
+        name: repere
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Text
+          name: corps
+          widget: markdown
+          required: false
+        - label: Links
+          name: liens
+          widget: list
+          fields:
+          - label: Beschriftung
+            name: label
+            widget: string
+          - label: URL
+            name: url
+            widget: string
+        - label: Quelle / Lizenz
+          name: source
+          widget: string
+          required: false
+      - label: Rückblick (zeigt eine frühere Antwort)
+        name: rappel
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: ID der früheren Antwort
+          name: source
+          widget: string
+        - label: Text darunter
+          name: corps
+          widget: markdown
+          required: false
+      - label: Silhouette (Wörter platzieren)
+        name: silhouette
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Privat
+          name: prive
+          widget: boolean
+          default: true
+      - label: Karte zum Drucken (z. B. Störkarte)
+        name: carte
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: IDs der Antwortfelder auf der Karte
+          name: champs
+          widget: list
   - name: t3
     label: Tâche 3 · Comprendre et traduire en pratique
     file: content/taches/t3.json
     format: json
-    fields: *id010
+    fields:
+    - label: ID (nicht ändern)
+      name: id
+      widget: string
+    - label: Nummer
+      name: numero
+      widget: string
+    - label: Titel
+      name: titre
+      widget: string
+    - label: Kurztitel (Navigation)
+      name: titre_court
+      widget: string
+    - label: Dauer
+      name: duree
+      widget: string
+    - label: Sozialform
+      name: modalite
+      widget: string
+    - label: Resultat / Produkte
+      name: resultat
+      widget: text
+    - label: Blöcke
+      name: blocs
+      widget: list
+      label_singular: Block
+      summary: '{{fields.id}} · {{fields.titre}}{{fields.label}}'
+      types:
+      - label: Konsigne (Aufgabenstellung)
+        name: consigne
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Einstiegsfrage (kursiv, kurz und einladend)
+          name: accroche
+          widget: string
+          required: false
+        - label: Dauer
+          name: duree
+          widget: string
+          required: false
+        - label: Sozialform
+          name: modalite
+          widget: string
+          required: false
+        - label: Text
+          name: corps
+          widget: markdown
+        - label: Text zugeklappt anzeigen («Consigne détaillée»)
+          name: repliee
+          widget: boolean
+          required: false
+          default: false
+      - label: Text (Lesetext, Situation, Gedicht)
+        name: texte
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+          required: false
+        - label: Text
+          name: corps
+          widget: markdown
+        - label: Zugeklappt anzeigen
+          name: repliable
+          widget: boolean
+          required: false
+          default: false
+      - label: Antwortfeld
+        name: reponse
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Beschriftung
+          name: label
+          widget: string
+        - label: Platzhalter / Hilfe im Feld
+          name: aide
+          widget: text
+          required: false
+        - label: Grösse
+          name: longueur
+          widget: select
+          options:
+          - court
+          - moyen
+          - long
+          default: long
+        - label: Zielwortzahl (0 = keine)
+          name: mots_cible
+          widget: number
+          value_type: int
+          default: 0
+        - label: Privat (bleibt lokal, nicht im Dossier)
+          name: prive
+          widget: boolean
+          default: false
+      - label: Tabelle
+        name: tableau
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Beschriftung
+          name: label
+          widget: string
+        - label: Spalten
+          name: colonnes
+          widget: list
+        - label: Beispielzeilen (je Zeile eine Liste der Zellen)
+          name: exemples
+          widget: list
+          required: false
+          field:
+            label: Zeile
+            name: ligne
+            widget: list
+        - label: Anzahl leere Zeilen
+          name: lignes
+          widget: number
+          value_type: int
+          default: 3
+      - label: Sortierübung (mit Selbstcheck)
+        name: tri
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Anweisung
+          name: consigne
+          widget: string
+        - label: Kategorien
+          name: categories
+          widget: list
+          fields:
+          - label: Kennung
+            name: id
+            widget: string
+            hint: kurz, ohne Leerzeichen, z. B. racines
+          - label: Beschriftung
+            name: label
+            widget: string
+        - label: Elemente
+          name: elements
+          widget: list
+          summary: '{{fields.texte}} → {{fields.solution}}'
+          fields:
+          - label: Text
+            name: texte
+            widget: string
+          - label: Lösung (Kategorie-Kennung oder «les-deux»)
+            name: solution
+            widget: string
+          - label: Erklärung (wird nach dem Prüfen gezeigt)
+            name: explication
+            widget: string
+            required: false
+        - label: Eigene Beispiele erlauben
+          name: ajout_libre
+          widget: boolean
+          default: false
+        - label: Redaktionsstatus (nur im Redaktionsmodus sichtbar)
+          name: statut_contenu
+          widget: string
+          required: false
+          hint: z. B. «Entwurf – à valider». Leeren, sobald der Inhalt freigegeben ist.
+      - label: Selbstcheck (Checkliste + Beispiel)
+        name: autocontrole
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Prüfpunkte
+          name: points
+          widget: list
+        - label: Titel des Beispiels
+          name: exemple_titre
+          widget: string
+          required: false
+        - label: Beispiel / Musterlösung
+          name: exemple
+          widget: markdown
+          required: false
+        - label: Redaktionsstatus (nur im Redaktionsmodus sichtbar)
+          name: statut_contenu
+          widget: string
+          required: false
+          hint: z. B. «Entwurf – à valider». Leeren, sobald der Inhalt freigegeben ist.
+      - label: Externe Ressource (ILIAS, Lehrmittel …)
+        name: externe
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Text
+          name: corps
+          widget: markdown
+          required: false
+        - label: Links
+          name: liens
+          widget: list
+          required: false
+          fields:
+          - label: Beschriftung
+            name: label
+            widget: string
+          - label: URL
+            name: url
+            widget: string
+            required: false
+      - label: Lehrplan-Fenster
+        name: lehrplan
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Text
+          name: corps
+          widget: markdown
+          required: false
+        - label: Schaltflächen
+          name: liens
+          widget: list
+          hint: Entweder ein Suchwort (öffnet die Lehrplan-Suche) oder eine URL auf tg.lehrplan.ch.
+          fields:
+          - label: Beschriftung
+            name: label
+            widget: string
+          - label: Suchwort
+            name: recherche
+            widget: string
+            required: false
+          - label: URL
+            name: url
+            widget: string
+            required: false
+      - label: Weiterführender Bezug (z. B. A Rounder Sense of Purpose)
+        name: repere
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Text
+          name: corps
+          widget: markdown
+          required: false
+        - label: Links
+          name: liens
+          widget: list
+          fields:
+          - label: Beschriftung
+            name: label
+            widget: string
+          - label: URL
+            name: url
+            widget: string
+        - label: Quelle / Lizenz
+          name: source
+          widget: string
+          required: false
+      - label: Rückblick (zeigt eine frühere Antwort)
+        name: rappel
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: ID der früheren Antwort
+          name: source
+          widget: string
+        - label: Text darunter
+          name: corps
+          widget: markdown
+          required: false
+      - label: Silhouette (Wörter platzieren)
+        name: silhouette
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Privat
+          name: prive
+          widget: boolean
+          default: true
+      - label: Karte zum Drucken (z. B. Störkarte)
+        name: carte
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: IDs der Antwortfelder auf der Karte
+          name: champs
+          widget: list
   - name: t4
     label: Tâche finale · Enrichir une tâche
     file: content/taches/t4.json
     format: json
-    fields: *id010
+    fields:
+    - label: ID (nicht ändern)
+      name: id
+      widget: string
+    - label: Nummer
+      name: numero
+      widget: string
+    - label: Titel
+      name: titre
+      widget: string
+    - label: Kurztitel (Navigation)
+      name: titre_court
+      widget: string
+    - label: Dauer
+      name: duree
+      widget: string
+    - label: Sozialform
+      name: modalite
+      widget: string
+    - label: Resultat / Produkte
+      name: resultat
+      widget: text
+    - label: Blöcke
+      name: blocs
+      widget: list
+      label_singular: Block
+      summary: '{{fields.id}} · {{fields.titre}}{{fields.label}}'
+      types:
+      - label: Konsigne (Aufgabenstellung)
+        name: consigne
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Einstiegsfrage (kursiv, kurz und einladend)
+          name: accroche
+          widget: string
+          required: false
+        - label: Dauer
+          name: duree
+          widget: string
+          required: false
+        - label: Sozialform
+          name: modalite
+          widget: string
+          required: false
+        - label: Text
+          name: corps
+          widget: markdown
+        - label: Text zugeklappt anzeigen («Consigne détaillée»)
+          name: repliee
+          widget: boolean
+          required: false
+          default: false
+      - label: Text (Lesetext, Situation, Gedicht)
+        name: texte
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+          required: false
+        - label: Text
+          name: corps
+          widget: markdown
+        - label: Zugeklappt anzeigen
+          name: repliable
+          widget: boolean
+          required: false
+          default: false
+      - label: Antwortfeld
+        name: reponse
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Beschriftung
+          name: label
+          widget: string
+        - label: Platzhalter / Hilfe im Feld
+          name: aide
+          widget: text
+          required: false
+        - label: Grösse
+          name: longueur
+          widget: select
+          options:
+          - court
+          - moyen
+          - long
+          default: long
+        - label: Zielwortzahl (0 = keine)
+          name: mots_cible
+          widget: number
+          value_type: int
+          default: 0
+        - label: Privat (bleibt lokal, nicht im Dossier)
+          name: prive
+          widget: boolean
+          default: false
+      - label: Tabelle
+        name: tableau
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Beschriftung
+          name: label
+          widget: string
+        - label: Spalten
+          name: colonnes
+          widget: list
+        - label: Beispielzeilen (je Zeile eine Liste der Zellen)
+          name: exemples
+          widget: list
+          required: false
+          field:
+            label: Zeile
+            name: ligne
+            widget: list
+        - label: Anzahl leere Zeilen
+          name: lignes
+          widget: number
+          value_type: int
+          default: 3
+      - label: Sortierübung (mit Selbstcheck)
+        name: tri
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Anweisung
+          name: consigne
+          widget: string
+        - label: Kategorien
+          name: categories
+          widget: list
+          fields:
+          - label: Kennung
+            name: id
+            widget: string
+            hint: kurz, ohne Leerzeichen, z. B. racines
+          - label: Beschriftung
+            name: label
+            widget: string
+        - label: Elemente
+          name: elements
+          widget: list
+          summary: '{{fields.texte}} → {{fields.solution}}'
+          fields:
+          - label: Text
+            name: texte
+            widget: string
+          - label: Lösung (Kategorie-Kennung oder «les-deux»)
+            name: solution
+            widget: string
+          - label: Erklärung (wird nach dem Prüfen gezeigt)
+            name: explication
+            widget: string
+            required: false
+        - label: Eigene Beispiele erlauben
+          name: ajout_libre
+          widget: boolean
+          default: false
+        - label: Redaktionsstatus (nur im Redaktionsmodus sichtbar)
+          name: statut_contenu
+          widget: string
+          required: false
+          hint: z. B. «Entwurf – à valider». Leeren, sobald der Inhalt freigegeben ist.
+      - label: Selbstcheck (Checkliste + Beispiel)
+        name: autocontrole
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Prüfpunkte
+          name: points
+          widget: list
+        - label: Titel des Beispiels
+          name: exemple_titre
+          widget: string
+          required: false
+        - label: Beispiel / Musterlösung
+          name: exemple
+          widget: markdown
+          required: false
+        - label: Redaktionsstatus (nur im Redaktionsmodus sichtbar)
+          name: statut_contenu
+          widget: string
+          required: false
+          hint: z. B. «Entwurf – à valider». Leeren, sobald der Inhalt freigegeben ist.
+      - label: Externe Ressource (ILIAS, Lehrmittel …)
+        name: externe
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Text
+          name: corps
+          widget: markdown
+          required: false
+        - label: Links
+          name: liens
+          widget: list
+          required: false
+          fields:
+          - label: Beschriftung
+            name: label
+            widget: string
+          - label: URL
+            name: url
+            widget: string
+            required: false
+      - label: Lehrplan-Fenster
+        name: lehrplan
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Text
+          name: corps
+          widget: markdown
+          required: false
+        - label: Schaltflächen
+          name: liens
+          widget: list
+          hint: Entweder ein Suchwort (öffnet die Lehrplan-Suche) oder eine URL auf tg.lehrplan.ch.
+          fields:
+          - label: Beschriftung
+            name: label
+            widget: string
+          - label: Suchwort
+            name: recherche
+            widget: string
+            required: false
+          - label: URL
+            name: url
+            widget: string
+            required: false
+      - label: Weiterführender Bezug (z. B. A Rounder Sense of Purpose)
+        name: repere
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Text
+          name: corps
+          widget: markdown
+          required: false
+        - label: Links
+          name: liens
+          widget: list
+          fields:
+          - label: Beschriftung
+            name: label
+            widget: string
+          - label: URL
+            name: url
+            widget: string
+        - label: Quelle / Lizenz
+          name: source
+          widget: string
+          required: false
+      - label: Rückblick (zeigt eine frühere Antwort)
+        name: rappel
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: ID der früheren Antwort
+          name: source
+          widget: string
+        - label: Text darunter
+          name: corps
+          widget: markdown
+          required: false
+      - label: Silhouette (Wörter platzieren)
+        name: silhouette
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Privat
+          name: prive
+          widget: boolean
+          default: true
+      - label: Karte zum Drucken (z. B. Störkarte)
+        name: carte
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: IDs der Antwortfelder auf der Karte
+          name: champs
+          widget: list
