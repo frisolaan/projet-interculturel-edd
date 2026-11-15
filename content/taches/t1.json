@@ -5,7 +5,7 @@
   "titre_court": "Qu’est-ce que la culture ?",
   "duree": "1 h 30",
   "modalite": "Travail individuel",
-  "resultat": "Carte mentale du concept « culture », arbre de la culture, réponses individuelles et définition accessible aux élèves et aux parents.",
+  "resultat": "Carte mentale, arbre de la culture, réponses et définition accessible aux élèves et aux parents.",
   "blocs": [
     {
       "type": "texte",
@@ -20,16 +20,14 @@
       "accroche": "Que mettez-vous derrière le mot « culture » ?",
       "duree": "",
       "modalite": "",
-      "corps": "Créez une carte mentale pour le terme **« La culture »**. Quelles en sont les parties intégrantes ?\n\nVous pouvez dessiner votre carte sur papier ou avec l’outil de votre choix, puis noter ci-dessous les éléments principaux et les liens entre eux.",
+      "corps": "Créez une carte mentale pour le terme **« La culture »**. Quelles en sont les parties intégrantes ?\n\nÉcrivez un mot, ajoutez-le, puis cliquez sur un mot pour y accrocher de nouvelles branches.",
       "repliee": false
     },
     {
-      "type": "reponse",
-      "id": "t1-a1-carte",
-      "label": "Ma carte mentale : éléments principaux et liens",
-      "aide": "Par exemple : culture → langue, valeurs, fêtes… ; valeurs → ce qui est permis / interdit…",
-      "longueur": "long",
-      "mots_cible": 0,
+      "type": "mindmap",
+      "id": "t1-a1-mindmap",
+      "label": "Ma carte mentale",
+      "centre": "La culture",
       "prive": false
     },
     {
@@ -39,23 +37,42 @@
       "accroche": "Deux idées du texte à creuser : l’échange et l’appartenance.",
       "duree": "",
       "modalite": "",
-      "corps": "Répondez aux deux questions suivantes.",
-      "repliee": true
+      "corps": "Répondez aux deux questions suivantes. Les passages du texte utiles sont rappelés au-dessus de chaque question.",
+      "repliee": false
+    },
+    {
+      "type": "extrait",
+      "id": "t1-a2a-extrait",
+      "titre": "Rappel du texte — paragraphe 2",
+      "source": "t1-texte",
+      "paragraphes": [
+        2
+      ]
     },
     {
       "type": "reponse",
       "id": "t1-a2a",
       "label": "a. La culture entre échanges et appartenance",
-      "aide": "Relisez le paragraphe ¶2. Expliquez le sens des deux affirmations suivantes et illustrez chacune par des exemples : « La culture a toujours été façonnée par les échanges. » — « La culture permet de distinguer qui est « nous » et qui sont « les autres ». »",
+      "aide": "Expliquez le sens des deux affirmations suivantes et illustrez chacune par des exemples : « La culture a toujours été façonnée par les échanges. » — « La culture permet de distinguer qui est « nous » et qui sont « les autres ». »",
       "longueur": "long",
       "mots_cible": 0,
       "prive": false
     },
     {
+      "type": "extrait",
+      "id": "t1-a2b-extrait",
+      "titre": "Rappel du texte — paragraphes 3 et 4",
+      "source": "t1-texte",
+      "paragraphes": [
+        3,
+        4
+      ]
+    },
+    {
       "type": "reponse",
       "id": "t1-a2b",
       "label": "b. Comprendre les malentendus",
-      "aide": "Expliquez pourquoi des malentendus peuvent survenir lorsque différentes cultures se rencontrent. Appuyez-vous sur les paragraphes ¶3 et ¶4 et intégrez-les à votre réflexion.",
+      "aide": "Expliquez pourquoi des malentendus peuvent survenir lorsque différentes cultures se rencontrent. Pour construire votre réponse, appuyez-vous sur les paragraphes 3 et 4 et intégrez-les à votre réflexion.",
       "longueur": "long",
       "mots_cible": 0,
       "prive": false
@@ -67,7 +84,7 @@
       "accroche": "Qu’est-ce qui se voit — et qu’est-ce qui reste sous la surface ?",
       "duree": "",
       "modalite": "",
-      "corps": "Représentez les différentes dimensions de la culture à l’aide de l’arbre.\n\n- Dans le **feuillage** : les éléments **« visibles »** de la culture.\n- Dans les **racines** : les éléments **« invisibles »** de la culture.\n\nClassez d’abord les éléments proposés, puis vérifiez. Ajoutez ensuite vos propres exemples.",
+      "corps": "À l’aide du dessin de l’arbre, représentez les différentes dimensions de la culture.\n\n- Dans le **feuillage**, inscrivez les éléments **« visibles »** de la culture.\n- Dans les **racines**, inscrivez les éléments **« invisibles »** de la culture.\n\nAppuyez-vous sur le texte « Qu’est-ce que la culture ? » et complétez votre schéma avec vos propres exemples. Commencez par classer les éléments proposés, puis comparez avec notre proposition.",
       "repliee": false
     },
     {
@@ -148,7 +165,8 @@
       ],
       "ajout_libre": true,
       "statut_contenu": "Entwurf – à valider",
-      "visuel": "arbre"
+      "visuel": "arbre",
+      "mots_de": "t1-a1-mindmap"
     },
     {
       "type": "consigne",

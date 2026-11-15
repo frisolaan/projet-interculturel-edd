@@ -224,6 +224,10 @@ collections:
             value: arbre
           default: colonnes
           required: false
+        - label: Wörter aus Mindmap übernehmen (ID der Mindmap, optional)
+          name: mots_de
+          widget: string
+          required: false
         - label: Kategorien
           name: categories
           widget: list
@@ -473,6 +477,44 @@ collections:
           name: echeance
           widget: string
           required: false
+      - label: Mindmap
+        name: mindmap
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Beschriftung
+          name: label
+          widget: string
+        - label: Wort in der Mitte
+          name: centre
+          widget: string
+        - label: Privat
+          name: prive
+          widget: boolean
+          default: false
+      - label: Auszug aus einem Text (Absätze ¶)
+        name: extrait
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Titel
+          name: titre
+          widget: string
+        - label: ID des Textblocks
+          name: source
+          widget: string
+        - label: Absatznummern
+          name: paragraphes
+          widget: list
+          field:
+            label: Nummer
+            name: n
+            widget: number
+            value_type: int
   - name: t2
     label: Tâche 2 · Une personne, plusieurs facettes
     file: content/taches/t2.json
@@ -636,6 +678,10 @@ collections:
             value: arbre
           default: colonnes
           required: false
+        - label: Wörter aus Mindmap übernehmen (ID der Mindmap, optional)
+          name: mots_de
+          widget: string
+          required: false
         - label: Kategorien
           name: categories
           widget: list
@@ -885,6 +931,44 @@ collections:
           name: echeance
           widget: string
           required: false
+      - label: Mindmap
+        name: mindmap
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Beschriftung
+          name: label
+          widget: string
+        - label: Wort in der Mitte
+          name: centre
+          widget: string
+        - label: Privat
+          name: prive
+          widget: boolean
+          default: false
+      - label: Auszug aus einem Text (Absätze ¶)
+        name: extrait
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Titel
+          name: titre
+          widget: string
+        - label: ID des Textblocks
+          name: source
+          widget: string
+        - label: Absatznummern
+          name: paragraphes
+          widget: list
+          field:
+            label: Nummer
+            name: n
+            widget: number
+            value_type: int
   - name: t3
     label: Tâche 3 · Comprendre et traduire en pratique
     file: content/taches/t3.json
@@ -1048,6 +1132,10 @@ collections:
             value: arbre
           default: colonnes
           required: false
+        - label: Wörter aus Mindmap übernehmen (ID der Mindmap, optional)
+          name: mots_de
+          widget: string
+          required: false
         - label: Kategorien
           name: categories
           widget: list
@@ -1297,6 +1385,44 @@ collections:
           name: echeance
           widget: string
           required: false
+      - label: Mindmap
+        name: mindmap
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Beschriftung
+          name: label
+          widget: string
+        - label: Wort in der Mitte
+          name: centre
+          widget: string
+        - label: Privat
+          name: prive
+          widget: boolean
+          default: false
+      - label: Auszug aus einem Text (Absätze ¶)
+        name: extrait
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Titel
+          name: titre
+          widget: string
+        - label: ID des Textblocks
+          name: source
+          widget: string
+        - label: Absatznummern
+          name: paragraphes
+          widget: list
+          field:
+            label: Nummer
+            name: n
+            widget: number
+            value_type: int
   - name: t4
     label: Tâche finale · Enrichir une tâche
     file: content/taches/t4.json
@@ -1460,6 +1586,10 @@ collections:
             value: arbre
           default: colonnes
           required: false
+        - label: Wörter aus Mindmap übernehmen (ID der Mindmap, optional)
+          name: mots_de
+          widget: string
+          required: false
         - label: Kategorien
           name: categories
           widget: list
@@ -1709,3 +1839,41 @@ collections:
           name: echeance
           widget: string
           required: false
+      - label: Mindmap
+        name: mindmap
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Beschriftung
+          name: label
+          widget: string
+        - label: Wort in der Mitte
+          name: centre
+          widget: string
+        - label: Privat
+          name: prive
+          widget: boolean
+          default: false
+      - label: Auszug aus einem Text (Absätze ¶)
+        name: extrait
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Titel
+          name: titre
+          widget: string
+        - label: ID des Textblocks
+          name: source
+          widget: string
+        - label: Absatznummern
+          name: paragraphes
+          widget: list
+          field:
+            label: Nummer
+            name: n
+            widget: number
+            value_type: int

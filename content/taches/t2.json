@@ -5,7 +5,7 @@
   "titre_court": "Une personne, plusieurs facettes",
   "duree": "1 h 30",
   "modalite": "Travail individuel, puis échange en binôme",
-  "resultat": "Analyse du poème, portrait personnel, silhouette et synthèse d’environ 150 mots.",
+  "resultat": "Analyse du poème, portrait et silhouette, synthèse d’environ 150 mots.",
   "blocs": [
     {
       "type": "texte",
@@ -57,7 +57,7 @@
       "accroche": "Quels mots viennent d’elle, lesquels du regard des autres ?",
       "duree": "",
       "modalite": "Binôme",
-      "corps": "Échangez en binôme sur les questions suivantes :\n\n- Quelles facettes de l’identité reconnaissez-vous dans le poème : relations, rôles sociaux, qualités, capacités, appartenances, sentiments ?\n- Quels termes pourraient correspondre à la manière dont la personne se décrit elle-même ? Lesquels pourraient refléter le regard des autres ? Plusieurs interprétations sont possibles.\n- Quelles tensions ou contradictions relevez-vous ?\n- Comment comprenez-vous la dernière phrase du poème ?\n\nChoisissez ensuite **cinq mots ou expressions** et expliquez leur sens dans le contexte du poème.\n\nAppuyez vos interprétations sur le texte. Évitez d’associer automatiquement une qualité à une nationalité : le poème présente une voix singulière, et non les caractéristiques d’un groupe.",
+      "corps": "Échangez en binôme sur les questions suivantes :\n\n- Quelles facettes de l’identité reconnaissez-vous dans le poème : relations, rôles sociaux, qualités, capacités, appartenances, sentiments ?\n- Quels termes pourraient correspondre à la manière dont la personne se décrit elle-même ? Lesquels pourraient refléter le regard des autres ? Plusieurs interprétations sont possibles.\n- Quelles tensions ou contradictions relevez-vous ?\n- Comment comprenez-vous la dernière phrase du poème ?\n\nChoisissez ensuite **cinq mots ou expressions** et expliquez leur sens dans le contexte du poème. Présentez vos réponses dans un tableau.\n\nAppuyez vos interprétations sur le texte. Évitez d’associer automatiquement une qualité à une nationalité : le poème présente une voix singulière, et non les caractéristiques d’un groupe.",
       "repliee": false
     },
     {
@@ -100,16 +100,14 @@
       "accroche": "À votre tour : plusieurs facettes, un seul « moi ».",
       "duree": "",
       "modalite": "Individuel",
-      "corps": "Créez une carte mentale autour du mot **« Moi »**. Vous pouvez y faire figurer vos centres d’intérêt, vos relations, vos capacités, vos langues, vos appartenances, vos valeurs ou vos aspirations.\n\nÀ partir de cette carte, rédigez un court poème composé de **trois ou quatre strophes**, en reprenant si vous le souhaitez la structure « Moi… Et moi… ».\n\nVous choisissez librement les éléments que vous souhaitez évoquer. Vous pouvez également écrire le portrait d’un personnage fictif. Vous n’avez pas à révéler d’informations personnelles ni à partager l’intégralité de votre texte.",
+      "corps": "Créez une carte mentale autour du mot **« Moi »**. Vous pouvez y faire figurer vos centres d’intérêt, vos relations, vos capacités, vos langues, vos appartenances, vos valeurs ou vos aspirations.\n\nÀ partir de cette carte, rédigez un court poème composé de **trois ou quatre strophes**, en reprenant si vous le souhaitez la structure « Moi… Et moi… ».\n\nVous choisissez librement les éléments que vous souhaitez évoquer. Vous pouvez également écrire le portrait d’un personnage fictif. Vous n’avez pas à révéler d’informations personnelles ni à partager l’intégralité de votre texte. Ce poème peut rester entièrement privé : vous êtes libre de le partager ou non.",
       "repliee": false
     },
     {
-      "type": "reponse",
-      "id": "t2-3-carte",
-      "label": "Ma carte « Moi » : mots-clés",
-      "aide": "",
-      "longueur": "long",
-      "mots_cible": 0,
+      "type": "mindmap",
+      "id": "t2-3-mindmap",
+      "label": "Ma carte « Moi »",
+      "centre": "Moi",
       "prive": true
     },
     {
@@ -128,7 +126,7 @@
       "accroche": "Où placeriez-vous vos mots ?",
       "duree": "",
       "modalite": "Individuel",
-      "corps": "Placez des mots ou expressions tirés de votre poème ou du poème proposé sur la silhouette. Choisissez leur emplacement selon les liens symboliques qui vous paraissent pertinents : une aspiration près de la tête, une relation importante près du cœur, une activité près des mains, par exemple. **Il n’existe pas de placement unique ou correct.**\n\nSi vous le souhaitez, placez à l’extérieur de la silhouette des étiquettes attribuées par les autres.",
+      "corps": "Dessinez une silhouette simple ou utilisez celle ci-dessous. Inscrivez-y des mots ou expressions tirés de votre poème ou du poème proposé.\n\nChoisissez leur emplacement selon les liens symboliques qui vous paraissent pertinents : une aspiration près de la tête, une relation importante près du cœur, une activité près des mains, par exemple. **Il n’existe pas de placement unique ou correct.**\n\nSi vous le souhaitez, placez à l’extérieur de la silhouette des étiquettes attribuées par les autres et représentez leurs liens avec ce qui figure à l’intérieur.",
       "repliee": false
     },
     {
@@ -143,7 +141,7 @@
       "accroche": "Ce que l’activité vous apprend — et ce qu’elle pourrait apprendre à vos élèves.",
       "duree": "",
       "modalite": "Individuel",
-      "corps": "Rédigez une brève synthèse d’environ **150 mots** en répondant aux questions suivantes :\n\n- Pourquoi est-il réducteur de définir une personne uniquement par sa nationalité, sa langue ou son origine ?\n- Quel est le potentiel didactique de cette activité ? Comment pourrait-elle aider vos élèves à mieux comprendre la diversité des identités ?\n- À quoi devriez-vous veiller pour que chaque élève puisse participer sans se sentir enfermé dans une catégorie ou obligé de dévoiler son histoire personnelle ?",
+      "corps": "Rédigez une brève synthèse d’environ **150 mots** en répondant aux questions suivantes :\n\n- Pourquoi est-il réducteur de définir une personne uniquement par sa nationalité, sa langue ou son origine ?\n- Quel est le potentiel didactique de cette activité ? Comment cette activité pourrait-elle aider vos élèves à mieux comprendre la diversité des identités ?\n- À quoi devriez-vous veiller pour que chaque élève puisse participer sans se sentir enfermé dans une catégorie ou obligé de dévoiler son histoire personnelle ?",
       "repliee": false
     },
     {

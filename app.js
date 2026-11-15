@@ -11,7 +11,7 @@ const STORE_KEY = 'pi-edd-v1';
 const LP_BASE = 'https://tg.lehrplan.ch/';
 const LP_SEARCH = (q) => `${LP_BASE}index.php?code=s&suchwort=${encodeURIComponent(q)}`;
 const REDACTION = new URLSearchParams(location.search).has('redaction');
-const ANSWER_TYPES = ['reponse', 'tableau', 'tri', 'autocontrole', 'silhouette'];
+const ANSWER_TYPES = ['reponse', 'tableau', 'tri', 'autocontrole', 'silhouette', 'mindmap'];
 
 const md = (s) => marked.parse(s || '');
 const mdInline = (s) => marked.parseInline(s || '');
@@ -457,6 +457,8 @@ function renderBlock(b) {
     case 'audio': return blockAudio(b);
     case 'schema': return blockSchema(b);
     case 'remise': return blockRemise(b);
+    case 'mindmap': return blockMindmap(b);
+    case 'extrait': return blockExtrait(b);
     default: return REDACTION ? el('div', { class: 'card' }, `Type inconnu : ${esc(b.type)}`) : null;
   }
 }
@@ -489,7 +491,9 @@ function blockReponse(b) {
   const wrap = el('section', { class: 'answer' + (b.prive ? ' private' : '') });
   wrap.append(el('label', { for: `f-${b.id}` }, `${mdInline(b.label)}${b.prive ? ' <span class="badge">espace privé</span>' : ''}`));
   const rows = b.longueur === 'court' ? 2 : b.longueur === 'moyen' ? 4 : 7;
-  const ta = el('textarea', { id: `f-${b.id}`, rows, placeholder: b.aide || '' });
+  const longHelp = (b.aide || '').length > 70;
+  if (longHelp) wrap.append(el('p', { class: 'answer-help' }, mdInline(b.aide)));
+  const ta = el('textarea', { id: `f-${b.id}`, rows, placeholder: longHelp ? '' : (b.aide || '') });
   ta.value = getA(b.id, '');
   const info = el('div', { class: 'answer-info' });
   const updInfo = () => {
@@ -544,6 +548,7 @@ function blockTri(b) {
   const st = getA(b.id, null) || { placements: {}, ajouts: [], verifie: false };
   const commit = () => setA(b.id, JSON.parse(JSON.stringify(st)));
   let selected = null;
+  let selectedOwn = null;
 
   const draw = () => {
     wrap.innerHTML = `<p class="tri-consigne">${mdInline(b.consigne)}</p>`;
@@ -577,6 +582,7 @@ function blockTri(b) {
       const chip = el('button', { class: cls, draggable: 'true', type: 'button' }, `${mark}${esc(item.texte)}${note ? `<span class="why">${esc(note)}</span>` : ''}`);
       chip.addEventListener('click', (e) => {
         e.stopPropagation();
+        if (placed && selectedOwn) { st.ajouts.push({ texte: selectedOwn, cat: placed }); selectedOwn = null; commit(); draw(); return; }
         if (placed && selected !== null && selected !== i) { drop(placed, selected); return; }
         if (placed) { delete st.placements[i]; st.verifie = false; selected = null; commit(); draw(); return; }
         selected = selected === i ? null : i; draw();
@@ -584,14 +590,40 @@ function blockTri(b) {
       chip.addEventListener('dragstart', (e) => { e.dataTransfer.setData('text/plain', String(i)); });
       (placed && boxes[placed] ? boxes[placed] : pool).append(chip);
     });
-    for (const a of st.ajouts) if (boxes[a.cat]) boxes[a.cat].append(el('span', { class: 'chip own' }, esc(a.texte)));
+    st.ajouts.forEach((a, ai) => {
+      if (!boxes[a.cat]) return;
+      const c = el('button', { type: 'button', class: 'chip own', title: 'Cliquer pour retirer' }, esc(a.texte));
+      c.addEventListener('click', (e) => { e.stopPropagation(); st.ajouts.splice(ai, 1); commit(); draw(); });
+      boxes[a.cat].append(c);
+    });
     [pool, ...Object.values(boxes)].forEach((zone) => {
       zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('over'); });
       zone.addEventListener('dragleave', () => zone.classList.remove('over'));
-      zone.addEventListener('drop', (e) => { e.preventDefault(); drop(zone.dataset.cat, Number(e.dataTransfer.getData('text/plain'))); });
-      zone.addEventListener('click', () => { if (selected !== null) drop(zone.dataset.cat, selected); });
+      zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const v = e.dataTransfer.getData('text/plain');
+        if (v.startsWith('own:')) { if (zone.dataset.cat) { st.ajouts.push({ texte: v.slice(4), cat: zone.dataset.cat }); commit(); draw(); } return; }
+        drop(zone.dataset.cat, Number(v));
+      });
+      zone.addEventListener('click', () => {
+        if (selectedOwn && zone.dataset.cat) { st.ajouts.push({ texte: selectedOwn, cat: zone.dataset.cat }); selectedOwn = null; commit(); draw(); return; }
+        if (selected !== null) drop(zone.dataset.cat, selected);
+      });
     });
     if (pool.children.length) wrap.append(pool);
+    if (b.mots_de) {
+      const used = new Set(st.ajouts.map((a) => a.texte));
+      const words = mmWords(b.mots_de).filter((w) => !used.has(w));
+      const box = el('div', { class: 'tri-own' });
+      box.append(el('p', { class: 'tri-own-t' }, words.length ? 'Vos mots de la carte mentale — placez-les aussi :' : (mmWords(b.mots_de).length ? 'Tous vos mots de la carte mentale sont placés.' : 'Votre carte mentale est encore vide — vous pourrez y revenir.')));
+      words.forEach((w) => {
+        const c = el('button', { type: 'button', class: 'chip own-src' + (selectedOwn === w ? ' selected' : ''), draggable: 'true' }, esc(w));
+        c.addEventListener('click', (e) => { e.stopPropagation(); selectedOwn = selectedOwn === w ? null : w; selected = null; draw(); });
+        c.addEventListener('dragstart', (e) => e.dataTransfer.setData('text/plain', 'own:' + w));
+        box.append(c);
+      });
+      wrap.append(box);
+    }
     else if (!st.verifie) wrap.append(el('p', { class: 'hint' }, 'Tout est placé.'));
     wrap.append(cats);
 
@@ -610,7 +642,7 @@ function blockTri(b) {
       f.append(inp, sel, el('button', { class: 'btn ghost small', type: 'submit' }, 'Ajouter'));
       f.addEventListener('submit', (e) => { e.preventDefault(); if (!inp.value.trim()) return; st.ajouts.push({ texte: inp.value.trim(), cat: sel.value }); commit(); draw(); });
       wrap.append(f);
-      if (st.ajouts.length) wrap.append(el('button', { class: 'link', onclick: () => { st.ajouts.pop(); commit(); draw(); } }, 'Retirer mon dernier exemple'));
+      if (st.ajouts.length) wrap.append(el('p', { class: 'hint' }, 'Vos propres mots (bordure pointillée) se retirent d’un clic.'));
     }
   };
   draw();
@@ -657,7 +689,7 @@ function blockAutocontrole(b) {
 function blockExterne(b) {
   const links = (b.liens || []).map((l) => (l.url
     ? `<a class="btn ghost small" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`
-    : (REDACTION ? `<span class="badge">lien à compléter : ${esc(l.label)}</span>` : `<span class="muted">${esc(l.label)}</span>`))).join(' ');
+    : `<span class="btn ghost small disabled" title="Le lien sera ajouté prochainement">${esc(l.label)} · lien à venir</span>`)).join(' ');
   return el('aside', { class: 'aside external' }, `<p class="aside-kicker">Hors de l’application</p><h3>${esc(b.titre)}</h3><div class="prose">${md(b.corps)}</div><div class="row">${links}</div>`);
 }
 
@@ -678,34 +710,61 @@ function blockRepere(b) {
 }
 
 function blockRappel(b) {
-  const v = getA(b.source, '');
+  const srcB = allBlocks().find((x) => x.id === b.source);
+  let v = getA(b.source, '');
+  if (srcB && srcB.type === 'mindmap') v = mmWords(b.source).join(' · ');
+  if (typeof v !== 'string') v = '';
   return el('aside', { class: 'aside recall' }, `<p class="aside-kicker">Retour en arrière</p><h3>${esc(b.titre)}</h3>
     <blockquote>${v ? esc(v).replace(/\n/g, '<br>') : '<em>Aucune note pour l’instant.</em>'}</blockquote>
     ${b.corps ? `<div class="prose">${md(b.corps)}</div>` : ''}`);
 }
 
-const SILHOUETTE_SVG = `<svg viewBox="0 0 200 400" aria-hidden="true"><g fill="var(--sil)">
-<circle cx="100" cy="48" r="32"/>
-<path d="M60 92 Q100 82 140 92 L160 112 Q170 160 172 220 L156 222 L150 150 L146 236 Q146 300 138 388 L112 388 L104 262 L96 262 L88 388 L62 388 Q54 300 54 236 L50 150 L44 222 L28 220 Q30 160 40 112 Z"/></g></svg>`;
+const SILHOUETTE_SVG = `<svg viewBox="0 0 200 400" aria-hidden="true" class="sil-fig"><g style="fill:var(--sil)">
+<circle cx="100" cy="50" r="33"/>
+<path d="M84 92 Q100 99 116 92 C138 95 150 104 154 122 L166 214 Q168 228 156 229 Q145 229 144 216 L137 152 L135 238 L132 380 Q131 393 118 393 Q106 393 105 380 L102 262 L98 262 L95 380 Q94 393 82 393 Q69 393 68 380 L65 238 L63 152 L56 216 Q55 229 44 229 Q32 228 34 214 L46 122 C50 104 62 95 84 92 Z"/></g></svg>`;
 
 function blockSilhouette(b) {
   const wrap = el('section', { class: 'answer private' });
   wrap.append(el('label', {}, 'Ma silhouette <span class="badge">espace privé</span>'));
-  const st = getA(b.id, null) || { mots: [] };
+  const st = getA(b.id, null) || { mots: [], liens: [] };
+  st.liens = st.liens || [];
+  let seq = 0;
+  st.mots.forEach((m) => { if (!m.id) m.id = 'm' + Math.random().toString(36).slice(2, 8); });
+  let linkFrom = null; let linkMode = false;
   const stage = el('div', { class: 'sil-stage' }, SILHOUETTE_SVG);
-  const commit = () => setA(b.id, { mots: st.mots.map((m) => ({ ...m })) });
-  const place = (m, i) => {
-    const w = el('span', { class: 'sil-word', style: `left:${m.x}%;top:${m.y}%` }, `${esc(m.texte)}<button type="button" aria-label="Supprimer">×</button>`);
-    w.querySelector('button').addEventListener('click', (e) => { e.stopPropagation(); st.mots.splice(i, 1); commit(); redraw(); });
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'sil-links'); svg.setAttribute('viewBox', '0 0 100 100'); svg.setAttribute('preserveAspectRatio', 'none');
+  stage.append(svg);
+  const commit = () => setA(b.id, { mots: st.mots.map((m) => ({ ...m })), liens: st.liens.map((l) => [...l]) });
+  const center = (m) => { const n = stage.querySelector(`[data-mid="${m.id}"]`); if (!n) return [m.x, m.y]; const r = stage.getBoundingClientRect(); const q = n.getBoundingClientRect(); return [((q.left + q.width / 2 - r.left) / r.width) * 100, ((q.top + q.height / 2 - r.top) / r.height) * 100]; };
+  const drawLinks = () => {
+    svg.innerHTML = '';
+    st.liens = st.liens.filter(([a, c]) => st.mots.find((m) => m.id === a) && st.mots.find((m) => m.id === c));
+    for (const [a, c] of st.liens) {
+      const [x1, y1] = center(st.mots.find((m) => m.id === a)); const [x2, y2] = center(st.mots.find((m) => m.id === c));
+      const l = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+      l.setAttribute('x1', x1); l.setAttribute('y1', y1); l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+      svg.append(l);
+    }
+  };
+  const place = (m) => {
+    const w = el('span', { class: 'sil-word' + (linkFrom === m.id ? ' linking' : ''), 'data-mid': m.id, style: `left:${m.x}%;top:${m.y}%` }, `${esc(m.texte)}<button type="button" aria-label="Supprimer">×</button>`);
+    w.querySelector('button').addEventListener('click', (e) => { e.stopPropagation(); st.mots = st.mots.filter((x) => x.id !== m.id); commit(); redraw(); });
     w.addEventListener('pointerdown', (e) => {
       if (e.target.tagName === 'BUTTON') return;
       e.preventDefault();
+      if (linkMode) {
+        if (!linkFrom) { linkFrom = m.id; redraw(); return; }
+        if (linkFrom !== m.id && !st.liens.some(([a, c]) => (a === linkFrom && c === m.id) || (a === m.id && c === linkFrom))) st.liens.push([linkFrom, m.id]);
+        linkFrom = null; commit(); redraw(); return;
+      }
       w.setPointerCapture(e.pointerId);
       const r = stage.getBoundingClientRect();
       const move = (ev) => {
         m.x = Math.min(95, Math.max(0, ((ev.clientX - r.left) / r.width) * 100));
         m.y = Math.min(96, Math.max(0, ((ev.clientY - r.top) / r.height) * 100));
         w.style.left = m.x + '%'; w.style.top = m.y + '%';
+        drawLinks();
       };
       const up = () => { w.removeEventListener('pointermove', move); w.removeEventListener('pointerup', up); commit(); };
       w.addEventListener('pointermove', move);
@@ -713,18 +772,24 @@ function blockSilhouette(b) {
     });
     stage.append(w);
   };
-  const redraw = () => { stage.querySelectorAll('.sil-word').forEach((n) => n.remove()); st.mots.forEach(place); };
-  redraw();
+  const redraw = () => { stage.querySelectorAll('.sil-word').forEach((n) => n.remove()); st.mots.forEach(place); requestAnimationFrame(drawLinks); stage.classList.toggle('link-mode', linkMode); };
   const f = el('form', { class: 'add-own' });
   const inp = el('input', { type: 'text', placeholder: 'Un mot ou une expression…', 'aria-label': 'Mot à placer' });
   f.append(inp, el('button', { class: 'btn ghost small', type: 'submit' }, 'Ajouter'));
   f.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!inp.value.trim()) return;
-    st.mots.push({ texte: inp.value.trim(), x: 2 + (st.mots.length % 3) * 3, y: 4 + (st.mots.length % 10) * 8 });
+    st.mots.push({ id: 'm' + Date.now().toString(36) + (seq++), texte: inp.value.trim(), x: 2 + (st.mots.length % 3) * 3, y: 4 + (st.mots.length % 10) * 8 });
     inp.value = ''; commit(); redraw();
   });
-  wrap.append(f, stage, el('p', { class: 'hint' }, 'Faites glisser les mots sur la silhouette ou autour d’elle.'));
+  const tools = el('div', { class: 'row' });
+  const linkBtn = el('button', { type: 'button', class: 'btn ghost small' }, 'Relier deux mots');
+  linkBtn.addEventListener('click', () => { linkMode = !linkMode; linkFrom = null; linkBtn.textContent = linkMode ? 'Terminer les liens' : 'Relier deux mots'; linkBtn.classList.toggle('on', linkMode); redraw(); });
+  const clear = el('button', { type: 'button', class: 'link' }, 'Effacer les liens');
+  clear.addEventListener('click', () => { st.liens = []; commit(); redraw(); });
+  tools.append(linkBtn, clear, el('span', { class: 'hint' }, 'Liens : cliquez sur un mot, puis sur un autre.'));
+  wrap.append(f, tools, stage, el('p', { class: 'hint' }, 'Faites glisser les mots sur la silhouette ou autour d’elle. Il n’existe pas de placement correct.'));
+  requestAnimationFrame(redraw);
   return wrap;
 }
 
@@ -793,6 +858,137 @@ function blockRemise(b) {
   return wrap;
 }
 
+// ---------------------------------------------------------------------------
+// Carte mentale : mots, branches, glisser-déposer
+// ---------------------------------------------------------------------------
+const mmWords = (id) => ((getA(id, null) || {}).noeuds || []).filter((n) => n.parent !== null && n.texte.trim()).map((n) => n.texte.trim());
+function mmDepth(nodes, n) { let d = 0; let p = n; while (p && p.parent !== null) { p = nodes.find((x) => x.id === p.parent); d++; } return d; }
+
+function blockMindmap(b) {
+  const wrap = el('section', { class: 'answer mindmap' + (b.prive ? ' private' : '') });
+  wrap.append(el('label', {}, `${esc(b.label || 'Ma carte mentale')}${b.prive ? ' <span class="badge">espace privé</span>' : ''}`));
+  const st = getA(b.id, null) || { noeuds: [{ id: 'c', texte: b.centre || 'Moi', x: 50, y: 50, parent: null }] };
+  st.noeuds[0].texte = b.centre || st.noeuds[0].texte;
+  let sel = 'c';
+  let seq = st.noeuds.reduce((m, n) => Math.max(m, parseInt(String(n.id).replace(/\D/g, ''), 10) || 0), 0);
+  const commit = () => setA(b.id, { noeuds: st.noeuds.map((n) => ({ ...n })) });
+
+  const bar = el('form', { class: 'mm-bar' });
+  const inp = el('input', { type: 'text', placeholder: 'Un mot ou une idée…', 'aria-label': 'Nouveau mot' });
+  const addBtn = el('button', { class: 'btn primary small', type: 'submit' }, '+ Ajouter');
+  const hint = el('span', { class: 'mm-hint' });
+  bar.append(inp, addBtn, hint);
+  const stage = el('div', { class: 'mm-stage' });
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'mm-lines');
+  stage.append(svg);
+  const tools = el('div', { class: 'mm-tools' });
+
+  const byId = (id) => st.noeuds.find((n) => n.id === id);
+  const place = (parent) => {
+    const kids = st.noeuds.filter((n) => n.parent === parent.id).length;
+    if (parent.parent === null) {
+      const a = (kids * 2 * Math.PI) / 7 - Math.PI / 2 + 0.35;
+      return { x: 50 + Math.cos(a) * 30, y: 50 + Math.sin(a) * 34 };
+    }
+    const dx = parent.x - 50; const dy = parent.y - 50;
+    const base = Math.atan2(dy, dx);
+    const a = base + (kids % 2 ? 1 : -1) * (0.45 + 0.3 * Math.floor(kids / 2));
+    return { x: parent.x + Math.cos(a) * 15, y: parent.y + Math.sin(a) * 17 };
+  };
+  const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+
+  const draw = () => {
+    stage.querySelectorAll('.mm-node').forEach((n) => n.remove());
+    const r = stage.getBoundingClientRect();
+    svg.setAttribute('viewBox', `0 0 ${r.width || 600} ${r.height || 420}`);
+    svg.innerHTML = '';
+    const W = r.width || 600; const H = r.height || 420;
+    for (const n of st.noeuds) {
+      if (n.parent === null) continue;
+      const p = byId(n.parent); if (!p) continue;
+      const x1 = (p.x / 100) * W; const y1 = (p.y / 100) * H; const x2 = (n.x / 100) * W; const y2 = (n.y / 100) * H;
+      const mx = (x1 + x2) / 2;
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', `M${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}`);
+      path.setAttribute('class', `mm-line d${Math.min(mmDepth(st.noeuds, n), 3)}`);
+      svg.append(path);
+    }
+    for (const n of st.noeuds) {
+      const d = mmDepth(st.noeuds, n);
+      const node = el('button', { type: 'button', class: `mm-node d${Math.min(d, 3)}${n.id === sel ? ' sel' : ''}`, style: `left:${n.x}%;top:${n.y}%` }, esc(n.texte));
+      node.addEventListener('pointerdown', (e) => {
+        const start = { x: e.clientX, y: e.clientY }; let moved = false;
+        node.setPointerCapture(e.pointerId);
+        const rr = stage.getBoundingClientRect();
+        const move = (ev) => {
+          if (!moved && Math.hypot(ev.clientX - start.x, ev.clientY - start.y) < 4) return;
+          moved = true;
+          n.x = clamp(((ev.clientX - rr.left) / rr.width) * 100, 4, 96);
+          n.y = clamp(((ev.clientY - rr.top) / rr.height) * 100, 5, 95);
+          node.style.left = n.x + '%'; node.style.top = n.y + '%';
+          drawLinesOnly();
+        };
+        const up = () => {
+          node.removeEventListener('pointermove', move); node.removeEventListener('pointerup', up);
+          if (moved) commit(); else { sel = n.id; draw(); inp.focus(); }
+        };
+        node.addEventListener('pointermove', move); node.addEventListener('pointerup', up);
+      });
+      stage.append(node);
+    }
+    const s = byId(sel) || st.noeuds[0];
+    hint.textContent = s.parent === null ? `Nouvelle branche depuis « ${s.texte} »` : `Nouvelle branche depuis « ${s.texte} »`;
+    tools.innerHTML = '';
+    if (s.parent !== null) {
+      const ren = el('button', { type: 'button', class: 'link' }, 'Renommer');
+      ren.addEventListener('click', () => { const t = prompt('Nouveau texte :', s.texte); if (t && t.trim()) { s.texte = t.trim(); commit(); draw(); } });
+      const del = el('button', { type: 'button', class: 'link' }, 'Supprimer (avec ses branches)');
+      del.addEventListener('click', () => {
+        const drop = new Set([s.id]); let grew = true;
+        while (grew) { grew = false; for (const n of st.noeuds) if (!drop.has(n.id) && drop.has(n.parent)) { drop.add(n.id); grew = true; } }
+        st.noeuds = st.noeuds.filter((n) => !drop.has(n.id)); sel = 'c'; commit(); draw();
+      });
+      tools.append(el('span', { class: 'muted' }, `« ${esc(s.texte)} » :`), ren, del);
+    } else {
+      tools.append(el('span', { class: 'muted' }, 'Cliquez sur un mot pour y ajouter une branche. Faites glisser les mots pour les déplacer.'));
+    }
+  };
+  const drawLinesOnly = () => {
+    const r = stage.getBoundingClientRect(); const W = r.width; const H = r.height;
+    const paths = svg.querySelectorAll('path'); let i = 0;
+    for (const n of st.noeuds) {
+      if (n.parent === null) continue;
+      const p = byId(n.parent); if (!p) continue;
+      const x1 = (p.x / 100) * W; const y1 = (p.y / 100) * H; const x2 = (n.x / 100) * W; const y2 = (n.y / 100) * H; const mx = (x1 + x2) / 2;
+      if (paths[i]) paths[i].setAttribute('d', `M${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}`);
+      i++;
+    }
+  };
+  bar.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const t = inp.value.trim(); if (!t) return;
+    const parent = byId(sel) || st.noeuds[0];
+    const pos = place(parent);
+    const n = { id: 'n' + (++seq), texte: t, x: clamp(pos.x, 12, 88), y: clamp(pos.y, 8, 92), parent: parent.id };
+    st.noeuds.push(n); inp.value = ''; commit(); draw(); inp.focus();
+  });
+  wrap.append(bar, stage, tools);
+  requestAnimationFrame(draw);
+  window.addEventListener('resize', () => { if (wrap.isConnected) draw(); });
+  return wrap;
+}
+
+// Extrait d’un texte précédent (paragraphes ¶)
+function blockExtrait(b) {
+  const src = allBlocks().find((x) => x.id === b.source);
+  if (!src) return null;
+  const paras = (src.corps || '').split(/\n\s*\n/);
+  const pick = paras.filter((p) => (b.paragraphes || []).some((n) => p.trim().startsWith(`**¶${n}**`)));
+  if (!pick.length) return null;
+  return el('aside', { class: 'aside extrait' }, `<p class="aside-kicker">${esc(b.titre || 'Rappel du texte')}</p><div class="prose">${md(pick.join('\n\n'))}</div>`);
+}
+
 function fmtTime(t) { t = Math.max(0, Math.round(t || 0)); return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`; }
 function blockAudio(b) {
   if (!b.fichier) return REDACTION ? el('div', { class: 'aside' }, 'Audio : fichier manquant') : null;
@@ -843,6 +1039,10 @@ function answerHTML(b) {
       return `<p><strong>${esc(c.label)} :</strong> ${esc(items.join(', ') || '—')}</p>`;
     }).join('');
     return `<div class="d-item"><h4>Classement (${esc(b.categories.map((c) => c.label).join(' / '))})</h4>${lists}</div>`;
+  }
+  if (b.type === 'mindmap' && v.noeuds?.length > 1) {
+    const list = (pid) => { const k = v.noeuds.filter((n) => n.parent === pid); return k.length ? `<ul>${k.map((n) => `<li>${esc(n.texte)}${list(n.id)}</li>`).join('')}</ul>` : ''; };
+    return `<div class="d-item"><h4>${esc(b.label || 'Carte mentale')} — ${esc(v.noeuds[0].texte)}</h4>${list('c')}</div>`;
   }
   if (b.type === 'silhouette' && v.mots?.length) return `<div class="d-item"><h4>Silhouette — mots placés</h4><p>${esc(v.mots.map((m) => m.texte).join(', '))}</p></div>`;
   return '';

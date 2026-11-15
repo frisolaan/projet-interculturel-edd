@@ -72,7 +72,9 @@ Die zweite Person braucht ein GitHub-Konto und muss im Repo als **Collaborator**
 | Text | Lesetext, Situation, Gedicht (optional zugeklappt) |
 | Antwortfeld | Freitext, optional mit Zielwortzahl; «privat» = nicht im Dossier/Export (ausser auf Wunsch) |
 | Tabelle | Raster mit Spalten und Beispielzeilen |
-| Sortierübung | Elemente in Kategorien ordnen, mit Prüfung; Lösung `les-deux` = beide möglich; Darstellung «Baum» (Krone / Wurzeln) für zwei Kategorien |
+| Sortierübung | Elemente in Kategorien ordnen, mit Prüfung; Lösung `les-deux` = beide möglich; Darstellung «Baum» (Krone / Wurzeln) für zwei Kategorien; optional Wörter aus einer Mindmap übernehmen (`mots_de`) |
+| Mindmap | Wörter und Äste anlegen, verschieben, umbenennen; erscheint im Dossier als Gliederung |
+| Auszug aus einem Text | zeigt einzelne Absätze (¶) eines früheren Textblocks direkt bei der Frage |
 | Schema | vordefinierte Grafik, z. B. Kopf – Herz – Hand |
 | Selbstcheck | Checkliste plus aufdeckbares Beispiel |
 | Externe Ressource | Hinweis auf ILIAS, Lehrmittel usw. |
@@ -81,13 +83,13 @@ Die zweite Person braucht ein GitHub-Konto und muss im Repo als **Collaborator**
 | Audio | MP3 im Editor hochladen, eigener Player in der App |
 | Abgabe auf ILIAS | Kasten «À remettre sur ILIAS» mit Link, Termin und Verweis aufs Dossier |
 | Rückblick | zeigt eine frühere Antwort erneut an |
-| Silhouette | Wörter auf eine Figur ziehen |
+| Silhouette | Wörter auf eine neutrale Figur ziehen und miteinander verbinden |
 | Karte zum Drucken | z. B. Störkarte aus mehreren Antwortfeldern |
 
 ## Offene Punkte (inhaltlich)
 
 - [ ] **Musterlösungen und Sortierlisten** sind Entwürfe (Status «Entwurf – à valider»): t1-a3-arbre, t1-a4-check, t2-2-check, t3-2-tri, t3-3-tri, t3-4-check, t3-5-check.
-- [ ] **ILIAS-Link** zum Classeur der 5. Séance (t3-1-ressources).
+- [ ] **ILIAS-Links** eintragen: Classeur 5. Séance (t3-1-ressources) und Abgabe Dossier final (t4-remise). Bis dahin zeigt die App «lien à venir».
 - [ ] **Schema** (t3-3-schema): als Kopf–Herz–Hand-Grafik nachgezeichnet. Falls im Kurs ein bestimmtes Schema aus der Lektüre gemeint ist, dieses prüfen bzw. ersetzen.
 - [ ] **Kontrollfragen zu Fäcke / Chaves et al.** (t3-1) – bisher nur Selbsteinschätzung; inhaltliche Fragen sollten aus den Texten formuliert werden.
 
@@ -105,6 +107,16 @@ Das Gedicht «MOI / ICH» (Tâche 2) liegt als synthetische Lesung bei (`assets/
 - Deutsch: Stimme «thorsten» (CC0) – gut verständlich, Männerstimme, einzelne Wörter (z. B. «Russin») unsauber.
 
 Eine echte Lesung (z. B. von einer Studentin) ersetzt die Datei jederzeit über den Editor.
+
+## Antworten wiederverwenden
+
+Frühere Antworten lassen sich in späteren Schritten aufnehmen:
+- **Rückblick**-Block: zeigt eine frühere Antwort (Text oder Mindmap-Wörter), z. B. die erste Reaktion in Tâche 3.
+- **Sortierübung** mit `mots_de`: übernimmt die Wörter der Mindmap als eigene Kärtchen, z. B. Mindmap «La culture» → Kulturbaum.
+
+## Abgleich mit dem Word-Dokument
+
+Satzweiser Abgleich (162 Sätze) am 15.11.2026: alle Sätze wörtlich übernommen, ausser einer bewussten Korrektur im «Cadre de travail» (Tâche 1 ist Einzelarbeit). Eigene Ergänzungen der App: Einstiegsfragen, Sortierübungen, Musterlösungen (Entwurf), Schema, Hinweise zur Bedienung.
 
 ## Datenschutz
 

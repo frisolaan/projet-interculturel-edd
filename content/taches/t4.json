@@ -11,7 +11,7 @@
       "type": "texte",
       "id": "t4-intro",
       "titre": "",
-      "corps": "À partir des connaissances acquises dans les trois premières tâches, vous allez enrichir une tâche existante de ***dis donc ! 7*** ou ***dis donc ! 8*** afin qu’elle permette également aux élèves de développer leurs compétences interculturelles.\n\nIl s’agit de faire **évoluer une tâche du manuel en lui donnant une dimension interculturelle explicite**, tout en conservant son objectif communicatif. Vous montrerez également comment cet enrichissement contribue à l’**ÉDD**.\n\nVous mettrez ensuite votre proposition à l’essai en binôme en y introduisant une **carte-incident** (*= Störkarte*) : une situation susceptible de compliquer la réalisation de la tâche et de solliciter les compétences interculturelles des élèves."
+      "corps": "À partir des connaissances acquises dans les trois premières tâches, vous allez enrichir une tâche existante de ***dis donc ! 7*** ou ***dis donc ! 8*** afin qu’elle permette également aux élèves de développer leurs compétences interculturelles.\n\nVous vous appuierez sur le matériel et les ressources disponibles. Il s’agit de faire **évoluer une tâche du manuel en lui donnant une dimension interculturelle explicite**, tout en conservant son objectif communicatif. Vous montrerez également comment cet enrichissement contribue à l’**ÉDD**.\n\nVous mettrez ensuite votre proposition à l’essai en binôme en y introduisant une **carte-incident** (*= Störkarte*) : une situation susceptible de compliquer la réalisation de la tâche et de solliciter les compétences interculturelles des élèves."
     },
     {
       "type": "consigne",
@@ -20,7 +20,7 @@
       "accroche": "Choisissez une tâche du manuel et regardez-la autrement.",
       "duree": "30 min",
       "modalite": "Binôme",
-      "corps": "Choisissez une tâche dans une unité de *dis donc ! 7* ou *dis donc ! 8*.\n\nExaminez ensemble :\n\n- Quel est son objectif communicatif et quelle production les élèves doivent-ils réaliser ?\n- Quelles ressources et quels moyens langagiers sont déjà disponibles ?\n- Quels aspects se prêtent à un travail interculturel : représentations, expériences différentes, interprétations, communication ou négociation ?\n- Qu’est-ce que la tâche permet déjà de développer et que souhaitez-vous y ajouter ?",
+      "corps": "Choisissez une tâche dans une unité de *dis donc ! 7* ou *dis donc ! 8*. Indiquez le volume, l’unité, la page et le titre ou le numéro de la tâche.\n\nExaminez ensemble :\n\n- Quel est son objectif communicatif et quelle production les élèves doivent-ils réaliser ?\n- Quelles ressources et quels moyens langagiers sont déjà disponibles ?\n- Quels aspects se prêtent à un travail interculturel : représentations, expériences différentes, interprétations, communication ou négociation ?\n- Qu’est-ce que la tâche permet déjà de développer et que souhaitez-vous y ajouter ?",
       "repliee": false
     },
     {
@@ -48,7 +48,7 @@
       "accroche": "Gardez l’objectif communicatif, ouvrez une perspective.",
       "duree": "1 h 30 à 2 h",
       "modalite": "Binôme",
-      "corps": "Adaptez la tâche pour que les élèves soient amenés à **examiner une représentation, à prendre en compte un autre point de vue ou à construire une compréhension mutuelle**. Vous pouvez ajouter une question, diversifier les perspectives, modifier une consigne ou introduire un moment de dialogue et de réflexion.\n\nVeillez à ne pas présenter les cultures comme des ensembles homogènes ni à attribuer automatiquement un comportement à l’origine d’une personne.",
+      "corps": "Adaptez la tâche pour que les élèves soient amenés à **examiner une représentation, à prendre en compte un autre point de vue ou à construire une compréhension mutuelle**.\n\nSelon la tâche choisie, vous pourrez notamment ajouter une question, diversifier les perspectives présentées, modifier une consigne ou introduire un moment de dialogue et de réflexion.\n\nVotre proposition comprendra :\n\n- **un ou deux objectifs interculturels observables**, en complément de l’objectif communicatif ;\n- une consigne destinée aux élèves, entièrement en français ;\n- les supports et les aides linguistiques nécessaires, en réutilisant autant que possible les ressources disponibles ;\n- un bref retour réflexif permettant aux élèves d’expliquer ce qu’ils ont découvert, questionné ou révisé ;\n- un indice concret permettant d’observer l’apprentissage interculturel.\n\nPrécisez ce que vous **conservez**, ce que vous **modifiez** et ce que vous **ajoutez** à la tâche initiale. Veillez à ne pas présenter les cultures comme des ensembles homogènes ni à attribuer automatiquement un comportement à l’origine d’une personne.",
       "repliee": false
     },
     {
@@ -112,7 +112,7 @@
       "type": "reponse",
       "id": "t4-2-justification",
       "label": "Justification : lectures théoriques, plan d’études (français, compétences transversales, ÉDD)",
-      "aide": "Quel enjeu de compréhension, de participation ou de vivre-ensemble votre proposition permet-elle de travailler ?",
+      "aide": "Justifiez brièvement votre enrichissement en vous appuyant sur les lectures théoriques et sur le plan d’études : enseignement du français, compétences transversales et ÉDD. Expliquez notamment quel enjeu de compréhension, de participation ou de vivre-ensemble votre proposition permet de travailler.",
       "longueur": "long",
       "mots_cible": 0,
       "prive": false
@@ -173,7 +173,7 @@
       "accroche": "Un grain de sable dans l’échange.",
       "duree": "30 min",
       "modalite": "Binôme",
-      "corps": "Imaginez un **incident critique** qui pourrait survenir pendant la réalisation de votre tâche : un événement bref qui perturbe l’échange, révèle une interprétation implicite ou rend la coopération plus difficile.\n\nL’incident doit être **plausible, directement lié à votre tâche et ouvert à plusieurs interprétations**. Il ne doit pas reposer sur une caricature culturelle. **Ne faites pas figurer la solution sur la carte.**\n\nExemples à adapter :\n\n- Une personne affirme : « Dans ce pays, tout le monde fait comme ça. »\n- Le silence d’un partenaire est interprété comme un manque d’intérêt.\n- Une proposition est retenue sans que les besoins d’un membre du groupe aient été entendus.\n- Deux personnes attribuent des sens différents à une même consigne ou à une même manière de communiquer.",
+      "corps": "Imaginez un **incident critique** qui pourrait survenir pendant la réalisation de votre tâche : un événement bref qui perturbe l’échange, révèle une interprétation implicite ou rend la coopération plus difficile.\n\nL’incident doit être **plausible, directement lié à votre tâche et ouvert à plusieurs interprétations**. Il ne doit pas reposer sur une caricature culturelle.\n\nVotre carte précisera : le moment où l’incident survient ; la situation et les paroles ou comportements observables ; les rôles à jouer. **Ne faites pas figurer la solution sur la carte.**\n\nExemples à adapter à votre tâche :\n\n- Une personne affirme : « Dans ce pays, tout le monde fait comme ça. »\n- Le silence d’un partenaire est interprété comme un manque d’intérêt.\n- Une proposition est retenue sans que les besoins d’un membre du groupe aient été entendus.\n- Deux personnes attribuent des sens différents à une même consigne ou à une même manière de communiquer.",
       "repliee": false
     },
     {
@@ -234,7 +234,7 @@
       "accroche": "Jouez, arrêtez-vous, rejouez.",
       "duree": "1 h",
       "modalite": "Binôme, hors de l’application",
-      "corps": "Parcourez d’abord votre tâche enrichie du point de vue des élèves : consignes, ressources, possibilités d’interaction.\n\nAu moment prévu, introduisez la carte-incident et jouez la scène. Explorez les réactions spontanées, puis marquez une pause pour analyser :\n\n- Que savons-nous réellement et quelles intentions supposons-nous ?\n- Quelles autres interprétations sont possibles ?\n- Quelles questions permettraient de mieux comprendre la situation ?\n- Quels moyens linguistiques ou quelles interventions pourraient faciliter la poursuite de la tâche ?\n\nDéfinissez **au moins deux pistes de résolution**, puis rejouez la scène en les essayant. Inversez les rôles si cela permet d’examiner un autre point de vue. Une clarification, une adaptation ou un désaccord exprimé avec respect peuvent constituer une issue pertinente.\n\n*Cet essai entre adultes sert à examiner votre dispositif ; il ne permet pas de démontrer les effets qu’il aurait dans une classe.*",
+      "corps": "Parcourez d’abord votre tâche enrichie en vous plaçant du point de vue des élèves. Vérifiez les consignes, les ressources et les possibilités d’interaction.\n\nAu moment prévu, introduisez votre carte-incident et jouez la scène. Explorez d’abord les réactions spontanées possibles, puis marquez une pause pour analyser la situation :\n\n- Que savons-nous réellement et quelles intentions supposons-nous ?\n- Quelles autres interprétations sont possibles ?\n- Quelles questions permettraient de mieux comprendre la situation ?\n- Quels moyens linguistiques ou quelles interventions pourraient faciliter la poursuite de la tâche ?\n\nDéfinissez **au moins deux pistes de résolution**, puis rejouez la scène en les essayant. Inversez les rôles si cela permet d’examiner un autre point de vue.\n\nDistinguez ce que les élèves pourraient faire eux-mêmes de ce qui demanderait une intervention de la personne enseignante. Il n’est pas nécessaire d’aboutir à un accord complet : une clarification, une adaptation ou un désaccord exprimé avec respect peuvent constituer une issue pertinente.\n\n*Cet essai entre adultes sert à examiner votre dispositif ; il ne permet pas de démontrer les effets qu’il aurait dans une classe.*",
       "repliee": false
     },
     {
@@ -271,7 +271,7 @@
       "accroche": "Ce que l’essai vous a appris.",
       "duree": "30 min à 1 h",
       "modalite": "Binôme",
-      "corps": "À partir de votre essai, améliorez les consignes, les aides ou le déroulement (directement dans l’étape 2). Rédigez ensuite ensemble un bref bilan.",
+      "corps": "À partir de votre essai, améliorez les consignes, les aides ou le déroulement (directement dans l’étape 2). Rédigez ensuite ensemble un bref bilan répondant aux questions suivantes.",
       "repliee": false
     },
     {
@@ -323,7 +323,7 @@
       "type": "texte",
       "id": "t4-production",
       "titre": "Production attendue",
-      "corps": "Remettez un **dossier compact de trois à quatre pages**, hors supports, comprenant :\n\n- la référence à la tâche initiale et une brève analyse ;\n- la tâche enrichie, ses objectifs et sa justification théorique et curriculaire ;\n- la carte-incident ;\n- les pistes de résolution, les modifications apportées et le bilan.\n\nJoignez uniquement les supports nécessaires. **L’ensemble sera rédigé en français.** Le bouton **« Dossier »** en haut de l’écran rassemble vos réponses comme point de départ."
+      "corps": "Remettez un **dossier compact de trois à quatre pages**, hors supports, comprenant :\n\n- La référence à la tâche initiale et une brève analyse.\n- La tâche enrichie, ses objectifs et sa justification théorique et curriculaire.\n- La carte-incident.\n- Les pistes de résolution, les modifications apportées et le bilan.\n\nJoignez uniquement les supports nécessaires à la compréhension et à la réalisation de votre proposition. **L’ensemble sera rédigé en français.** Le bouton **« Dossier »** en haut de l’écran rassemble vos réponses comme point de départ."
     },
     {
       "type": "remise",
@@ -336,14 +336,14 @@
     {
       "type": "autocontrole",
       "id": "t4-criteres",
-      "titre": "Critères de réussite — auto-évaluation avant la remise",
+      "titre": "Critères de réussite — votre proposition sera appréciée selon :",
       "points": [
-        "L’enrichissement est pertinent par rapport à la tâche initiale.",
-        "Les objectifs interculturels et les indices d’apprentissage sont clairs.",
-        "Les liens avec les fondements théoriques, le plan d’études et l’ÉDD sont solides.",
-        "L’incident est plausible et plusieurs interprétations ont été envisagées.",
-        "Les pistes de résolution et les aides proposées sont pertinentes.",
-        "La révision finale tient compte de l’essai."
+        "la pertinence de l’enrichissement par rapport à la tâche initiale ;",
+        "la clarté des objectifs interculturels et des indices d’apprentissage ;",
+        "la qualité des liens avec les fondements théoriques, le plan d’études et l’ÉDD ;",
+        "la plausibilité de l’incident et la diversité des interprétations envisagées ;",
+        "la pertinence des pistes de résolution et des aides proposées ;",
+        "la prise en compte de l’essai dans la révision finale."
       ],
       "exemple_titre": "",
       "exemple": "",
