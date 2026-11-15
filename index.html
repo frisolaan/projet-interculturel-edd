@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compétences interculturelles et ÉDD</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <button class="icon-btn menu-btn" id="menu-btn" aria-label="Menu">☰</button>
+    <a class="brand" href="#/">Compétences interculturelles <span>&amp; ÉDD</span></a>
+    <div class="actions">
+      <span class="save-status" id="save-status" aria-live="polite"></span>
+      <button id="btn-open" class="btn ghost">Ouvrir</button>
+      <button id="btn-save" class="btn primary">Enregistrer</button>
+      <a id="btn-dossier" class="btn ghost" href="#/dossier">Dossier</a>
+      <button id="btn-lp" class="btn ghost">Plan d’études</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <nav class="sidebar" id="sidebar" aria-label="Étapes du parcours"></nav>
+    <main id="main" tabindex="-1"><p class="loading">Chargement…</p></main>
+  </div>
+
+  <aside class="drawer" id="drawer" aria-label="Plan d’études" hidden>
+    <div class="drawer-head">
+      <form id="lp-search" class="lp-search">
+        <input type="search" id="lp-q" placeholder="Rechercher dans le Lehrplan (ex. Kulturen)" aria-label="Recherche dans le plan d’études">
+        <button class="btn primary" type="submit">Rechercher</button>
+      </form>
+      <a id="lp-newtab" class="btn ghost small" target="_blank" rel="noopener">Nouvel onglet ↗</a>
+      <button class="icon-btn" id="drawer-close" aria-label="Fermer">✕</button>
+    </div>
+    <iframe id="lp-frame" title="Lehrplan Volksschule Thurgau" src="about:blank"></iframe>
+    <p class="drawer-note">Contenu affiché en direct depuis tg.lehrplan.ch — © D-EDK / Kanton Thurgau.</p>
+  </aside>
+
+  <input type="file" id="file-input" accept=".json,application/json" hidden>
+  <div id="print-area" class="print-area"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

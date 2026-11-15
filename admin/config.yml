@@ -1,0 +1,337 @@
+# Redaktionseditor (Sveltia CMS) – https://github.com/sveltia/sveltia-cms
+# Anmeldung: «Sign in with Token» mit einem fine-grained GitHub-Token
+# (nur dieses Repo, Contents: Read and Write).
+
+backend:
+  name: github
+  repo: frisolaan/projet-interculturel-edd
+  branch: main
+media_folder: assets/uploads
+public_folder: /assets/uploads
+collections:
+- name: parcours
+  label: Parcours (Startseite)
+  files:
+  - name: parcours
+    label: Startseite und Rahmen
+    file: content/parcours.json
+    format: json
+    fields:
+    - label: Titel
+      name: titre
+      widget: string
+    - label: Untertitel
+      name: sous_titre
+      widget: string
+    - label: Semester
+      name: semestre
+      widget: string
+    - label: Einleitung
+      name: intro
+      widget: markdown
+    - label: Cadre de travail
+      name: cadre
+      widget: markdown
+    - label: Objectifs
+      name: objectifs
+      widget: list
+    - label: Hinweis zum Speichern
+      name: sauvegarde
+      widget: markdown
+    - label: Reihenfolge der Tâches (IDs)
+      name: taches
+      widget: list
+- name: taches
+  label: Tâches
+  files:
+  - name: t1
+    label: Tâche 1 · Qu’est-ce que la culture ?
+    file: content/taches/t1.json
+    format: json
+    fields: &id004
+    - label: ID (nicht ändern)
+      name: id
+      widget: string
+    - label: Nummer
+      name: numero
+      widget: string
+    - label: Titel
+      name: titre
+      widget: string
+    - label: Kurztitel (Navigation)
+      name: titre_court
+      widget: string
+    - label: Dauer
+      name: duree
+      widget: string
+    - label: Sozialform
+      name: modalite
+      widget: string
+    - label: Resultat / Produkte
+      name: resultat
+      widget: text
+    - label: Blöcke
+      name: blocs
+      widget: list
+      label_singular: Block
+      summary: '{{fields.id}} · {{fields.titre}}{{fields.label}}'
+      types:
+      - label: Konsigne (Aufgabenstellung)
+        name: consigne
+        widget: object
+        fields:
+        - &id002
+          label: ID (nicht ändern)
+          name: id
+          widget: string
+          hint: 'Technische Kennung. Antworten der Studierenden hängen daran – bestehende IDs nie umbenennen. Für neue Blöcke: eindeutig, z. B. t2-6-notes.'
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Dauer
+          name: duree
+          widget: string
+          required: &id001 false
+        - label: Sozialform
+          name: modalite
+          widget: string
+          required: *id001
+        - label: Text
+          name: corps
+          widget: markdown
+      - label: Text (Lesetext, Situation, Gedicht)
+        name: texte
+        widget: object
+        fields:
+        - *id002
+        - label: Titel
+          name: titre
+          widget: string
+          required: *id001
+        - label: Text
+          name: corps
+          widget: markdown
+        - label: Zugeklappt anzeigen
+          name: repliable
+          widget: boolean
+          required: *id001
+          default: *id001
+      - label: Antwortfeld
+        name: reponse
+        widget: object
+        fields:
+        - *id002
+        - label: Beschriftung
+          name: label
+          widget: string
+        - label: Platzhalter / Hilfe im Feld
+          name: aide
+          widget: text
+          required: *id001
+        - label: Grösse
+          name: longueur
+          widget: select
+          options:
+          - court
+          - moyen
+          - long
+          default: long
+        - label: Zielwortzahl (0 = keine)
+          name: mots_cible
+          widget: number
+          value_type: int
+          default: 0
+        - label: Privat (bleibt lokal, nicht im Dossier)
+          name: prive
+          widget: boolean
+          default: *id001
+      - label: Tabelle
+        name: tableau
+        widget: object
+        fields:
+        - *id002
+        - label: Beschriftung
+          name: label
+          widget: string
+        - label: Spalten
+          name: colonnes
+          widget: list
+        - label: Beispielzeilen (je Zeile eine Liste der Zellen)
+          name: exemples
+          widget: list
+          required: *id001
+          field:
+            label: Zeile
+            name: ligne
+            widget: list
+        - label: Anzahl leere Zeilen
+          name: lignes
+          widget: number
+          value_type: int
+          default: 3
+      - label: Sortierübung (mit Selbstcheck)
+        name: tri
+        widget: object
+        fields:
+        - *id002
+        - label: Anweisung
+          name: consigne
+          widget: string
+        - label: Kategorien
+          name: categories
+          widget: list
+          fields:
+          - label: Kennung
+            name: id
+            widget: string
+            hint: kurz, ohne Leerzeichen, z. B. racines
+          - label: Beschriftung
+            name: label
+            widget: string
+        - label: Elemente
+          name: elements
+          widget: list
+          summary: '{{fields.texte}} → {{fields.solution}}'
+          fields:
+          - label: Text
+            name: texte
+            widget: string
+          - label: Lösung (Kategorie-Kennung oder «les-deux»)
+            name: solution
+            widget: string
+          - label: Erklärung (wird nach dem Prüfen gezeigt)
+            name: explication
+            widget: string
+            required: *id001
+        - label: Eigene Beispiele erlauben
+          name: ajout_libre
+          widget: boolean
+          default: *id001
+        - &id003
+          label: Redaktionsstatus (nur im Redaktionsmodus sichtbar)
+          name: statut_contenu
+          widget: string
+          required: *id001
+          hint: z. B. «Entwurf – à valider». Leeren, sobald der Inhalt freigegeben ist.
+      - label: Selbstcheck (Checkliste + Beispiel)
+        name: autocontrole
+        widget: object
+        fields:
+        - *id002
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Prüfpunkte
+          name: points
+          widget: list
+        - label: Titel des Beispiels
+          name: exemple_titre
+          widget: string
+          required: *id001
+        - label: Beispiel / Musterlösung
+          name: exemple
+          widget: markdown
+          required: *id001
+        - *id003
+      - label: Externe Ressource (ILIAS, Lehrmittel …)
+        name: externe
+        widget: object
+        fields:
+        - *id002
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Text
+          name: corps
+          widget: markdown
+          required: *id001
+        - label: Links
+          name: liens
+          widget: list
+          required: *id001
+          fields:
+          - label: Beschriftung
+            name: label
+            widget: string
+          - label: URL
+            name: url
+            widget: string
+            required: *id001
+      - label: Lehrplan-Fenster
+        name: lehrplan
+        widget: object
+        fields:
+        - *id002
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Text
+          name: corps
+          widget: markdown
+          required: *id001
+        - label: Schaltflächen
+          name: liens
+          widget: list
+          hint: Entweder ein Suchwort (öffnet die Lehrplan-Suche) oder eine URL auf tg.lehrplan.ch.
+          fields:
+          - label: Beschriftung
+            name: label
+            widget: string
+          - label: Suchwort
+            name: recherche
+            widget: string
+            required: *id001
+          - label: URL
+            name: url
+            widget: string
+            required: *id001
+      - label: Rückblick (zeigt eine frühere Antwort)
+        name: rappel
+        widget: object
+        fields:
+        - *id002
+        - label: Titel
+          name: titre
+          widget: string
+        - label: ID der früheren Antwort
+          name: source
+          widget: string
+        - label: Text darunter
+          name: corps
+          widget: markdown
+          required: *id001
+      - label: Silhouette (Wörter platzieren)
+        name: silhouette
+        widget: object
+        fields:
+        - *id002
+        - label: Privat
+          name: prive
+          widget: boolean
+          default: true
+      - label: Karte zum Drucken (z. B. Störkarte)
+        name: carte
+        widget: object
+        fields:
+        - *id002
+        - label: Titel
+          name: titre
+          widget: string
+        - label: IDs der Antwortfelder auf der Karte
+          name: champs
+          widget: list
+  - name: t2
+    label: Tâche 2 · Une personne, plusieurs facettes
+    file: content/taches/t2.json
+    format: json
+    fields: *id004
+  - name: t3
+    label: Tâche 3 · Comprendre et traduire en pratique
+    file: content/taches/t3.json
+    format: json
+    fields: *id004
+  - name: t4
+    label: Tâche finale · Enrichir une tâche
+    file: content/taches/t4.json
+    format: json
+    fields: *id004

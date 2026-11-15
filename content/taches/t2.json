@@ -1,0 +1,148 @@
+{
+  "id": "t2",
+  "numero": "2",
+  "titre": "Une personne, plusieurs facettes",
+  "titre_court": "Une personne, plusieurs facettes",
+  "duree": "1 h 30",
+  "modalite": "Travail individuel, puis échange en binôme",
+  "resultat": "Analyse du poème, portrait personnel, silhouette et synthèse d’environ 150 mots.",
+  "blocs": [
+    {
+      "type": "texte",
+      "id": "t2-intro",
+      "titre": "",
+      "corps": "Cette activité vous invite à explorer la diversité des éléments qui composent une identité et à réfléchir aux limites des étiquettes que nous attribuons aux autres."
+    },
+    {
+      "type": "consigne",
+      "id": "t2-1",
+      "titre": "1. Découvrez le poème",
+      "duree": "",
+      "modalite": "Individuel",
+      "corps": "Lisez le poème suivant, rédigé par une adolescente."
+    },
+    {
+      "type": "texte",
+      "id": "t2-poeme",
+      "titre": "MOI",
+      "corps": "Moi :\nFille, grande, aimée,\nAmie, serviable, sœur, attachante.\n\nEt moi :\nChanteuse, douée, danseuse, expressive dans mes mouvements,\nGénie des maths, intelligente, musicienne, créative.\n\nEt moi :\nRusse, multiculturelle, migrante, jugée,\nDouée pour les langues, adaptée, Allemande, ponctuelle.\n\nEt moi :\nPrisonnière, enfermée, sans véritable chez-moi, en quête,\nVivant entre plusieurs mondes, incertaine.\n\nC’est ensemble que toutes ces facettes forment mon « moi ».\n\n*Traduction en français par Adrian Juric*"
+    },
+    {
+      "type": "texte",
+      "id": "t2-poeme-de",
+      "titre": "ICH (version originale en allemand)",
+      "corps": "Ich:\nMädchen, groß, Tochter, geliebt\nFreundin, hilfsbereit, Schwester, liebenswert.\n\nUnd Ich:\nSängerin, begabt, Tänzerin, körperbetont\nMathegenie, intelligent, Musikerin, kreativ.\n\nUnd Ich:\nRussin, multikulti, Migrantin, verurteilt\nSprachgenie, angepasst, Deutsche, pünktlich.\n\nUnd Ich:\nGefangene, eingeschlossen, Heimatlose, auf der Suche,\nZwischen-den-Welten-Lebende, unsicher.\n\nErst wir alle zusammen sind Ich.\n\n*Source de l’original : à compléter.*",
+      "repliable": true
+    },
+    {
+      "type": "consigne",
+      "id": "t2-2",
+      "titre": "2. Explorez les différentes facettes de l’identité",
+      "duree": "",
+      "modalite": "Binôme",
+      "corps": "Échangez en binôme sur les questions suivantes :\n\n- Quelles facettes de l’identité reconnaissez-vous dans le poème : relations, rôles sociaux, qualités, capacités, appartenances, sentiments ?\n- Quels termes pourraient correspondre à la manière dont la personne se décrit elle-même ? Lesquels pourraient refléter le regard des autres ? Plusieurs interprétations sont possibles.\n- Quelles tensions ou contradictions relevez-vous ?\n- Comment comprenez-vous la dernière phrase du poème ?\n\nChoisissez ensuite **cinq mots ou expressions** et expliquez leur sens dans le contexte du poème.\n\nAppuyez vos interprétations sur le texte. Évitez d’associer automatiquement une qualité à une nationalité : le poème présente une voix singulière, et non les caractéristiques d’un groupe."
+    },
+    {
+      "type": "tableau",
+      "id": "t2-2-tableau",
+      "label": "Cinq mots ou expressions",
+      "colonnes": ["Mot ou expression", "Interprétation possible dans le poème"],
+      "exemples": [
+        ["Sœur", "Une relation familiale qui constitue une facette de l’identité"],
+        ["Vivant entre plusieurs mondes", "Le sentiment d’appartenir à plusieurs milieux, sans toujours parvenir à les concilier"]
+      ],
+      "lignes": 5
+    },
+    {
+      "type": "autocontrole",
+      "id": "t2-2-check",
+      "titre": "Autocontrôle — mes interprétations",
+      "points": [
+        "Chaque interprétation s’appuie sur le texte du poème.",
+        "J’ai distingué au moins une fois le regard de la personne sur elle-même et le regard des autres.",
+        "Je n’ai attribué aucune qualité à une nationalité ou à une origine."
+      ],
+      "exemple_titre": "Pistes d’interprétation (parmi d’autres)",
+      "exemple": "- **jugée** : un terme qui semble venir du regard des autres ; il est placé juste après « migrante », ce qui peut suggérer une expérience d’étiquetage.\n- **adaptée** : peut être lu comme une qualité revendiquée ou comme une attente venue de l’extérieur — les deux lectures sont possibles.\n- **Russe … Allemande** : deux appartenances nationales dans la même strophe ; le poème ne choisit pas entre elles.\n- **Prisonnière, enfermée** : un sentiment de contrainte, peut-être lié aux étiquettes, qui contraste avec la richesse des facettes précédentes.",
+      "statut_contenu": "Entwurf – à valider"
+    },
+    {
+      "type": "consigne",
+      "id": "t2-3",
+      "titre": "3. Composez votre propre portrait",
+      "duree": "",
+      "modalite": "Individuel",
+      "corps": "Créez une carte mentale autour du mot **« Moi »**. Vous pouvez y faire figurer vos centres d’intérêt, vos relations, vos capacités, vos langues, vos appartenances, vos valeurs ou vos aspirations.\n\nÀ partir de cette carte, rédigez un court poème composé de **trois ou quatre strophes**, en reprenant si vous le souhaitez la structure « Moi… Et moi… ».\n\nVous choisissez librement les éléments que vous souhaitez évoquer. Vous pouvez également écrire le portrait d’un personnage fictif. Vous n’avez pas à révéler d’informations personnelles ni à partager l’intégralité de votre texte."
+    },
+    {
+      "type": "reponse",
+      "id": "t2-3-carte",
+      "label": "Ma carte « Moi » : mots-clés",
+      "aide": "",
+      "longueur": "long",
+      "mots_cible": 0,
+      "prive": true
+    },
+    {
+      "type": "reponse",
+      "id": "t2-3-poeme",
+      "label": "Mon poème",
+      "aide": "Moi : …\nEt moi : …",
+      "longueur": "long",
+      "mots_cible": 0,
+      "prive": true
+    },
+    {
+      "type": "consigne",
+      "id": "t2-4",
+      "titre": "4. Représentez cette identité dans une silhouette",
+      "duree": "",
+      "modalite": "Individuel",
+      "corps": "Placez des mots ou expressions tirés de votre poème ou du poème proposé sur la silhouette. Choisissez leur emplacement selon les liens symboliques qui vous paraissent pertinents : une aspiration près de la tête, une relation importante près du cœur, une activité près des mains, par exemple. **Il n’existe pas de placement unique ou correct.**\n\nSi vous le souhaitez, placez à l’extérieur de la silhouette des étiquettes attribuées par les autres."
+    },
+    {
+      "type": "silhouette",
+      "id": "t2-4-silhouette",
+      "prive": true
+    },
+    {
+      "type": "consigne",
+      "id": "t2-5",
+      "titre": "5. Faites le lien avec l’apprentissage interculturel",
+      "duree": "",
+      "modalite": "Individuel",
+      "corps": "Rédigez une brève synthèse d’environ **150 mots** en répondant aux questions suivantes :\n\n- Pourquoi est-il réducteur de définir une personne uniquement par sa nationalité, sa langue ou son origine ?\n- Quel est le potentiel didactique de cette activité ? Comment pourrait-elle aider vos élèves à mieux comprendre la diversité des identités ?\n- À quoi devriez-vous veiller pour que chaque élève puisse participer sans se sentir enfermé dans une catégorie ou obligé de dévoiler son histoire personnelle ?"
+    },
+    {
+      "type": "reponse",
+      "id": "t2-5-synthese",
+      "label": "Ma synthèse",
+      "aide": "",
+      "longueur": "long",
+      "mots_cible": 150,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t2-5-phrase",
+      "label": "Complétez : « Pour mieux comprendre une personne, plutôt que de supposer que…, je peux… »",
+      "aide": "Pour mieux comprendre une personne, plutôt que de supposer que …, je peux …",
+      "longueur": "court",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "autocontrole",
+      "id": "t2-5-check",
+      "titre": "Autocontrôle — ma synthèse",
+      "points": [
+        "Je réponds aux trois questions.",
+        "Je nomme au moins une précaution concrète pour protéger la sphère privée des élèves.",
+        "Ma synthèse compte environ 150 mots."
+      ],
+      "exemple_titre": "",
+      "exemple": "",
+      "statut_contenu": ""
+    }
+  ]
+}

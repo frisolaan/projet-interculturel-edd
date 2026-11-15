@@ -1,0 +1,124 @@
+{
+  "id": "t1",
+  "numero": "1",
+  "titre": "Qu’est-ce que « la culture » ? Un essai de définition",
+  "titre_court": "Qu’est-ce que la culture ?",
+  "duree": "1 h 30",
+  "modalite": "Travail individuel",
+  "resultat": "Carte mentale du concept « culture », arbre de la culture, réponses individuelles et définition accessible aux élèves et aux parents.",
+  "blocs": [
+    {
+      "type": "texte",
+      "id": "t1-texte",
+      "titre": "Texte : Qu’est-ce que la culture ?",
+      "corps": "**¶1** Le mot **culture** vient du latin *cultura*, qui désigne la culture de la terre. Par opposition à ce que produit la nature, la culture désigne « ce qui est créé par les êtres humains » : l’art, la littérature, la musique, mais aussi un système de valeurs qui s’est développé à travers des traditions et des coutumes.\n\n**¶2** La culture n’a jamais été figée : elle a toujours été façonnée par les échanges. Cependant, elle a aussi servi, à toutes les époques, à affirmer une identité collective, en répondant aux questions suivantes : qui fait partie de « notre groupe » et qui n’en fait pas partie ? Qui sommes-« nous » et qui sont « les autres » ?\n\n**¶3** Dans la Grèce antique, les Athéniens pouvaient faire la guerre aux Spartiates. Mais lorsqu’il s’agissait de combattre les ennemis perses, ils se rappelaient ce qu’ils avaient en commun. En effet, selon la conception grecque antique, toutes les personnes extérieures à leur propre univers culturel étaient des « barbares », même si, comme les Perses, elles produisaient des réalisations au moins équivalentes dans les domaines de l’architecture, de la littérature ou de l’art.\n\n**¶4** « Là-bas », les hommes portaient la barbe et les gens parlaient une autre langue qui, aux oreilles des Grecs, ressemblait à un charabia incompréhensible. Surtout, ils vénéraient « d’autres dieux et d’autres sanctuaires ». Leurs dieux portaient des noms inconnus et ils avaient une autre conception de ce qui était permis ou interdit. Même les opinions sur le bien et le mal divergeaient. En matière de religion, les êtres humains ont toujours eu tendance à supposer rapidement que seule leur propre foi détenait les vérités ultimes et offrait l’unique voie vers le salut.\n\n*Source : à compléter.*"
+    },
+    {
+      "type": "consigne",
+      "id": "t1-a1",
+      "titre": "Activité 1 — Construire une carte mentale",
+      "duree": "",
+      "modalite": "",
+      "corps": "Créez une carte mentale pour le terme **« La culture »**. Quelles en sont les parties intégrantes ?\n\nVous pouvez dessiner votre carte sur papier ou avec l’outil de votre choix, puis noter ci-dessous les éléments principaux et les liens entre eux."
+    },
+    {
+      "type": "reponse",
+      "id": "t1-a1-carte",
+      "label": "Ma carte mentale : éléments principaux et liens",
+      "aide": "Par exemple : culture → langue, valeurs, fêtes… ; valeurs → ce qui est permis / interdit…",
+      "longueur": "long",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "consigne",
+      "id": "t1-a2",
+      "titre": "Activité 2 — Approfondir sa compréhension",
+      "duree": "",
+      "modalite": "",
+      "corps": "Répondez aux deux questions suivantes."
+    },
+    {
+      "type": "reponse",
+      "id": "t1-a2a",
+      "label": "a. La culture entre échanges et appartenance",
+      "aide": "Relisez le paragraphe ¶2. Expliquez le sens des deux affirmations suivantes et illustrez chacune par des exemples : « La culture a toujours été façonnée par les échanges. » — « La culture permet de distinguer qui est « nous » et qui sont « les autres ». »",
+      "longueur": "long",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t1-a2b",
+      "label": "b. Comprendre les malentendus",
+      "aide": "Expliquez pourquoi des malentendus peuvent survenir lorsque différentes cultures se rencontrent. Appuyez-vous sur les paragraphes ¶3 et ¶4 et intégrez-les à votre réflexion.",
+      "longueur": "long",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "consigne",
+      "id": "t1-a3",
+      "titre": "Activité 3 — L’arbre de la culture",
+      "duree": "",
+      "modalite": "",
+      "corps": "Représentez les différentes dimensions de la culture à l’aide de l’arbre.\n\n- Dans le **feuillage** : les éléments **« visibles »** de la culture.\n- Dans les **racines** : les éléments **« invisibles »** de la culture.\n\nClassez d’abord les éléments proposés, puis vérifiez. Ajoutez ensuite vos propres exemples."
+    },
+    {
+      "type": "tri",
+      "id": "t1-a3-arbre",
+      "consigne": "Cliquez sur un élément, puis sur la partie de l’arbre où il vous semble appartenir (ou faites-le glisser).",
+      "categories": [
+        { "id": "feuillage", "label": "Feuillage — visible" },
+        { "id": "racines", "label": "Racines — invisible" }
+      ],
+      "elements": [
+        { "texte": "les fêtes et les célébrations", "solution": "feuillage", "explication": "" },
+        { "texte": "la cuisine et les repas", "solution": "feuillage", "explication": "" },
+        { "texte": "les vêtements", "solution": "feuillage", "explication": "" },
+        { "texte": "la musique et l’art", "solution": "feuillage", "explication": "" },
+        { "texte": "l’architecture", "solution": "feuillage", "explication": "" },
+        { "texte": "les valeurs", "solution": "racines", "explication": "" },
+        { "texte": "les croyances religieuses", "solution": "racines", "explication": "" },
+        { "texte": "les idées sur le bien et le mal", "solution": "racines", "explication": "" },
+        { "texte": "le rapport au temps", "solution": "racines", "explication": "" },
+        { "texte": "ce qui est permis ou interdit", "solution": "racines", "explication": "" },
+        { "texte": "la langue", "solution": "les-deux", "explication": "On entend la langue, mais elle porte aussi des manières de voir le monde qui restent invisibles." },
+        { "texte": "les manières de saluer", "solution": "les-deux", "explication": "Le geste est visible ; les règles de politesse qui le guident sont invisibles." }
+      ],
+      "ajout_libre": true,
+      "statut_contenu": "Entwurf – à valider"
+    },
+    {
+      "type": "consigne",
+      "id": "t1-a4",
+      "titre": "Activité 4 — Formuler une définition de la culture",
+      "duree": "",
+      "modalite": "",
+      "corps": "Comment expliqueriez-vous le terme **« culture »** ?\n\nRédigez une courte définition sous la forme d’un **article de dictionnaire**, en vous appuyant sur le texte et sur votre arbre de la culture. Veillez à ce que votre définition soit également compréhensible pour vos élèves et leurs parents."
+    },
+    {
+      "type": "reponse",
+      "id": "t1-a4-def",
+      "label": "Ma définition (article de dictionnaire)",
+      "aide": "culture (n. f.) : …",
+      "longueur": "long",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "autocontrole",
+      "id": "t1-a4-check",
+      "titre": "Autocontrôle — ma définition",
+      "points": [
+        "Elle nomme des éléments visibles et invisibles de la culture.",
+        "Elle montre que la culture change et se construit par les échanges.",
+        "Elle évite de présenter une culture comme un bloc homogène.",
+        "Un·e élève de 7e et ses parents peuvent la comprendre sans aide."
+      ],
+      "exemple_titre": "Exemple de définition",
+      "exemple": "**culture** (n. f.) : ensemble de ce que les êtres humains créent et partagent dans un groupe — des choses que l’on voit (fêtes, repas, musique, langue) et des choses que l’on ne voit pas (valeurs, croyances, idées sur ce qui se fait ou ne se fait pas). Une culture n’est jamais figée : elle change au contact d’autres personnes et d’autres groupes. Chaque personne participe à plusieurs cultures à la fois.",
+      "statut_contenu": "Entwurf – à valider"
+    }
+  ]
+}

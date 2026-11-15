@@ -1,0 +1,313 @@
+{
+  "id": "t3",
+  "numero": "3",
+  "titre": "Comprendre les compétences interculturelles et les traduire en pratique",
+  "titre_court": "Comprendre et traduire en pratique",
+  "duree": "3 h",
+  "modalite": "Travail individuel, puis échange en binôme",
+  "resultat": "Une consigne améliorée par binôme et un argumentaire individuel d’environ 200 mots, fondé sur la théorie et le plan d’études.",
+  "blocs": [
+    {
+      "type": "texte",
+      "id": "t3-intro",
+      "titre": "",
+      "corps": "Cette tâche vous invite à mettre en relation les textes théoriques, le plan d’études et le schéma des compétences interculturelles. Vous mobiliserez ensuite ces ressources pour analyser une situation et améliorer une activité de français."
+    },
+    {
+      "type": "consigne",
+      "id": "t3-1",
+      "titre": "1. Réactivez les fondements théoriques",
+      "duree": "~ 40 min",
+      "modalite": "Individuel",
+      "corps": "Reprenez les ressources déjà étudiées :\n\n- les chapitres **11.2 et 11.3 de Christiane Fäcke** ;\n- les **pages 8 à 21 de Chaves, Favier et Pélissier (2013), *L’interculturel en classe*** ;\n- le **podcast de votre camarade** résumant ces deux textes, disponible dans le classeur ILIAS de la cinquième séance.\n\nEffectuez une **relecture sélective** et une **réécoute ciblée** : retrouvez les passages utiles pour répondre aux questions suivantes :\n\n- Pourquoi les connaissances sur d’autres cultures ne suffisent-elles pas à développer une compétence interculturelle ?\n- Quelle place occupent le changement de perspective et la réflexion sur ses propres représentations ?\n- Comment éviter de présenter les cultures comme des ensembles homogènes et figés ?"
+    },
+    {
+      "type": "externe",
+      "id": "t3-1-ressources",
+      "titre": "Ressources hors de l’application",
+      "corps": "Les textes et le podcast se trouvent sur ILIAS.",
+      "liens": [
+        { "label": "Classeur ILIAS — séance 5", "url": "" }
+      ]
+    },
+    {
+      "type": "reponse",
+      "id": "t3-1-faecke",
+      "label": "Une idée importante — Fäcke (avec la page)",
+      "aide": "Idée : … (p. …)",
+      "longueur": "moyen",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t3-1-chaves",
+      "label": "Une idée importante — Chaves, Favier et Pélissier (avec la page)",
+      "aide": "Idée : … (p. …)",
+      "longueur": "moyen",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "autocontrole",
+      "id": "t3-1-check",
+      "titre": "Autocontrôle — je peux expliquer en deux phrases…",
+      "points": [
+        "… pourquoi les connaissances sur d’autres cultures ne suffisent pas.",
+        "… le rôle du changement de perspective et de la réflexion sur mes propres représentations.",
+        "… comment éviter de présenter les cultures comme homogènes et figées.",
+        "Chaque idée notée est accompagnée de sa page."
+      ],
+      "exemple_titre": "",
+      "exemple": "",
+      "statut_contenu": ""
+    },
+    {
+      "type": "consigne",
+      "id": "t3-2",
+      "titre": "2. Examinez vos premières interprétations",
+      "duree": "~ 20 min",
+      "modalite": "Individuel, puis comparaison en binôme",
+      "corps": "Avez-vous déjà interprété un comportement comme « typique » d’un groupe ? Pensez à un exemple que vous pouvez évoquer sans exposer une expérience personnelle sensible. Quelle autre explication serait possible ?"
+    },
+    {
+      "type": "reponse",
+      "id": "t3-2-exemple",
+      "label": "Mon exemple et une autre explication possible",
+      "aide": "",
+      "longueur": "moyen",
+      "mots_cible": 0,
+      "prive": true
+    },
+    {
+      "type": "texte",
+      "id": "t3-2-situation",
+      "titre": "Situation",
+      "corps": "Lors de la préparation d’un échange, une élève dit : « Les élèves de Suisse romande vont sûrement parler uniquement français. Alors, je ne pourrai rien dire. » Un camarade ajoute : « Ils sont différents de nous, c’est tout. »"
+    },
+    {
+      "type": "tri",
+      "id": "t3-2-tri",
+      "consigne": "Classez les énoncés : qu’est-ce qui est établi, supposé ou généralisé ?",
+      "categories": [
+        { "id": "etabli", "label": "Établi" },
+        { "id": "suppose", "label": "Supposé" },
+        { "id": "generalise", "label": "Généralisé" }
+      ],
+      "elements": [
+        { "texte": "Une élève exprime une inquiétude avant l’échange.", "solution": "etabli", "explication": "C’est ce que l’on observe." },
+        { "texte": "Un camarade réagit à ce que dit l’élève.", "solution": "etabli", "explication": "" },
+        { "texte": "Les élèves romands parleront uniquement français.", "solution": "suppose", "explication": "C’est une anticipation : personne ne sait encore comment l’échange se déroulera." },
+        { "texte": "L’élève ne pourra rien dire.", "solution": "suppose", "explication": "" },
+        { "texte": "Ils sont différents de nous, c’est tout.", "solution": "generalise", "explication": "Un groupe entier est décrit comme homogène et opposé à « nous »." }
+      ],
+      "ajout_libre": false,
+      "statut_contenu": "Entwurf – à valider"
+    },
+    {
+      "type": "reponse",
+      "id": "t3-2-reaction",
+      "label": "Ma première réaction en tant qu’enseignant·e",
+      "aide": "Conservez cette note : vous y reviendrez à la fin de la tâche.",
+      "longueur": "moyen",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "consigne",
+      "id": "t3-3",
+      "titre": "3. Mettez en relation la théorie, le plan d’études et le schéma",
+      "duree": "~ 20 min",
+      "modalite": "Individuel, puis comparaison en binôme",
+      "corps": "Étudiez la partie consacrée aux cultures dans le plan d’études thurgovien pour le français (**Kulturen im Fokus**) ainsi que le schéma proposé."
+    },
+    {
+      "type": "lehrplan",
+      "id": "t3-3-lp",
+      "titre": "Lehrplan Volksschule Thurgau – Französisch",
+      "corps": "Ouvrez le plan d’études dans le panneau latéral.",
+      "liens": [
+        { "label": "Rechercher « Kulturen »", "recherche": "Kulturen" }
+      ]
+    },
+    {
+      "type": "texte",
+      "id": "t3-3-dimensions",
+      "titre": "Trois dimensions de la compétence interculturelle",
+      "corps": "- **Les connaissances — la tête :** ce que l’on sait et ce que l’on apprend sur les pratiques, les contextes et les références des personnes.\n- **Les attitudes — le cœur :** la curiosité, l’ouverture et la disposition à questionner ses propres évidences.\n- **Les capacités d’agir — la main :** les démarches permettant de clarifier une interprétation, de communiquer et de construire une compréhension mutuelle.\n\n*Schéma : à ajouter.*"
+    },
+    {
+      "type": "tri",
+      "id": "t3-3-tri",
+      "consigne": "À quelle dimension rattacheriez-vous chaque énoncé ?",
+      "categories": [
+        { "id": "tete", "label": "Connaissances — la tête" },
+        { "id": "coeur", "label": "Attitudes — le cœur" },
+        { "id": "main", "label": "Capacités d’agir — la main" }
+      ],
+      "elements": [
+        { "texte": "savoir que les pratiques varient au sein d’un même pays", "solution": "tete", "explication": "" },
+        { "texte": "connaître le contexte d’une fête ou d’une coutume", "solution": "tete", "explication": "" },
+        { "texte": "être curieux d’une autre manière de faire", "solution": "coeur", "explication": "" },
+        { "texte": "suspendre un jugement trop rapide", "solution": "coeur", "explication": "" },
+        { "texte": "accepter qu’une situation ait plusieurs interprétations", "solution": "coeur", "explication": "" },
+        { "texte": "poser une question pour vérifier une interprétation", "solution": "main", "explication": "" },
+        { "texte": "reformuler pour s’assurer d’avoir compris", "solution": "main", "explication": "" },
+        { "texte": "négocier une solution en français", "solution": "main", "explication": "" }
+      ],
+      "ajout_libre": false,
+      "statut_contenu": "Entwurf – à valider"
+    },
+    {
+      "type": "texte",
+      "id": "t3-3-entrees",
+      "titre": "Quatre entrées didactiques",
+      "corps": "Pour passer de ces dimensions à la conception d’une tâche :\n\n- **Observer et situer :** décrire une situation et reconnaître les limites de ses connaissances.\n- **Rester ouvert :** suspendre un jugement trop rapide.\n- **Explorer des perspectives :** envisager plusieurs interprétations et poser des questions.\n- **Construire la compréhension :** mobiliser le français pour clarifier un besoin ou négocier une solution.\n\nCes entrées constituent une aide à la planification, et non un modèle exhaustif."
+    },
+    {
+      "type": "consigne",
+      "id": "t3-4",
+      "titre": "4. Analysez une activité de français",
+      "duree": "~ 20 min",
+      "modalite": "Binôme",
+      "corps": "Une personne enseignante propose la tâche suivante :\n\n> « Réalisez une affiche présentant le petit-déjeuner typiquement français et le petit-déjeuner typiquement suisse. Comparez les habitudes des Français et des Suisses, puis indiquez quel petit-déjeuner vous préférez. »\n\nDiscutez :\n\n- Quelles connaissances cette activité permet-elle d’acquérir ?\n- Quelles dimensions de la compétence interculturelle sont peu sollicitées ?\n- Quels risques de généralisation ou de renforcement des stéréotypes comporte-t-elle ?\n- Quel attendu du plan d’études pourrait guider son amélioration ?\n\nJustifiez votre analyse à l’aide d’**une idée de Fäcke** et d’**une idée de Chaves, Favier et Pélissier**. Précisez ce que l’activité permet et ce qu’il faudrait faire évoluer."
+    },
+    {
+      "type": "reponse",
+      "id": "t3-4-analyse",
+      "label": "Notre analyse",
+      "aide": "",
+      "longueur": "long",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "autocontrole",
+      "id": "t3-4-check",
+      "titre": "Autocontrôle — notre analyse",
+      "points": [
+        "Nous nommons ce que l’activité permet réellement d’apprendre.",
+        "Nous identifions au moins une dimension peu sollicitée (tête, cœur ou main).",
+        "Nous nommons un risque de généralisation concret.",
+        "Nous citons une idée de chaque lecture."
+      ],
+      "exemple_titre": "Une analyse possible",
+      "exemple": "L’activité mobilise surtout des **connaissances** (la tête) et du vocabulaire utile. En revanche, les **attitudes** et les **capacités d’agir** sont peu sollicitées : les élèves ne questionnent pas leurs représentations et n’interagissent avec personne.\n\nLes formules « typiquement français » et « typiquement suisse » présentent chaque pays comme un ensemble homogène — or les habitudes varient selon les familles, les régions, l’âge ou le budget. La question de préférence finale invite à juger plutôt qu’à comprendre.\n\nPiste : partir de témoignages individuels, faire formuler des questions et comparer avec ses propres habitudes, elles aussi diverses.",
+      "statut_contenu": "Entwurf – à valider"
+    },
+    {
+      "type": "consigne",
+      "id": "t3-5",
+      "titre": "5. Transformez la consigne",
+      "duree": "~ 20 min",
+      "modalite": "Binôme",
+      "corps": "Réécrivez la consigne pour en faire une **courte tâche interculturelle réalisable en cours de français** (environ une demi-page). Votre proposition devra :\n\n- présenter des expériences situées, par exemple deux témoignages individuels, plutôt que des habitudes nationales supposées uniformes ;\n- amener les élèves à examiner une première représentation ou à découvrir un autre point de vue ;\n- prévoir une action en français : poser une question, reformuler, expliquer ou négocier.\n\nPrécisez les supports nécessaires et ajoutez **deux formulations en français** pour aider les élèves."
+    },
+    {
+      "type": "reponse",
+      "id": "t3-5-consigne",
+      "label": "Notre consigne améliorée (supports et deux formulations d’aide compris)",
+      "aide": "",
+      "longueur": "long",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t3-5-attendu",
+      "label": "« Notre tâche se rattache à l’attendu suivant du plan d’études : … »",
+      "aide": "",
+      "longueur": "court",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t3-5-observer",
+      "label": "« Nous pourrons observer un apprentissage interculturel lorsque les élèves… »",
+      "aide": "",
+      "longueur": "court",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "autocontrole",
+      "id": "t3-5-check",
+      "titre": "Autocontrôle — notre consigne",
+      "points": [
+        "Elle part d’expériences situées et non d’habitudes nationales.",
+        "Elle fait examiner une représentation ou découvrir un autre point de vue.",
+        "Elle prévoit une action en français.",
+        "Elle précise les supports et propose deux formulations d’aide.",
+        "Elle tient sur une demi-page environ."
+      ],
+      "exemple_titre": "Exemple de consigne",
+      "exemple": "**Le petit-déjeuner de Léa et de Malik**\n\n1. Écoute les messages vocaux de Léa (Lausanne) et de Malik (Lyon) : ils racontent leur petit-déjeuner d’hier.\n2. Note deux choses qui te surprennent et deux choses que tu fais aussi.\n3. Avec ton/ta partenaire, prépare deux questions pour Léa ou Malik afin de mieux comprendre leurs habitudes.\n4. Compare : ta famille prend-elle toujours le même petit-déjeuner ? Et celle de ton/ta partenaire ?\n\n*Supports :* deux enregistrements courts, fiche de notes.\n*Aides :* « Est-ce que tu manges toujours… ? » — « Chez moi, c’est différent : … »",
+      "statut_contenu": "Entwurf – à valider"
+    },
+    {
+      "type": "consigne",
+      "id": "t3-6a",
+      "titre": "6a. Explorez les compétences transversales et l’ÉDD",
+      "duree": "~ 30 min",
+      "modalite": "Individuel",
+      "corps": "Reprenez le *Lehrplan Volksschule Thurgau*. Au-delà de la partie consacrée aux cultures, examinez :\n\n- **« Grundlagen – Überfachliche Kompetenzen »** : repérez **deux dimensions des compétences transversales** qui peuvent contribuer au développement de la compétence interculturelle.\n- **« Bildung für Nachhaltige Entwicklung »** : relevez **un ou deux passages pertinents** pour établir un lien entre l’apprentissage interculturel et l’ÉDD.\n\nPour chaque élément, notez le titre de la sous-rubrique, reformulez l’idée essentielle **en français** et expliquez son lien avec la compétence interculturelle. Distinguez ce que le plan d’études énonce explicitement du rapprochement que vous proposez."
+    },
+    {
+      "type": "lehrplan",
+      "id": "t3-6a-lp",
+      "titre": "Lehrplan Volksschule Thurgau",
+      "corps": "Cherchez vous-même les passages : la recherche fait partie de la tâche.",
+      "liens": [
+        { "label": "Page d’accueil du plan d’études", "url": "https://tg.lehrplan.ch/" }
+      ]
+    },
+    {
+      "type": "tableau",
+      "id": "t3-6a-tableau",
+      "label": "Mes éléments du plan d’études",
+      "colonnes": ["Rubrique / sous-rubrique", "Idée essentielle (en français)", "Lien avec la compétence interculturelle", "Explicite ou rapprochement ?"],
+      "exemples": [],
+      "lignes": 4
+    },
+    {
+      "type": "consigne",
+      "id": "t3-6b",
+      "titre": "6b. Rédigez un bilan sous forme d’argumentaire",
+      "duree": "~ 30 min",
+      "modalite": "Individuel",
+      "corps": "Des parents et/ou la direction vous demandent pourquoi vous consacrez du temps à des activités portant sur les représentations, les identités et la compréhension interculturelle en cours de français.\n\nRédigez une réponse argumentée d’environ **200 mots**, dans un langage accessible à des non-spécialistes :\n\n- **Justifiez sa place en cours de français**, en vous référant à un attendu de la partie consacrée aux cultures et à une idée issue de vos lectures.\n- **Montrez que ces apprentissages dépassent le cours de français** : appuyez-vous sur les deux dimensions des compétences transversales et sur un passage relatif à l’ÉDD.\n- **Précisez les effets attendus dans la vie scolaire** (examiner plusieurs points de vue, dialoguer avec respect, coopérer…).\n- **Terminez par une courte phrase résumant votre conception de la compétence interculturelle.**\n\nÉvitez de vous limiter à affirmer que ces activités sont importantes : expliquez pourquoi elles font partie de la mission de l’école."
+    },
+    {
+      "type": "rappel",
+      "id": "t3-6b-rappel",
+      "titre": "Votre première réaction (étape 2)",
+      "source": "t3-2-reaction",
+      "corps": "Comment la formuleriez-vous aujourd’hui ?"
+    },
+    {
+      "type": "reponse",
+      "id": "t3-6b-argumentaire",
+      "label": "Mon argumentaire",
+      "aide": "",
+      "longueur": "long",
+      "mots_cible": 200,
+      "prive": false
+    },
+    {
+      "type": "autocontrole",
+      "id": "t3-6b-check",
+      "titre": "Autocontrôle — mon argumentaire",
+      "points": [
+        "Je cite un attendu de la partie « Kulturen im Fokus » et une idée de mes lectures.",
+        "Je m’appuie sur deux dimensions des compétences transversales et sur un passage ÉDD.",
+        "Je nomme des effets concrets dans la vie scolaire.",
+        "Je termine par une phrase qui résume ma conception de la compétence interculturelle.",
+        "Un parent sans formation en didactique comprend mon texte."
+      ],
+      "exemple_titre": "",
+      "exemple": "",
+      "statut_contenu": ""
+    }
+  ]
+}

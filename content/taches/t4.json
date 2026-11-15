@@ -1,0 +1,288 @@
+{
+  "id": "t4",
+  "numero": "finale",
+  "titre": "Enrichir une tâche de dis donc ! par une perspective interculturelle",
+  "titre_court": "Tâche finale : enrichir une tâche",
+  "duree": "4 à 5 h",
+  "modalite": "Travail en binôme",
+  "resultat": "Tâche enrichie, carte-incident, essai en binôme, pistes de résolution et bilan, réunis dans un dossier de trois à quatre pages.",
+  "blocs": [
+    {
+      "type": "texte",
+      "id": "t4-intro",
+      "titre": "",
+      "corps": "À partir des connaissances acquises dans les trois premières tâches, vous allez enrichir une tâche existante de ***dis donc ! 7*** ou ***dis donc ! 8*** afin qu’elle permette également aux élèves de développer leurs compétences interculturelles.\n\nIl s’agit de faire **évoluer une tâche du manuel en lui donnant une dimension interculturelle explicite**, tout en conservant son objectif communicatif. Vous montrerez également comment cet enrichissement contribue à l’**ÉDD**.\n\nVous mettrez ensuite votre proposition à l’essai en binôme en y introduisant une **carte-incident** (*= Störkarte*) : une situation susceptible de compliquer la réalisation de la tâche et de solliciter les compétences interculturelles des élèves."
+    },
+    {
+      "type": "consigne",
+      "id": "t4-1",
+      "titre": "1. Choisissez et analysez une tâche",
+      "duree": "30 min",
+      "modalite": "Binôme",
+      "corps": "Choisissez une tâche dans une unité de *dis donc ! 7* ou *dis donc ! 8*.\n\nExaminez ensemble :\n\n- Quel est son objectif communicatif et quelle production les élèves doivent-ils réaliser ?\n- Quelles ressources et quels moyens langagiers sont déjà disponibles ?\n- Quels aspects se prêtent à un travail interculturel : représentations, expériences différentes, interprétations, communication ou négociation ?\n- Qu’est-ce que la tâche permet déjà de développer et que souhaitez-vous y ajouter ?"
+    },
+    {
+      "type": "reponse",
+      "id": "t4-1-reference",
+      "label": "Référence : volume, unité, page, titre ou numéro de la tâche",
+      "aide": "dis donc ! 7, unité …, p. …, tâche …",
+      "longueur": "court",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t4-1-analyse",
+      "label": "Brève analyse de la tâche initiale",
+      "aide": "",
+      "longueur": "long",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "consigne",
+      "id": "t4-2",
+      "titre": "2. Enrichissez la tâche",
+      "duree": "1 h 30 à 2 h",
+      "modalite": "Binôme",
+      "corps": "Adaptez la tâche pour que les élèves soient amenés à **examiner une représentation, à prendre en compte un autre point de vue ou à construire une compréhension mutuelle**. Vous pouvez ajouter une question, diversifier les perspectives, modifier une consigne ou introduire un moment de dialogue et de réflexion.\n\nVeillez à ne pas présenter les cultures comme des ensembles homogènes ni à attribuer automatiquement un comportement à l’origine d’une personne."
+    },
+    {
+      "type": "tableau",
+      "id": "t4-2-ccm",
+      "label": "Ce que nous conservons, modifions, ajoutons",
+      "colonnes": ["Nous conservons", "Nous modifions", "Nous ajoutons"],
+      "exemples": [],
+      "lignes": 3
+    },
+    {
+      "type": "reponse",
+      "id": "t4-2-objectifs",
+      "label": "Un ou deux objectifs interculturels observables (en complément de l’objectif communicatif)",
+      "aide": "",
+      "longueur": "moyen",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t4-2-consigne",
+      "label": "Consigne destinée aux élèves (entièrement en français)",
+      "aide": "",
+      "longueur": "long",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t4-2-supports",
+      "label": "Supports et aides linguistiques",
+      "aide": "Réutilisez autant que possible les ressources disponibles.",
+      "longueur": "moyen",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t4-2-reflexif",
+      "label": "Retour réflexif des élèves",
+      "aide": "Comment les élèves expliquent-ils ce qu’ils ont découvert, questionné ou révisé ?",
+      "longueur": "moyen",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t4-2-indice",
+      "label": "Indice concret permettant d’observer l’apprentissage interculturel",
+      "aide": "",
+      "longueur": "court",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t4-2-justification",
+      "label": "Justification : lectures théoriques, plan d’études (français, compétences transversales, ÉDD)",
+      "aide": "Quel enjeu de compréhension, de participation ou de vivre-ensemble votre proposition permet-elle de travailler ?",
+      "longueur": "long",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "lehrplan",
+      "id": "t4-2-lp",
+      "titre": "Plan d’études",
+      "corps": "",
+      "liens": [
+        { "label": "Rechercher « Kulturen »", "recherche": "Kulturen" },
+        { "label": "Page d’accueil du plan d’études", "url": "https://tg.lehrplan.ch/" }
+      ]
+    },
+    {
+      "type": "consigne",
+      "id": "t4-3",
+      "titre": "3. Créez votre carte-incident",
+      "duree": "30 min",
+      "modalite": "Binôme",
+      "corps": "Imaginez un **incident critique** qui pourrait survenir pendant la réalisation de votre tâche : un événement bref qui perturbe l’échange, révèle une interprétation implicite ou rend la coopération plus difficile.\n\nL’incident doit être **plausible, directement lié à votre tâche et ouvert à plusieurs interprétations**. Il ne doit pas reposer sur une caricature culturelle. **Ne faites pas figurer la solution sur la carte.**\n\nExemples à adapter :\n\n- Une personne affirme : « Dans ce pays, tout le monde fait comme ça. »\n- Le silence d’un partenaire est interprété comme un manque d’intérêt.\n- Une proposition est retenue sans que les besoins d’un membre du groupe aient été entendus.\n- Deux personnes attribuent des sens différents à une même consigne ou à une même manière de communiquer."
+    },
+    {
+      "type": "reponse",
+      "id": "t4-3-moment",
+      "label": "Moment où l’incident survient",
+      "aide": "",
+      "longueur": "court",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t4-3-situation",
+      "label": "Situation : paroles ou comportements observables",
+      "aide": "",
+      "longueur": "moyen",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t4-3-roles",
+      "label": "Rôles à jouer",
+      "aide": "",
+      "longueur": "moyen",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "autocontrole",
+      "id": "t4-3-check",
+      "titre": "Autocontrôle — avant d’imprimer la carte",
+      "points": [
+        "L’incident est plausible et directement lié à notre tâche.",
+        "Il est ouvert à plusieurs interprétations.",
+        "Il ne repose sur aucune caricature culturelle.",
+        "La solution ne figure pas sur la carte."
+      ],
+      "exemple_titre": "",
+      "exemple": "",
+      "statut_contenu": ""
+    },
+    {
+      "type": "carte",
+      "id": "t4-3-carte",
+      "titre": "Carte-incident",
+      "champs": ["t4-3-moment", "t4-3-situation", "t4-3-roles"]
+    },
+    {
+      "type": "consigne",
+      "id": "t4-4",
+      "titre": "4. Mettez la tâche à l’essai avec la carte-incident",
+      "duree": "1 h",
+      "modalite": "Binôme, hors de l’application",
+      "corps": "Parcourez d’abord votre tâche enrichie du point de vue des élèves : consignes, ressources, possibilités d’interaction.\n\nAu moment prévu, introduisez la carte-incident et jouez la scène. Explorez les réactions spontanées, puis marquez une pause pour analyser :\n\n- Que savons-nous réellement et quelles intentions supposons-nous ?\n- Quelles autres interprétations sont possibles ?\n- Quelles questions permettraient de mieux comprendre la situation ?\n- Quels moyens linguistiques ou quelles interventions pourraient faciliter la poursuite de la tâche ?\n\nDéfinissez **au moins deux pistes de résolution**, puis rejouez la scène en les essayant. Inversez les rôles si cela permet d’examiner un autre point de vue. Une clarification, une adaptation ou un désaccord exprimé avec respect peuvent constituer une issue pertinente.\n\n*Cet essai entre adultes sert à examiner votre dispositif ; il ne permet pas de démontrer les effets qu’il aurait dans une classe.*"
+    },
+    {
+      "type": "reponse",
+      "id": "t4-4-protocole",
+      "label": "Protocole : réactions spontanées, interprétations, questions",
+      "aide": "",
+      "longueur": "long",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t4-4-pistes",
+      "label": "Au moins deux pistes de résolution",
+      "aide": "Piste 1 : …\nPiste 2 : …",
+      "longueur": "long",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t4-4-roles",
+      "label": "Ce que les élèves pourraient faire eux-mêmes / ce qui demande une intervention de l’enseignant·e",
+      "aide": "",
+      "longueur": "moyen",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "consigne",
+      "id": "t4-5",
+      "titre": "5. Révisez et faites le bilan",
+      "duree": "30 min à 1 h",
+      "modalite": "Binôme",
+      "corps": "À partir de votre essai, améliorez les consignes, les aides ou le déroulement (directement dans l’étape 2). Rédigez ensuite ensemble un bref bilan."
+    },
+    {
+      "type": "reponse",
+      "id": "t4-5-competences",
+      "label": "En quoi la tâche enrichie permet-elle de développer des compétences interculturelles ?",
+      "aide": "",
+      "longueur": "moyen",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t4-5-incident",
+      "label": "Qu’a révélé la carte-incident ?",
+      "aide": "",
+      "longueur": "moyen",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t4-5-limites",
+      "label": "Quelles pistes de résolution avez-vous explorées et quelles sont leurs limites ?",
+      "aide": "",
+      "longueur": "moyen",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t4-5-modifications",
+      "label": "Qu’avez-vous modifié après l’essai ?",
+      "aide": "",
+      "longueur": "moyen",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "reponse",
+      "id": "t4-5-parents",
+      "label": "Comment expliqueriez-vous aux parents et à la direction que cet enrichissement contribue aux objectifs du plan d’études, au-delà du seul apprentissage du français ?",
+      "aide": "",
+      "longueur": "moyen",
+      "mots_cible": 0,
+      "prive": false
+    },
+    {
+      "type": "texte",
+      "id": "t4-production",
+      "titre": "Production attendue",
+      "corps": "Remettez un **dossier compact de trois à quatre pages**, hors supports, comprenant :\n\n- la référence à la tâche initiale et une brève analyse ;\n- la tâche enrichie, ses objectifs et sa justification théorique et curriculaire ;\n- la carte-incident ;\n- les pistes de résolution, les modifications apportées et le bilan.\n\nJoignez uniquement les supports nécessaires. **L’ensemble sera rédigé en français.** Le bouton **« Dossier »** en haut de l’écran rassemble vos réponses comme point de départ."
+    },
+    {
+      "type": "autocontrole",
+      "id": "t4-criteres",
+      "titre": "Critères de réussite — auto-évaluation avant la remise",
+      "points": [
+        "L’enrichissement est pertinent par rapport à la tâche initiale.",
+        "Les objectifs interculturels et les indices d’apprentissage sont clairs.",
+        "Les liens avec les fondements théoriques, le plan d’études et l’ÉDD sont solides.",
+        "L’incident est plausible et plusieurs interprétations ont été envisagées.",
+        "Les pistes de résolution et les aides proposées sont pertinentes.",
+        "La révision finale tient compte de l’essai."
+      ],
+      "exemple_titre": "",
+      "exemple": "",
+      "statut_contenu": ""
+    }
+  ]
+}
