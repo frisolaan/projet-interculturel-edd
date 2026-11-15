@@ -17,9 +17,11 @@
       "type": "consigne",
       "id": "t3-1",
       "titre": "1. Réactivez les fondements théoriques",
+      "accroche": "Retrouvez les idées-clés de vos lectures.",
       "duree": "~ 40 min",
       "modalite": "Individuel",
-      "corps": "Reprenez les ressources déjà étudiées :\n\n- les chapitres **11.2 et 11.3 de Christiane Fäcke** ;\n- les **pages 8 à 21 de Chaves, Favier et Pélissier (2013), *L’interculturel en classe*** ;\n- le **podcast de votre camarade** résumant ces deux textes, disponible dans le classeur ILIAS de la cinquième séance.\n\nEffectuez une **relecture sélective** et une **réécoute ciblée** : retrouvez les passages utiles pour répondre aux questions suivantes :\n\n- Pourquoi les connaissances sur d’autres cultures ne suffisent-elles pas à développer une compétence interculturelle ?\n- Quelle place occupent le changement de perspective et la réflexion sur ses propres représentations ?\n- Comment éviter de présenter les cultures comme des ensembles homogènes et figés ?"
+      "corps": "Reprenez les ressources déjà étudiées :\n\n- les chapitres **11.2 et 11.3 de Christiane Fäcke** ;\n- les **pages 8 à 21 de Chaves, Favier et Pélissier (2013), *L’interculturel en classe*** ;\n- le **podcast de votre camarade** résumant ces deux textes, disponible dans le classeur ILIAS de la cinquième séance.\n\nEffectuez une **relecture sélective** et une **réécoute ciblée** : retrouvez les passages utiles pour répondre aux questions suivantes :\n\n- Pourquoi les connaissances sur d’autres cultures ne suffisent-elles pas à développer une compétence interculturelle ?\n- Quelle place occupent le changement de perspective et la réflexion sur ses propres représentations ?\n- Comment éviter de présenter les cultures comme des ensembles homogènes et figés ?",
+      "repliee": false
     },
     {
       "type": "externe",
@@ -27,7 +29,10 @@
       "titre": "Ressources hors de l’application",
       "corps": "Les textes et le podcast se trouvent sur ILIAS.",
       "liens": [
-        { "label": "Classeur ILIAS — séance 5", "url": "" }
+        {
+          "label": "Classeur ILIAS — séance 5",
+          "url": ""
+        }
       ]
     },
     {
@@ -66,9 +71,11 @@
       "type": "consigne",
       "id": "t3-2",
       "titre": "2. Examinez vos premières interprétations",
+      "accroche": "Entre ce que l’on voit et ce que l’on suppose.",
       "duree": "~ 20 min",
       "modalite": "Individuel, puis comparaison en binôme",
-      "corps": "Avez-vous déjà interprété un comportement comme « typique » d’un groupe ? Pensez à un exemple que vous pouvez évoquer sans exposer une expérience personnelle sensible. Quelle autre explication serait possible ?"
+      "corps": "Avez-vous déjà interprété un comportement comme « typique » d’un groupe ? Pensez à un exemple que vous pouvez évoquer sans exposer une expérience personnelle sensible. Quelle autre explication serait possible ?",
+      "repliee": false
     },
     {
       "type": "reponse",
@@ -90,16 +97,45 @@
       "id": "t3-2-tri",
       "consigne": "Classez les énoncés : qu’est-ce qui est établi, supposé ou généralisé ?",
       "categories": [
-        { "id": "etabli", "label": "Établi" },
-        { "id": "suppose", "label": "Supposé" },
-        { "id": "generalise", "label": "Généralisé" }
+        {
+          "id": "etabli",
+          "label": "Établi"
+        },
+        {
+          "id": "suppose",
+          "label": "Supposé"
+        },
+        {
+          "id": "generalise",
+          "label": "Généralisé"
+        }
       ],
       "elements": [
-        { "texte": "Une élève exprime une inquiétude avant l’échange.", "solution": "etabli", "explication": "C’est ce que l’on observe." },
-        { "texte": "Un camarade réagit à ce que dit l’élève.", "solution": "etabli", "explication": "" },
-        { "texte": "Les élèves romands parleront uniquement français.", "solution": "suppose", "explication": "C’est une anticipation : personne ne sait encore comment l’échange se déroulera." },
-        { "texte": "L’élève ne pourra rien dire.", "solution": "suppose", "explication": "" },
-        { "texte": "Ils sont différents de nous, c’est tout.", "solution": "generalise", "explication": "Un groupe entier est décrit comme homogène et opposé à « nous »." }
+        {
+          "texte": "Une élève exprime une inquiétude avant l’échange.",
+          "solution": "etabli",
+          "explication": "C’est ce que l’on observe."
+        },
+        {
+          "texte": "Un camarade réagit à ce que dit l’élève.",
+          "solution": "etabli",
+          "explication": ""
+        },
+        {
+          "texte": "Les élèves romands parleront uniquement français.",
+          "solution": "suppose",
+          "explication": "C’est une anticipation : personne ne sait encore comment l’échange se déroulera."
+        },
+        {
+          "texte": "L’élève ne pourra rien dire.",
+          "solution": "suppose",
+          "explication": ""
+        },
+        {
+          "texte": "Ils sont différents de nous, c’est tout.",
+          "solution": "generalise",
+          "explication": "Un groupe entier est décrit comme homogène et opposé à « nous »."
+        }
       ],
       "ajout_libre": false,
       "statut_contenu": "Entwurf – à valider"
@@ -117,9 +153,11 @@
       "type": "consigne",
       "id": "t3-3",
       "titre": "3. Mettez en relation la théorie, le plan d’études et le schéma",
+      "accroche": "La tête, le cœur, la main.",
       "duree": "~ 20 min",
       "modalite": "Individuel, puis comparaison en binôme",
-      "corps": "Étudiez la partie consacrée aux cultures dans le plan d’études thurgovien pour le français (**Kulturen im Fokus**) ainsi que le schéma proposé."
+      "corps": "Étudiez la partie consacrée aux cultures dans le plan d’études thurgovien pour le français (**Kulturen im Fokus**) ainsi que le schéma proposé.",
+      "repliee": false
     },
     {
       "type": "lehrplan",
@@ -127,7 +165,10 @@
       "titre": "Lehrplan Volksschule Thurgau – Französisch",
       "corps": "Ouvrez le plan d’études dans le panneau latéral.",
       "liens": [
-        { "label": "Rechercher « Kulturen »", "recherche": "Kulturen" }
+        {
+          "label": "Rechercher « Kulturen »",
+          "recherche": "Kulturen"
+        }
       ]
     },
     {
@@ -141,19 +182,60 @@
       "id": "t3-3-tri",
       "consigne": "À quelle dimension rattacheriez-vous chaque énoncé ?",
       "categories": [
-        { "id": "tete", "label": "Connaissances — la tête" },
-        { "id": "coeur", "label": "Attitudes — le cœur" },
-        { "id": "main", "label": "Capacités d’agir — la main" }
+        {
+          "id": "tete",
+          "label": "Connaissances — la tête"
+        },
+        {
+          "id": "coeur",
+          "label": "Attitudes — le cœur"
+        },
+        {
+          "id": "main",
+          "label": "Capacités d’agir — la main"
+        }
       ],
       "elements": [
-        { "texte": "savoir que les pratiques varient au sein d’un même pays", "solution": "tete", "explication": "" },
-        { "texte": "connaître le contexte d’une fête ou d’une coutume", "solution": "tete", "explication": "" },
-        { "texte": "être curieux d’une autre manière de faire", "solution": "coeur", "explication": "" },
-        { "texte": "suspendre un jugement trop rapide", "solution": "coeur", "explication": "" },
-        { "texte": "accepter qu’une situation ait plusieurs interprétations", "solution": "coeur", "explication": "" },
-        { "texte": "poser une question pour vérifier une interprétation", "solution": "main", "explication": "" },
-        { "texte": "reformuler pour s’assurer d’avoir compris", "solution": "main", "explication": "" },
-        { "texte": "négocier une solution en français", "solution": "main", "explication": "" }
+        {
+          "texte": "savoir que les pratiques varient au sein d’un même pays",
+          "solution": "tete",
+          "explication": ""
+        },
+        {
+          "texte": "connaître le contexte d’une fête ou d’une coutume",
+          "solution": "tete",
+          "explication": ""
+        },
+        {
+          "texte": "être curieux d’une autre manière de faire",
+          "solution": "coeur",
+          "explication": ""
+        },
+        {
+          "texte": "suspendre un jugement trop rapide",
+          "solution": "coeur",
+          "explication": ""
+        },
+        {
+          "texte": "accepter qu’une situation ait plusieurs interprétations",
+          "solution": "coeur",
+          "explication": ""
+        },
+        {
+          "texte": "poser une question pour vérifier une interprétation",
+          "solution": "main",
+          "explication": ""
+        },
+        {
+          "texte": "reformuler pour s’assurer d’avoir compris",
+          "solution": "main",
+          "explication": ""
+        },
+        {
+          "texte": "négocier une solution en français",
+          "solution": "main",
+          "explication": ""
+        }
       ],
       "ajout_libre": false,
       "statut_contenu": "Entwurf – à valider"
@@ -168,9 +250,11 @@
       "type": "consigne",
       "id": "t3-4",
       "titre": "4. Analysez une activité de français",
+      "accroche": "Que permet vraiment cette affiche — et que laisse-t-elle de côté ?",
       "duree": "~ 20 min",
       "modalite": "Binôme",
-      "corps": "Une personne enseignante propose la tâche suivante :\n\n> « Réalisez une affiche présentant le petit-déjeuner typiquement français et le petit-déjeuner typiquement suisse. Comparez les habitudes des Français et des Suisses, puis indiquez quel petit-déjeuner vous préférez. »\n\nDiscutez :\n\n- Quelles connaissances cette activité permet-elle d’acquérir ?\n- Quelles dimensions de la compétence interculturelle sont peu sollicitées ?\n- Quels risques de généralisation ou de renforcement des stéréotypes comporte-t-elle ?\n- Quel attendu du plan d’études pourrait guider son amélioration ?\n\nJustifiez votre analyse à l’aide d’**une idée de Fäcke** et d’**une idée de Chaves, Favier et Pélissier**. Précisez ce que l’activité permet et ce qu’il faudrait faire évoluer."
+      "corps": "Une personne enseignante propose la tâche suivante :\n\n> « Réalisez une affiche présentant le petit-déjeuner typiquement français et le petit-déjeuner typiquement suisse. Comparez les habitudes des Français et des Suisses, puis indiquez quel petit-déjeuner vous préférez. »\n\nDiscutez :\n\n- Quelles connaissances cette activité permet-elle d’acquérir ?\n- Quelles dimensions de la compétence interculturelle sont peu sollicitées ?\n- Quels risques de généralisation ou de renforcement des stéréotypes comporte-t-elle ?\n- Quel attendu du plan d’études pourrait guider son amélioration ?\n\nJustifiez votre analyse à l’aide d’**une idée de Fäcke** et d’**une idée de Chaves, Favier et Pélissier**. Précisez ce que l’activité permet et ce qu’il faudrait faire évoluer.",
+      "repliee": false
     },
     {
       "type": "reponse",
@@ -199,9 +283,11 @@
       "type": "consigne",
       "id": "t3-5",
       "titre": "5. Transformez la consigne",
+      "accroche": "Du « typiquement » au témoignage.",
       "duree": "~ 20 min",
       "modalite": "Binôme",
-      "corps": "Réécrivez la consigne pour en faire une **courte tâche interculturelle réalisable en cours de français** (environ une demi-page). Votre proposition devra :\n\n- présenter des expériences situées, par exemple deux témoignages individuels, plutôt que des habitudes nationales supposées uniformes ;\n- amener les élèves à examiner une première représentation ou à découvrir un autre point de vue ;\n- prévoir une action en français : poser une question, reformuler, expliquer ou négocier.\n\nPrécisez les supports nécessaires et ajoutez **deux formulations en français** pour aider les élèves."
+      "corps": "Réécrivez la consigne pour en faire une **courte tâche interculturelle réalisable en cours de français** (environ une demi-page). Votre proposition devra :\n\n- présenter des expériences situées, par exemple deux témoignages individuels, plutôt que des habitudes nationales supposées uniformes ;\n- amener les élèves à examiner une première représentation ou à découvrir un autre point de vue ;\n- prévoir une action en français : poser une question, reformuler, expliquer ou négocier.\n\nPrécisez les supports nécessaires et ajoutez **deux formulations en français** pour aider les élèves.",
+      "repliee": false
     },
     {
       "type": "reponse",
@@ -249,9 +335,11 @@
       "type": "consigne",
       "id": "t3-6a",
       "titre": "6a. Explorez les compétences transversales et l’ÉDD",
+      "accroche": "Ce que le plan d’études dit au-delà du cours de français.",
       "duree": "~ 30 min",
       "modalite": "Individuel",
-      "corps": "Reprenez le *Lehrplan Volksschule Thurgau*. Au-delà de la partie consacrée aux cultures, examinez :\n\n- **« Grundlagen – Überfachliche Kompetenzen »** : repérez **deux dimensions des compétences transversales** qui peuvent contribuer au développement de la compétence interculturelle.\n- **« Bildung für Nachhaltige Entwicklung »** : relevez **un ou deux passages pertinents** pour établir un lien entre l’apprentissage interculturel et l’ÉDD.\n\nPour chaque élément, notez le titre de la sous-rubrique, reformulez l’idée essentielle **en français** et expliquez son lien avec la compétence interculturelle. Distinguez ce que le plan d’études énonce explicitement du rapprochement que vous proposez."
+      "corps": "Reprenez le *Lehrplan Volksschule Thurgau*. Au-delà de la partie consacrée aux cultures, examinez :\n\n- **« Grundlagen – Überfachliche Kompetenzen »** : repérez **deux dimensions des compétences transversales** qui peuvent contribuer au développement de la compétence interculturelle.\n- **« Bildung für Nachhaltige Entwicklung »** : relevez **un ou deux passages pertinents** pour établir un lien entre l’apprentissage interculturel et l’ÉDD.\n\nPour chaque élément, notez le titre de la sous-rubrique, reformulez l’idée essentielle **en français** et expliquez son lien avec la compétence interculturelle. Distinguez ce que le plan d’études énonce explicitement du rapprochement que vous proposez.",
+      "repliee": false
     },
     {
       "type": "lehrplan",
@@ -259,14 +347,55 @@
       "titre": "Lehrplan Volksschule Thurgau",
       "corps": "Cherchez vous-même les passages : la recherche fait partie de la tâche.",
       "liens": [
-        { "label": "Page d’accueil du plan d’études", "url": "https://tg.lehrplan.ch/" }
+        {
+          "label": "Page d’accueil du plan d’études",
+          "url": "https://tg.lehrplan.ch/"
+        }
       ]
+    },
+    {
+      "type": "repere",
+      "id": "t3-6a-rsp",
+      "titre": "Pour aller plus loin : A Rounder Sense of Purpose",
+      "corps": "Un cadre européen de 12 compétences pour l’éducation au développement durable, destiné aux enseignant·e·s. Plusieurs de ses compétences rejoignent la compétence interculturelle. C’est un complément : la référence pour votre travail reste le plan d’études thurgovien.",
+      "liens": [
+        {
+          "label": "Empathie",
+          "url": "https://aroundersenseofpurpose.eu/fr/ec-inv"
+        },
+        {
+          "label": "Valeurs",
+          "url": "https://aroundersenseofpurpose.eu/fr/at-inv"
+        },
+        {
+          "label": "Esprit critique",
+          "url": "https://aroundersenseofpurpose.eu/fr/th-ref"
+        },
+        {
+          "label": "Participation",
+          "url": "https://aroundersenseofpurpose.eu/fr/at-int"
+        },
+        {
+          "label": "Attention",
+          "url": "https://aroundersenseofpurpose.eu/fr/th-inv"
+        },
+        {
+          "label": "Les 12 compétences",
+          "url": "https://aroundersenseofpurpose.eu/fr/"
+        }
+      ],
+      "source": "A Rounder Sense of Purpose, CC BY 4.0"
     },
     {
       "type": "tableau",
       "id": "t3-6a-tableau",
       "label": "Mes éléments du plan d’études",
-      "colonnes": ["Rubrique / sous-rubrique", "Idée essentielle (en français)", "Lien avec la compétence interculturelle", "Explicite ou rapprochement ?"],
+      "colonnes": [
+        "Rubrique / sous-rubrique",
+        "Idée essentielle (en français)",
+        "Lien avec la compétence interculturelle",
+        "Explicite ou rapprochement ?"
+      ],
       "exemples": [],
       "lignes": 4
     },
@@ -274,9 +403,11 @@
       "type": "consigne",
       "id": "t3-6b",
       "titre": "6b. Rédigez un bilan sous forme d’argumentaire",
+      "accroche": "Un parent vous demande : « Pourquoi faire ça en cours de français ? »",
       "duree": "~ 30 min",
       "modalite": "Individuel",
-      "corps": "Des parents et/ou la direction vous demandent pourquoi vous consacrez du temps à des activités portant sur les représentations, les identités et la compréhension interculturelle en cours de français.\n\nRédigez une réponse argumentée d’environ **200 mots**, dans un langage accessible à des non-spécialistes :\n\n- **Justifiez sa place en cours de français**, en vous référant à un attendu de la partie consacrée aux cultures et à une idée issue de vos lectures.\n- **Montrez que ces apprentissages dépassent le cours de français** : appuyez-vous sur les deux dimensions des compétences transversales et sur un passage relatif à l’ÉDD.\n- **Précisez les effets attendus dans la vie scolaire** (examiner plusieurs points de vue, dialoguer avec respect, coopérer…).\n- **Terminez par une courte phrase résumant votre conception de la compétence interculturelle.**\n\nÉvitez de vous limiter à affirmer que ces activités sont importantes : expliquez pourquoi elles font partie de la mission de l’école."
+      "corps": "Des parents et/ou la direction vous demandent pourquoi vous consacrez du temps à des activités portant sur les représentations, les identités et la compréhension interculturelle en cours de français.\n\nRédigez une réponse argumentée d’environ **200 mots**, dans un langage accessible à des non-spécialistes :\n\n- **Justifiez sa place en cours de français**, en vous référant à un attendu de la partie consacrée aux cultures et à une idée issue de vos lectures.\n- **Montrez que ces apprentissages dépassent le cours de français** : appuyez-vous sur les deux dimensions des compétences transversales et sur un passage relatif à l’ÉDD.\n- **Précisez les effets attendus dans la vie scolaire** (examiner plusieurs points de vue, dialoguer avec respect, coopérer…).\n- **Terminez par une courte phrase résumant votre conception de la compétence interculturelle.**\n\nÉvitez de vous limiter à affirmer que ces activités sont importantes : expliquez pourquoi elles font partie de la mission de l’école.",
+      "repliee": false
     },
     {
       "type": "rappel",

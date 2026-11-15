@@ -1,4 +1,5 @@
 import { marked } from './vendor/marked.esm.js';
+import { motif } from './motifs.js';
 
 marked.setOptions({ breaks: true });
 
@@ -27,9 +28,10 @@ const el = (tag, attrs = {}, html = '') => {
   return n;
 };
 const countWords = (s) => (s || '').trim().split(/\s+/).filter(Boolean).length;
+const tacheLabel = (t) => (t.numero === 'finale' ? 'Tâche finale' : `Tâche ${t.numero}`);
 
 // ---------------------------------------------------------------------------
-// State (answers stay on the device)
+// État (les réponses restent sur l’appareil)
 // ---------------------------------------------------------------------------
 let state = loadLocal();
 let parcours = null;
@@ -38,13 +40,13 @@ let fileHandle = null;
 let autosaveTimer = null;
 
 function freshState() {
-  return { app: APP_ID, version: 1, answers: {}, inclurePrive: false, savedAt: null, changedAt: null };
+  return { app: APP_ID, version: 1, answers: {}, inclurePrive: false, savedAt: null, changedAt: null, etapes: {} };
 }
 function loadLocal() {
   try {
     const raw = localStorage.getItem(STORE_KEY);
     if (raw) return { ...freshState(), ...JSON.parse(raw) };
-  } catch (e) { /* storage unavailable */ }
+  } catch (e) { /* stockage indisponible */ }
   return freshState();
 }
 function persistLocal() {
@@ -57,6 +59,7 @@ function setA(id, value) {
   persistLocal();
   updateSaveStatus();
   renderSidebarProgress();
+  document.dispatchEvent(new CustomEvent('answer-change', { detail: id }));
   if (fileHandle) {
     clearTimeout(autosaveTimer);
     autosaveTimer = setTimeout(() => saveToHandle().catch(() => updateSaveStatus()), 1500);
@@ -64,7 +67,7 @@ function setA(id, value) {
 }
 
 // ---------------------------------------------------------------------------
-// Content loading
+// Contenu
 // ---------------------------------------------------------------------------
 async function loadContent() {
   const bust = `?v=${Date.now()}`;
@@ -76,8 +79,19 @@ async function loadContent() {
 const allBlocks = () => parcours.taches.flatMap((id) => taches[id].blocs.map((b) => ({ ...b, tache: id })));
 const privateIds = () => new Set(allBlocks().filter((b) => b.prive).map((b) => b.id));
 
+// Une étape commence à chaque consigne ; ce qui précède forme l’introduction.
+function stepsOf(id) {
+  const t = taches[id];
+  const steps = [{ titre: 'Introduction', intro: true, blocs: [] }];
+  for (const b of t.blocs) {
+    if (b.type === 'consigne') steps.push({ titre: b.titre, consigne: b, blocs: [b] });
+    else steps[steps.length - 1].blocs.push(b);
+  }
+  return steps;
+}
+
 // ---------------------------------------------------------------------------
-// Saving to / opening a file
+// Enregistrer / reprendre
 // ---------------------------------------------------------------------------
 function exportPayload() {
   const priv = privateIds();
@@ -115,12 +129,12 @@ async function save() {
       markSaved();
     }
   } catch (e) {
-    if (e.name !== 'AbortError') alert('L’enregistrement a échoué : ' + e.message);
+    if (e.name !== 'AbortError') alert('L’enregistrement n’a pas abouti : ' + e.message);
   }
 }
 function applyFile(text) {
   let data;
-  try { data = JSON.parse(text); } catch { alert('Ce fichier n’est pas un fichier de parcours valide.'); return false; }
+  try { data = JSON.parse(text); } catch { alert('Ce fichier n’est pas un fichier de parcours.'); return false; }
   if (data.app !== APP_ID || typeof data.answers !== 'object') { alert('Ce fichier ne correspond pas à ce parcours.'); return false; }
   const priv = privateIds();
   const kept = {};
@@ -129,6 +143,7 @@ function applyFile(text) {
   state.inclurePrive = !!data.inclurePrive;
   state.changedAt = data.savedAt || new Date().toISOString();
   markSaved();
+  renderSidebarProgress();
   route();
   return true;
 }
@@ -155,31 +170,24 @@ function relTime(iso) {
   if (min < 60) return `il y a ${min} min`;
   const h = Math.round(min / 60);
   if (h < 24) return `il y a ${h} h`;
-  return `il y a ${Math.round(h / 24)} jour(s)`;
+  return `il y a ${Math.round(h / 24)} j`;
 }
+const isDirty = () => state.changedAt && (!state.savedAt || state.changedAt > state.savedAt);
 function updateSaveStatus() {
-  const s = $('#save-status');
-  const dirty = state.changedAt && (!state.savedAt || state.changedAt > state.savedAt);
-  if (!state.savedAt && !state.changedAt) { s.textContent = ''; s.className = 'save-status'; return; }
-  if (dirty) {
-    s.textContent = fileHandle ? 'Enregistrement…' : 'Modifications non enregistrées';
-    s.className = 'save-status warn';
-  } else {
-    s.textContent = `Enregistré ${relTime(state.savedAt)}` + (fileHandle ? ' · auto' : '');
-    s.className = 'save-status ok';
-  }
+  const txt = !state.savedAt && !state.changedAt ? ''
+    : isDirty() ? (fileHandle ? 'Enregistrement…' : 'Pas encore enregistré dans un fichier')
+    : `Enregistré ${relTime(state.savedAt)}`;
+  const cls = 'save-status ' + (!txt ? '' : isDirty() && !fileHandle ? 'warn' : 'ok');
+  document.querySelectorAll('[data-save-status]').forEach((s) => { s.textContent = txt; s.className = cls; });
 }
 setInterval(updateSaveStatus, 60000);
-window.addEventListener('beforeunload', (e) => {
-  if (state.changedAt && (!state.savedAt || state.changedAt > state.savedAt)) { e.preventDefault(); e.returnValue = ''; }
-});
+window.addEventListener('beforeunload', (e) => { if (isDirty()) { e.preventDefault(); e.returnValue = ''; } });
 
 // ---------------------------------------------------------------------------
-// Lehrplan drawer
+// Plan d’études (panneau latéral)
 // ---------------------------------------------------------------------------
 function openLP(url) {
-  const d = $('#drawer');
-  d.hidden = false;
+  $('#drawer').hidden = false;
   document.body.classList.add('drawer-open');
   $('#lp-frame').src = url || LP_BASE;
   $('#lp-newtab').href = url || LP_BASE;
@@ -193,7 +201,7 @@ $('#lp-search').addEventListener('submit', (e) => {
 });
 
 // ---------------------------------------------------------------------------
-// Sidebar
+// Navigation latérale
 // ---------------------------------------------------------------------------
 function tacheProgress(id) {
   const blocks = taches[id].blocs.filter((b) => b.type === 'reponse' || b.type === 'tableau');
@@ -205,16 +213,24 @@ function tacheProgress(id) {
   }).length;
   return Math.round((done / blocks.length) * 100);
 }
-function renderSidebar() {
+function renderSidebar(activeT, activeStep) {
   const nav = $('#sidebar');
   nav.innerHTML = '';
-  nav.append(el('a', { href: '#/', 'data-route': '' }, '<span class="num">◆</span><span class="lbl">Accueil</span>'));
+  nav.append(el('a', { href: '#/', class: !activeT ? 'active' : '' }, '<span class="lbl">Accueil</span>'));
   for (const id of parcours.taches) {
     const t = taches[id];
-    nav.append(el('a', { href: `#/${id}`, 'data-route': id },
-      `<span class="num">${esc(t.numero === 'finale' ? '★' : t.numero)}</span><span class="lbl">${esc(t.titre_court || t.titre)}<small>${esc(t.duree)}</small></span><span class="prog" data-prog="${id}"></span>`));
+    const a = el('a', { href: `#/${id}/${state.etapes[id] || 0}`, class: 'tache-link' + (activeT === id ? ' active' : '') },
+      `<span class="mini">${motif(id)}</span><span class="lbl">${esc(tacheLabel(t))}<strong>${esc(t.titre_court || t.titre)}</strong></span><span class="prog" data-prog="${id}"></span>`);
+    nav.append(a);
+    if (activeT === id) {
+      const ol = el('ol', { class: 'steps-nav' });
+      stepsOf(id).forEach((s, i) => {
+        ol.append(el('li', {}, `<a href="#/${id}/${i}" class="${i === activeStep ? 'current' : ''}">${mdInline(s.titre.replace(/^Activité \d+ — |^\d+[a-z]?\. /, ''))}</a>`));
+      });
+      nav.append(ol);
+    }
   }
-  nav.append(el('a', { href: '#/dossier', 'data-route': 'dossier' }, '<span class="num">▤</span><span class="lbl">Dossier</span>'));
+  nav.append(el('a', { href: '#/dossier', class: activeT === 'dossier' ? 'active' : '' }, '<span class="lbl">Mon dossier</span>'));
   renderSidebarProgress();
 }
 function renderSidebarProgress() {
@@ -224,9 +240,6 @@ function renderSidebarProgress() {
     n.title = `${p} % des réponses`;
   });
 }
-function markActive(r) {
-  document.querySelectorAll('#sidebar a').forEach((a) => a.classList.toggle('active', a.dataset.route === r));
-}
 $('#menu-btn').addEventListener('click', () => document.body.classList.toggle('nav-open'));
 
 // ---------------------------------------------------------------------------
@@ -234,51 +247,97 @@ $('#menu-btn').addEventListener('click', () => document.body.classList.toggle('n
 // ---------------------------------------------------------------------------
 function renderHome(main) {
   const p = parcours;
-  main.append(el('section', { class: 'hero' }, `
-    <p class="eyebrow">${esc(p.sous_titre)} · ${esc(p.semestre)}</p>
-    <h1>${esc(p.titre)}</h1>
-    <div class="lead">${md(p.intro)}</div>`));
-  main.append(el('section', { class: 'card' }, `<h2>Cadre de travail</h2>${md(p.cadre)}`));
-  main.append(el('section', { class: 'card' }, `<h2>Objectifs du parcours</h2><ul>${p.objectifs.map((o) => `<li>${mdInline(o)}</li>`).join('')}</ul>`));
-  const rows = p.taches.map((id) => {
+  main.append(el('section', { class: 'home-hero' }, `
+    ${motif('accueil', 'hero-motif')}
+    <div>
+      <p class="eyebrow">${esc(p.sous_titre)} · ${esc(p.semestre)}</p>
+      <h1>${esc(p.titre)}</h1>
+      <div class="lead">${md(p.intro)}</div>
+    </div>`));
+  const grid = el('div', { class: 'tache-grid' });
+  for (const id of p.taches) {
     const t = taches[id];
-    return `<tr><td><a href="#/${id}">${esc(t.numero === 'finale' ? 'Tâche finale' : 'Tâche ' + t.numero)} · ${esc(t.titre_court || t.titre)}</a></td><td>${esc(t.duree)}</td><td>${esc(t.resultat)}</td></tr>`;
-  }).join('');
-  main.append(el('section', { class: 'card' }, `<h2>Les étapes en un coup d’œil</h2>
-    <table class="overview"><thead><tr><th>Tâche</th><th>Durée</th><th>Principales productions</th></tr></thead><tbody>${rows}</tbody></table>`));
-  const sv = el('section', { class: 'card notice' }, `<h2>Vos réponses et l’enregistrement</h2>${md(p.sauvegarde)}`);
-  main.append(sv);
-  main.append(el('p', { class: 'next' }, `<a class="btn primary" href="#/${p.taches[0]}">Commencer la tâche 1 →</a>`));
+    const prog = tacheProgress(id);
+    const card = el('a', { class: 'tache-card', href: `#/${id}/${state.etapes[id] || 0}` }, `
+      ${motif(id)}
+      <span class="eyebrow">${esc(tacheLabel(t))}</span>
+      <h2>${esc(t.titre_court || t.titre)}</h2>
+      <p class="chips"><span>${esc(t.duree)}</span><span>${esc(t.modalite)}</span></p>
+      <span class="prog"><span style="width:${prog}%"></span></span>
+      <span class="go">${prog ? 'Continuer' : 'Commencer'} →</span>`);
+    grid.append(card);
+  }
+  main.append(grid);
+  const more = el('div', { class: 'home-more' });
+  more.append(el('details', { class: 'soft' }, `<summary>Cadre de travail</summary><div class="prose">${md(p.cadre)}</div>`));
+  more.append(el('details', { class: 'soft' }, `<summary>Objectifs du parcours</summary><ul class="prose">${p.objectifs.map((o) => `<li>${mdInline(o)}</li>`).join('')}</ul>`));
+  more.append(el('details', { class: 'soft private-note' }, `<summary>Vos réponses restent chez vous</summary><div class="prose">${md(p.sauvegarde)}</div>`));
+  main.append(more);
 }
 
-function renderTache(main, id) {
+function stepHeader(id, steps, idx) {
   const t = taches[id];
-  main.append(el('section', { class: 'hero' }, `
-    <p class="eyebrow">${esc(t.numero === 'finale' ? 'Tâche finale' : 'Tâche ' + t.numero)}</p>
-    <h1>${mdInline(t.titre)}</h1>
-    <p class="meta"><span>⏱ ${esc(t.duree)}</span><span>👥 ${esc(t.modalite)}</span></p>
-    <p class="meta result"><strong>Résultat :</strong> ${esc(t.resultat)}</p>`));
-  for (const b of t.blocs) {
+  const bar = steps.map((s, i) => `<a href="#/${id}/${i}" class="seg ${i < idx ? 'done' : i === idx ? 'now' : ''}" title="${esc(s.titre.replace(/[*_]/g, ''))}" aria-label="Étape ${i + 1} : ${esc(s.titre.replace(/[*_]/g, ''))}"></a>`).join('');
+  return el('header', { class: 'step-head' }, `
+    <span class="eyebrow">${esc(tacheLabel(t))} · étape ${idx + 1} / ${steps.length}</span>
+    <nav class="segbar" aria-label="Étapes">${bar}</nav>`);
+}
+
+function renderStep(main, id, idx) {
+  const t = taches[id];
+  const steps = stepsOf(id);
+  if (idx >= steps.length) return renderEnd(main, id);
+  idx = Math.max(0, idx);
+  state.etapes[id] = idx; persistLocal();
+  const step = steps[idx];
+  main.append(stepHeader(id, steps, idx));
+
+  if (step.intro) {
+    main.append(el('section', { class: 'tache-hero' }, `
+      ${motif(id, 'hero-motif')}
+      <div>
+        <h1>${mdInline(t.titre)}</h1>
+        <p class="chips"><span>${esc(t.duree)}</span><span>${esc(t.modalite)}</span></p>
+        <p class="result">${esc(t.resultat)}</p>
+      </div>`));
+  }
+  for (const b of step.blocs) {
     const node = renderBlock(b);
     if (!node) continue;
     if (REDACTION) node.prepend(el('div', { class: 'redac-tag' }, `${esc(b.type)} · <code>${esc(b.id)}</code>${b.statut_contenu ? ` · <mark>${esc(b.statut_contenu)}</mark>` : ''}`));
     main.append(node);
   }
+
+  const foot = el('footer', { class: 'step-foot' });
+  const prev = idx > 0 ? el('a', { class: 'btn ghost', href: `#/${id}/${idx - 1}` }, '← Retour') : el('span');
+  const status = el('span', { 'data-save-status': '' });
+  const nextLabel = idx === steps.length - 1 ? 'Terminer la tâche' : idx === 0 ? 'Commencer' : 'Continuer';
+  const next = el('a', { class: 'btn primary', href: `#/${id}/${idx + 1}` }, `${nextLabel} →`);
+  foot.append(prev, status, next);
+  main.append(foot);
+  updateSaveStatus();
+}
+
+function renderEnd(main, id) {
+  const t = taches[id];
   const idx = parcours.taches.indexOf(id);
   const next = parcours.taches[idx + 1];
-  const foot = el('section', { class: 'card notice end' }, `
-    <h2>Fin de la tâche</h2>
-    <p>Pensez à <strong>enregistrer</strong> votre progression avant de continuer.</p>`);
-  const actions = el('div', { class: 'row' });
-  actions.append(el('button', { class: 'btn primary', onclick: save }, 'Enregistrer maintenant'));
-  if (next) actions.append(el('a', { class: 'btn ghost', href: `#/${next}` }, 'Tâche suivante →'));
-  else actions.append(el('a', { class: 'btn ghost', href: '#/dossier' }, 'Voir le dossier →'));
-  foot.append(actions);
-  main.append(foot);
+  main.append(el('section', { class: 'end-card' }, `
+    ${motif(id, 'hero-motif')}
+    <h1>${esc(tacheLabel(t))} terminée</h1>
+    <p class="lead">Prenez un instant pour enregistrer votre parcours dans votre fichier.</p>`));
+  const row = el('div', { class: 'row center' });
+  row.append(el('button', { class: 'btn primary', onclick: save }, 'Enregistrer mon parcours'));
+  row.append(next
+    ? el('a', { class: 'btn ghost', href: `#/${next}/${state.etapes[next] || 0}` }, `${tacheLabel(taches[next])} →`)
+    : el('a', { class: 'btn ghost', href: '#/dossier' }, 'Voir mon dossier →'));
+  main.append(row);
+  main.append(el('p', { class: 'center muted' }, '<span data-save-status></span>'));
+  updateSaveStatus();
 }
 
 // ---------------------------------------------------------------------------
-// Blocks
+// Blocs
 // ---------------------------------------------------------------------------
 function renderBlock(b) {
   switch (b.type) {
@@ -290,6 +349,7 @@ function renderBlock(b) {
     case 'autocontrole': return blockAutocontrole(b);
     case 'externe': return blockExterne(b);
     case 'lehrplan': return blockLehrplan(b);
+    case 'repere': return blockRepere(b);
     case 'rappel': return blockRappel(b);
     case 'silhouette': return blockSilhouette(b);
     case 'carte': return blockCarte(b);
@@ -298,27 +358,33 @@ function renderBlock(b) {
 }
 
 function blockTexte(b) {
+  const minutes = Math.max(1, Math.round(countWords(b.corps) / 180));
+  const head = b.titre ? `<h3>${esc(b.titre)}</h3>` : '';
   if (b.repliable) {
-    const d = el('details', { class: 'card text' });
-    d.innerHTML = `<summary>${esc(b.titre)}</summary><div class="prose">${md(b.corps)}</div>`;
-    return d;
+    return el('details', { class: 'reading soft' }, `<summary>${esc(b.titre)}</summary><div class="prose">${md(b.corps)}</div>`);
   }
-  return el('section', { class: 'card text' }, `${b.titre ? `<h3>${esc(b.titre)}</h3>` : ''}<div class="prose">${md(b.corps)}</div>`);
+  const long = countWords(b.corps) > 120;
+  return el('section', { class: 'reading' + (long ? ' long' : '') }, `${head}${long ? `<p class="meta-line">Lecture · ${minutes} min</p>` : ''}<div class="prose">${md(b.corps)}</div>`);
 }
 
 function blockConsigne(b) {
-  const meta = [b.duree && `⏱ ${esc(b.duree)}`, b.modalite && `👥 ${esc(b.modalite)}`].filter(Boolean).join('<span class="dot">·</span>');
-  return el('section', { class: 'consigne', id: b.id }, `
+  const chips = [b.duree, b.modalite].filter(Boolean).map((x) => `<span>${esc(x)}</span>`).join('');
+  const sec = el('section', { class: 'consigne', id: b.id });
+  sec.innerHTML = `
     <h2>${mdInline(b.titre)}</h2>
-    ${meta ? `<p class="meta">${meta}</p>` : ''}
-    <div class="prose">${md(b.corps)}</div>`);
+    ${b.accroche ? `<p class="accroche">${mdInline(b.accroche)}</p>` : ''}
+    ${chips ? `<p class="chips">${chips}</p>` : ''}`;
+  if (b.corps) {
+    if (b.repliee) sec.append(el('details', { class: 'soft' }, `<summary>Consigne détaillée</summary><div class="prose">${md(b.corps)}</div>`));
+    else sec.append(el('div', { class: 'prose' }, md(b.corps)));
+  }
+  return sec;
 }
 
 function blockReponse(b) {
   const wrap = el('section', { class: 'answer' + (b.prive ? ' private' : '') });
-  const label = el('label', { for: `f-${b.id}` }, `${mdInline(b.label)}${b.prive ? ' <span class="badge">privé</span>' : ''}`);
-  wrap.append(label);
-  const rows = b.longueur === 'court' ? 2 : b.longueur === 'moyen' ? 4 : 8;
+  wrap.append(el('label', { for: `f-${b.id}` }, `${mdInline(b.label)}${b.prive ? ' <span class="badge">espace privé</span>' : ''}`));
+  const rows = b.longueur === 'court' ? 2 : b.longueur === 'moyen' ? 4 : 7;
   const ta = el('textarea', { id: `f-${b.id}`, rows, placeholder: b.aide || '' });
   ta.value = getA(b.id, '');
   const info = el('div', { class: 'answer-info' });
@@ -332,7 +398,7 @@ function blockReponse(b) {
   ta.addEventListener('input', () => { setA(b.id, ta.value); updInfo(); autoGrow(ta); });
   updInfo();
   wrap.append(ta, info);
-  if (b.prive) wrap.append(el('p', { class: 'hint' }, 'Ce texte reste sur cet ordinateur. Il n’est ajouté au fichier de sauvegarde ou au dossier que si vous le choisissez dans le dossier.'));
+  if (b.prive) wrap.append(el('p', { class: 'hint' }, 'Reste sur cet ordinateur. N’entre dans votre fichier ou votre dossier que si vous le décidez.'));
   requestAnimationFrame(() => autoGrow(ta));
   return wrap;
 }
@@ -365,7 +431,7 @@ function blockTableau(b) {
   const tw = el('div', { class: 'table-wrap' });
   tw.append(table);
   wrap.append(tw);
-  wrap.append(el('button', { class: 'btn ghost small', onclick: () => { const r = b.colonnes.map(() => ''); data.push(r); addRow(r, data.length - 1); persist(); } }, '+ Ajouter une ligne'));
+  wrap.append(el('button', { class: 'link', onclick: () => { const r = b.colonnes.map(() => ''); data.push(r); addRow(r, data.length - 1); persist(); } }, '+ une ligne'));
   return wrap;
 }
 
@@ -380,23 +446,29 @@ function blockTri(b) {
     const pool = el('div', { class: 'tri-pool', 'data-cat': '' });
     const cats = el('div', { class: 'tri-cats', style: `--n:${b.categories.length}` });
     const boxes = {};
-    for (const c of b.categories) {
-      const box = el('div', { class: 'tri-cat', 'data-cat': c.id }, `<h4>${esc(c.label)}</h4>`);
+    b.categories.forEach((c, ci) => {
+      const box = el('div', { class: `tri-cat tone-${ci % 3}`, 'data-cat': c.id }, `<h4>${esc(c.label)}</h4>`);
       boxes[c.id] = box;
       cats.append(box);
-    }
+    });
+    const drop = (catId, idx) => {
+      if (catId) st.placements[idx] = catId; else delete st.placements[idx];
+      st.verifie = false; selected = null; commit(); draw();
+    };
     b.elements.forEach((item, i) => {
       const placed = st.placements[i];
       let cls = 'chip';
       let note = '';
+      let mark = '';
       if (st.verifie && placed) {
-        const ok = item.solution === 'les-deux' || item.solution === placed;
-        cls += ok ? ' right' : ' wrong';
-        if (item.solution === 'les-deux') cls += ' both';
-        if (item.explication && (item.solution === 'les-deux' || !ok)) note = item.explication;
+        const both = item.solution === 'les-deux';
+        const ok = both || item.solution === placed;
+        cls += both ? ' both' : ok ? ' right' : ' wrong';
+        mark = both ? '⇄ ' : ok ? '✓ ' : '↺ ';
+        if (item.explication && (both || !ok)) note = item.explication;
       }
       if (selected === i) cls += ' selected';
-      const chip = el('button', { class: cls, draggable: 'true', type: 'button', title: note || '' }, esc(item.texte) + (note ? ` <span class="why">${esc(note)}</span>` : ''));
+      const chip = el('button', { class: cls, draggable: 'true', type: 'button' }, `${mark}${esc(item.texte)}${note ? `<span class="why">${esc(note)}</span>` : ''}`);
       chip.addEventListener('click', (e) => {
         e.stopPropagation();
         if (placed && selected !== null && selected !== i) { drop(placed, selected); return; }
@@ -406,13 +478,7 @@ function blockTri(b) {
       chip.addEventListener('dragstart', (e) => { e.dataTransfer.setData('text/plain', String(i)); });
       (placed && boxes[placed] ? boxes[placed] : pool).append(chip);
     });
-    for (const a of st.ajouts) {
-      if (boxes[a.cat]) boxes[a.cat].append(el('span', { class: 'chip own' }, esc(a.texte)));
-    }
-    const drop = (catId, idx) => {
-      if (catId) st.placements[idx] = catId; else delete st.placements[idx];
-      st.verifie = false; selected = null; commit(); draw();
-    };
+    for (const a of st.ajouts) if (boxes[a.cat]) boxes[a.cat].append(el('span', { class: 'chip own' }, esc(a.texte)));
     [pool, ...Object.values(boxes)].forEach((zone) => {
       zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('over'); });
       zone.addEventListener('dragleave', () => zone.classList.remove('over'));
@@ -420,19 +486,19 @@ function blockTri(b) {
       zone.addEventListener('click', () => { if (selected !== null) drop(zone.dataset.cat, selected); });
     });
     if (pool.children.length) wrap.append(pool);
+    else if (!st.verifie) wrap.append(el('p', { class: 'hint' }, 'Tout est placé.'));
     wrap.append(cats);
 
     const bar = el('div', { class: 'row' });
     const allPlaced = Object.keys(st.placements).length === b.elements.length;
-    bar.append(el('button', { class: 'btn primary', disabled: !allPlaced, onclick: () => { st.verifie = true; commit(); draw(); } }, 'Vérifier'));
-    bar.append(el('button', { class: 'btn ghost', onclick: () => { st.placements = {}; st.verifie = false; commit(); draw(); } }, 'Recommencer'));
+    if (allPlaced && !st.verifie) bar.append(el('button', { class: 'btn primary', onclick: () => { st.verifie = true; commit(); draw(); } }, 'Comparer avec notre proposition'));
+    if (Object.keys(st.placements).length) bar.append(el('button', { class: 'link', onclick: () => { st.placements = {}; st.verifie = false; commit(); draw(); } }, 'Tout reprendre'));
     wrap.append(bar);
     if (st.verifie) {
-      const right = b.elements.filter((it, i) => it.solution === 'les-deux' || it.solution === st.placements[i]).length;
-      wrap.append(el('p', { class: 'feedback' }, `${right} / ${b.elements.length} placements correspondent à la proposition. En vert : conforme à la proposition. En rouge : à reconsidérer. En bleu : les deux catégories sont possibles — lisez la remarque sous l’élément.`));
+      wrap.append(el('p', { class: 'feedback' }, '<span>✓ proche de notre proposition</span><span>↺ à reconsidérer</span><span>⇄ les deux sont possibles</span><em>Une proposition, pas une vérité : discutez les écarts.</em>'));
     }
     if (b.ajout_libre) {
-      const f = el('form', { class: 'row add-own' });
+      const f = el('form', { class: 'add-own' });
       const inp = el('input', { type: 'text', placeholder: 'Mon propre exemple…', 'aria-label': 'Mon propre exemple' });
       const sel = el('select', { 'aria-label': 'Catégorie' }, b.categories.map((c) => `<option value="${esc(c.id)}">${esc(c.label)}</option>`).join(''));
       f.append(inp, sel, el('button', { class: 'btn ghost small', type: 'submit' }, 'Ajouter'));
@@ -446,26 +512,30 @@ function blockTri(b) {
 }
 
 function blockAutocontrole(b) {
-  const wrap = el('section', { class: 'check' });
+  const wrap = el('details', { class: 'check' });
   const st = getA(b.id, null) || { coches: [], vu: false };
-  wrap.append(el('h3', {}, `✓ ${esc(b.titre)}`));
+  const done = () => b.points.filter((_, i) => st.coches[i]).length;
+  const sum = el('summary', {}, '');
+  const updSum = () => { sum.innerHTML = `<span class="check-title">Regard sur mon travail</span><span class="check-count">${done()} / ${b.points.length}</span>`; };
+  updSum();
+  wrap.append(sum);
   const ul = el('ul');
   b.points.forEach((p, i) => {
     const li = el('li');
     const id = `c-${b.id}-${i}`;
     const cb = el('input', { type: 'checkbox', id });
     cb.checked = !!st.coches[i];
-    cb.addEventListener('change', () => { st.coches[i] = cb.checked; setA(b.id, { ...st }); });
+    cb.addEventListener('change', () => { st.coches[i] = cb.checked; setA(b.id, { ...st }); updSum(); });
     li.append(cb, el('label', { for: id }, mdInline(p)));
     ul.append(li);
   });
   wrap.append(ul);
   if (b.exemple) {
-    const box = el('div', { class: 'example-box prose', hidden: !st.vu }, `<h4>${esc(b.exemple_titre || 'Exemple')}</h4>${md(b.exemple)}<p class="hint">Un exemple parmi d’autres possibles — comparez, ne copiez pas.</p>`);
-    const btn = el('button', { class: 'btn ghost small' }, st.vu ? 'Masquer l’exemple' : 'Comparer avec un exemple');
+    const box = el('div', { class: 'example-box prose', hidden: !st.vu }, `<h4>${esc(b.exemple_titre || 'Un regard possible')}</h4>${md(b.exemple)}<p class="hint">Un regard parmi d’autres — pour comparer, pas pour copier.</p>`);
+    const btn = el('button', { class: 'link' }, st.vu ? 'Masquer' : 'Voir un regard possible');
     btn.addEventListener('click', () => {
       st.vu = box.hidden; box.hidden = !box.hidden;
-      btn.textContent = box.hidden ? 'Comparer avec un exemple' : 'Masquer l’exemple';
+      btn.textContent = box.hidden ? 'Voir un regard possible' : 'Masquer';
       setA(b.id, { ...st });
     });
     wrap.append(btn, box);
@@ -477,24 +547,28 @@ function blockExterne(b) {
   const links = (b.liens || []).map((l) => (l.url
     ? `<a class="btn ghost small" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`
     : (REDACTION ? `<span class="badge">lien à compléter : ${esc(l.label)}</span>` : `<span class="muted">${esc(l.label)}</span>`))).join(' ');
-  return el('section', { class: 'card external' }, `<h3>↗ ${esc(b.titre)}</h3><div class="prose">${md(b.corps)}</div><div class="row">${links}</div>`);
+  return el('aside', { class: 'aside external' }, `<p class="aside-kicker">Hors de l’application</p><h3>${esc(b.titre)}</h3><div class="prose">${md(b.corps)}</div><div class="row">${links}</div>`);
 }
 
 function blockLehrplan(b) {
-  const wrap = el('section', { class: 'card lp' }, `<h3>📘 ${esc(b.titre)}</h3>${b.corps ? `<div class="prose">${md(b.corps)}</div>` : ''}`);
+  const wrap = el('aside', { class: 'aside lp' }, `<p class="aside-kicker">Plan d’études</p><h3>${esc(b.titre)}</h3>${b.corps ? `<div class="prose">${md(b.corps)}</div>` : ''}`);
   const row = el('div', { class: 'row' });
   for (const l of b.liens || []) {
     const url = l.recherche ? LP_SEARCH(l.recherche) : l.url;
-    if (!url) continue;
-    row.append(el('button', { class: 'btn ghost small', onclick: () => openLP(url) }, esc(l.label)));
+    if (url) row.append(el('button', { class: 'btn ghost small', onclick: () => openLP(url) }, esc(l.label)));
   }
   wrap.append(row);
   return wrap;
 }
 
+function blockRepere(b) {
+  const links = (b.liens || []).filter((l) => l.url).map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('');
+  return el('aside', { class: 'aside repere' }, `<p class="aside-kicker">Pour aller plus loin</p><h3>${esc(b.titre.replace(/^Pour aller plus loin : /, ''))}</h3><div class="prose">${md(b.corps)}</div><p class="tags">${links}</p>${b.source ? `<p class="hint">${esc(b.source)}</p>` : ''}`);
+}
+
 function blockRappel(b) {
   const v = getA(b.source, '');
-  return el('section', { class: 'card recall' }, `<h3>↺ ${esc(b.titre)}</h3>
+  return el('aside', { class: 'aside recall' }, `<p class="aside-kicker">Retour en arrière</p><h3>${esc(b.titre)}</h3>
     <blockquote>${v ? esc(v).replace(/\n/g, '<br>') : '<em>Aucune note pour l’instant.</em>'}</blockquote>
     ${b.corps ? `<div class="prose">${md(b.corps)}</div>` : ''}`);
 }
@@ -505,7 +579,7 @@ const SILHOUETTE_SVG = `<svg viewBox="0 0 200 400" aria-hidden="true"><g fill="v
 
 function blockSilhouette(b) {
   const wrap = el('section', { class: 'answer private' });
-  wrap.append(el('label', {}, 'Ma silhouette <span class="badge">privé</span>'));
+  wrap.append(el('label', {}, 'Ma silhouette <span class="badge">espace privé</span>'));
   const st = getA(b.id, null) || { mots: [] };
   const stage = el('div', { class: 'sil-stage' }, SILHOUETTE_SVG);
   const commit = () => setA(b.id, { mots: st.mots.map((m) => ({ ...m })) });
@@ -530,7 +604,7 @@ function blockSilhouette(b) {
   };
   const redraw = () => { stage.querySelectorAll('.sil-word').forEach((n) => n.remove()); st.mots.forEach(place); };
   redraw();
-  const f = el('form', { class: 'row add-own' });
+  const f = el('form', { class: 'add-own' });
   const inp = el('input', { type: 'text', placeholder: 'Un mot ou une expression…', 'aria-label': 'Mot à placer' });
   f.append(inp, el('button', { class: 'btn ghost small', type: 'submit' }, 'Ajouter'));
   f.addEventListener('submit', (e) => {
@@ -539,21 +613,27 @@ function blockSilhouette(b) {
     st.mots.push({ texte: inp.value.trim(), x: 2 + (st.mots.length % 3) * 3, y: 4 + (st.mots.length % 10) * 8 });
     inp.value = ''; commit(); redraw();
   });
-  wrap.append(f, stage, el('p', { class: 'hint' }, 'Faites glisser les mots sur la silhouette ou autour d’elle. Il n’existe pas de placement correct.'));
+  wrap.append(f, stage, el('p', { class: 'hint' }, 'Faites glisser les mots sur la silhouette ou autour d’elle.'));
   return wrap;
 }
 
 function blockCarte(b) {
-  const wrap = el('section', { class: 'card' });
+  const wrap = el('section', { class: 'answer' });
   const render = () => {
     const parts = b.champs.map((id) => {
       const blk = allBlocks().find((x) => x.id === id);
       return `<div class="carte-field"><h4>${esc(blk ? blk.label : id)}</h4><p>${esc(getA(id, '') || '…').replace(/\n/g, '<br>')}</p></div>`;
     }).join('');
-    return `<div class="carte"><div class="carte-head">${esc(b.titre)}</div>${parts}</div>`;
+    return `<div class="carte">${motif('t4', 'carte-motif')}<div class="carte-head">${esc(b.titre)}</div>${parts}</div>`;
   };
-  wrap.innerHTML = `<h3>Aperçu de la carte</h3>${render()}`;
-  wrap.append(el('button', { class: 'btn primary small', onclick: () => printHTML(render(), 'print-carte') }, 'Imprimer la carte'));
+  wrap.innerHTML = `<label>Aperçu de la carte</label><div class="carte-slot">${render()}</div>`;
+  const onChange = (e) => {
+    if (!wrap.isConnected) { document.removeEventListener('answer-change', onChange); return; }
+    if (b.champs.includes(e.detail)) wrap.querySelector('.carte-slot').innerHTML = render();
+  };
+  document.addEventListener('answer-change', onChange);
+  wrap.append(el('div', { class: 'row' }, ''));
+  wrap.lastChild.append(el('button', { class: 'btn ghost small', onclick: () => printHTML(render(), 'print-carte') }, 'Imprimer la carte'));
   return wrap;
 }
 
@@ -585,24 +665,25 @@ function dossierHTML() {
   return parcours.taches.map((id) => {
     const t = taches[id];
     const items = t.blocs.filter((b) => ANSWER_TYPES.includes(b.type) && (!priv.has(b.id) || state.inclurePrive)).map(answerHTML).join('');
-    return `<section class="d-tache"><h2>${esc(t.numero === 'finale' ? 'Tâche finale' : 'Tâche ' + t.numero)} — ${mdInline(t.titre)}</h2>${items || '<p class="muted">Aucune réponse pour l’instant.</p>'}</section>`;
+    return `<section class="d-tache"><h2>${esc(tacheLabel(t))} — ${mdInline(t.titre)}</h2>${items || '<p class="muted">Aucune réponse pour l’instant.</p>'}</section>`;
   }).join('');
 }
 function renderDossier(main) {
-  main.append(el('section', { class: 'hero' }, `<p class="eyebrow">Dossier</p><h1>Mes réponses</h1>
-    <p class="lead">Toutes vos réponses rassemblées. Imprimez-les ou enregistrez-les en PDF comme point de départ pour votre dossier final.</p>`));
-  const opts = el('section', { class: 'card' });
+  main.append(el('section', { class: 'tache-hero' }, `${motif('dossier', 'hero-motif')}<div><h1>Mon dossier</h1>
+    <p class="lead">Toutes vos réponses au même endroit — un point de départ pour votre dossier final.</p></div>`));
+  const opts = el('section', { class: 'dossier-opts' });
   const lab = el('label', { class: 'toggle' });
   const cb = el('input', { type: 'checkbox' });
   cb.checked = state.inclurePrive;
   cb.addEventListener('change', () => { state.inclurePrive = cb.checked; persistLocal(); main.innerHTML = ''; renderDossier(main); });
-  lab.append(cb, document.createTextNode(' Inclure mes textes privés (poème, carte « Moi », silhouette, exemple personnel) dans le dossier et dans le fichier de sauvegarde'));
+  lab.append(cb, document.createTextNode(' Inclure mon espace privé (poème, carte « Moi », silhouette, exemple personnel) dans le dossier et dans mon fichier'));
   opts.append(lab);
   const row = el('div', { class: 'row' });
-  row.append(el('button', { class: 'btn primary', onclick: () => printHTML(`<h1>${esc(parcours.titre)}</h1>${dossierHTML()}`, 'print-dossier') }, 'Imprimer / PDF'));
+  row.append(el('button', { class: 'btn primary', onclick: () => printHTML(`<h1>${esc(parcours.titre)}</h1>${dossierHTML()}`, 'print-dossier') }, 'Imprimer ou enregistrer en PDF'));
+  row.append(el('button', { class: 'btn ghost', onclick: save }, 'Enregistrer mon parcours'));
   opts.append(row);
   main.append(opts);
-  main.append(el('div', { class: 'dossier card' }, dossierHTML()));
+  main.append(el('div', { class: 'dossier' }, dossierHTML()));
 }
 
 function printHTML(html, cls) {
@@ -615,17 +696,21 @@ function printHTML(html, cls) {
 }
 
 // ---------------------------------------------------------------------------
-// Router
+// Routeur : #/  ·  #/t1/2  ·  #/dossier
 // ---------------------------------------------------------------------------
 function route() {
   const main = $('#main');
-  const r = location.hash.replace(/^#\/?/, '');
+  const [r, s] = location.hash.replace(/^#\/?/, '').split('/');
   main.innerHTML = '';
+  main.className = '';
   document.body.classList.remove('nav-open');
-  if (r === 'dossier') renderDossier(main);
-  else if (taches[r]) renderTache(main, r);
-  else renderHome(main);
-  markActive(taches[r] || r === 'dossier' ? r : '');
+  if (r === 'dossier') { renderDossier(main); renderSidebar('dossier'); }
+  else if (taches[r]) {
+    const idx = Number.isFinite(parseInt(s, 10)) ? parseInt(s, 10) : (state.etapes[r] || 0);
+    main.className = 'step-mode';
+    renderStep(main, r, idx);
+    renderSidebar(r, idx);
+  } else { main.className = 'home'; renderHome(main); renderSidebar(null); }
   main.focus({ preventScroll: true });
   window.scrollTo(0, 0);
 }
@@ -633,16 +718,23 @@ function route() {
 $('#btn-save').addEventListener('click', save);
 $('#btn-open').addEventListener('click', openFile);
 window.addEventListener('hashchange', route);
+document.addEventListener('keydown', (e) => {
+  if (e.target.closest('input, textarea, select')) return;
+  const [r, s] = location.hash.replace(/^#\/?/, '').split('/');
+  if (!taches[r]) return;
+  const i = parseInt(s, 10) || 0;
+  if (e.key === 'ArrowRight') location.hash = `#/${r}/${i + 1}`;
+  if (e.key === 'ArrowLeft' && i > 0) location.hash = `#/${r}/${i - 1}`;
+});
 
 (async () => {
   try {
     await loadContent();
   } catch (e) {
-    $('#main').innerHTML = `<div class="card notice"><h2>Le contenu n’a pas pu être chargé.</h2><p>${esc(e.message)}</p></div>`;
+    $('#main').innerHTML = `<div class="aside"><h2>Le contenu n’a pas pu être chargé.</h2><p>${esc(e.message)}</p></div>`;
     return;
   }
   if (REDACTION) document.body.classList.add('redaction');
-  renderSidebar();
   updateSaveStatus();
   route();
 })();

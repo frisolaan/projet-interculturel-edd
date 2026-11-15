@@ -17,9 +17,11 @@
       "type": "consigne",
       "id": "t1-a1",
       "titre": "Activité 1 — Construire une carte mentale",
+      "accroche": "Que mettez-vous derrière le mot « culture » ?",
       "duree": "",
       "modalite": "",
-      "corps": "Créez une carte mentale pour le terme **« La culture »**. Quelles en sont les parties intégrantes ?\n\nVous pouvez dessiner votre carte sur papier ou avec l’outil de votre choix, puis noter ci-dessous les éléments principaux et les liens entre eux."
+      "corps": "Créez une carte mentale pour le terme **« La culture »**. Quelles en sont les parties intégrantes ?\n\nVous pouvez dessiner votre carte sur papier ou avec l’outil de votre choix, puis noter ci-dessous les éléments principaux et les liens entre eux.",
+      "repliee": false
     },
     {
       "type": "reponse",
@@ -34,9 +36,11 @@
       "type": "consigne",
       "id": "t1-a2",
       "titre": "Activité 2 — Approfondir sa compréhension",
+      "accroche": "Deux idées du texte à creuser : l’échange et l’appartenance.",
       "duree": "",
       "modalite": "",
-      "corps": "Répondez aux deux questions suivantes."
+      "corps": "Répondez aux deux questions suivantes.",
+      "repliee": true
     },
     {
       "type": "reponse",
@@ -60,9 +64,11 @@
       "type": "consigne",
       "id": "t1-a3",
       "titre": "Activité 3 — L’arbre de la culture",
+      "accroche": "Qu’est-ce qui se voit — et qu’est-ce qui reste sous la surface ?",
       "duree": "",
       "modalite": "",
-      "corps": "Représentez les différentes dimensions de la culture à l’aide de l’arbre.\n\n- Dans le **feuillage** : les éléments **« visibles »** de la culture.\n- Dans les **racines** : les éléments **« invisibles »** de la culture.\n\nClassez d’abord les éléments proposés, puis vérifiez. Ajoutez ensuite vos propres exemples."
+      "corps": "Représentez les différentes dimensions de la culture à l’aide de l’arbre.\n\n- Dans le **feuillage** : les éléments **« visibles »** de la culture.\n- Dans les **racines** : les éléments **« invisibles »** de la culture.\n\nClassez d’abord les éléments proposés, puis vérifiez. Ajoutez ensuite vos propres exemples.",
+      "repliee": false
     },
     {
       "type": "tri",
@@ -147,9 +153,11 @@
       "type": "consigne",
       "id": "t1-a4",
       "titre": "Activité 4 — Formuler une définition de la culture",
+      "accroche": "Et si vous deviez l’expliquer à un parent d’élève ?",
       "duree": "",
       "modalite": "",
-      "corps": "Comment expliqueriez-vous le terme **« culture »** ?\n\nRédigez une courte définition sous la forme d’un **article de dictionnaire**, en vous appuyant sur le texte et sur votre arbre de la culture. Veillez à ce que votre définition soit également compréhensible pour vos élèves et leurs parents."
+      "corps": "Comment expliqueriez-vous le terme **« culture »** ?\n\nRédigez une courte définition sous la forme d’un **article de dictionnaire**, en vous appuyant sur le texte et sur votre arbre de la culture. Veillez à ce que votre définition soit également compréhensible pour vos élèves et leurs parents.",
+      "repliee": false
     },
     {
       "type": "reponse",

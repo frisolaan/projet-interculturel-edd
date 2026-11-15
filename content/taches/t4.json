@@ -2,7 +2,7 @@
   "id": "t4",
   "numero": "finale",
   "titre": "Enrichir une tâche de dis donc ! par une perspective interculturelle",
-  "titre_court": "Tâche finale : enrichir une tâche",
+  "titre_court": "Enrichir une tâche de dis donc !",
   "duree": "4 à 5 h",
   "modalite": "Travail en binôme",
   "resultat": "Tâche enrichie, carte-incident, essai en binôme, pistes de résolution et bilan, réunis dans un dossier de trois à quatre pages.",
@@ -17,9 +17,11 @@
       "type": "consigne",
       "id": "t4-1",
       "titre": "1. Choisissez et analysez une tâche",
+      "accroche": "Choisissez une tâche du manuel et regardez-la autrement.",
       "duree": "30 min",
       "modalite": "Binôme",
-      "corps": "Choisissez une tâche dans une unité de *dis donc ! 7* ou *dis donc ! 8*.\n\nExaminez ensemble :\n\n- Quel est son objectif communicatif et quelle production les élèves doivent-ils réaliser ?\n- Quelles ressources et quels moyens langagiers sont déjà disponibles ?\n- Quels aspects se prêtent à un travail interculturel : représentations, expériences différentes, interprétations, communication ou négociation ?\n- Qu’est-ce que la tâche permet déjà de développer et que souhaitez-vous y ajouter ?"
+      "corps": "Choisissez une tâche dans une unité de *dis donc ! 7* ou *dis donc ! 8*.\n\nExaminez ensemble :\n\n- Quel est son objectif communicatif et quelle production les élèves doivent-ils réaliser ?\n- Quelles ressources et quels moyens langagiers sont déjà disponibles ?\n- Quels aspects se prêtent à un travail interculturel : représentations, expériences différentes, interprétations, communication ou négociation ?\n- Qu’est-ce que la tâche permet déjà de développer et que souhaitez-vous y ajouter ?",
+      "repliee": false
     },
     {
       "type": "reponse",
@@ -43,15 +45,21 @@
       "type": "consigne",
       "id": "t4-2",
       "titre": "2. Enrichissez la tâche",
+      "accroche": "Gardez l’objectif communicatif, ouvrez une perspective.",
       "duree": "1 h 30 à 2 h",
       "modalite": "Binôme",
-      "corps": "Adaptez la tâche pour que les élèves soient amenés à **examiner une représentation, à prendre en compte un autre point de vue ou à construire une compréhension mutuelle**. Vous pouvez ajouter une question, diversifier les perspectives, modifier une consigne ou introduire un moment de dialogue et de réflexion.\n\nVeillez à ne pas présenter les cultures comme des ensembles homogènes ni à attribuer automatiquement un comportement à l’origine d’une personne."
+      "corps": "Adaptez la tâche pour que les élèves soient amenés à **examiner une représentation, à prendre en compte un autre point de vue ou à construire une compréhension mutuelle**. Vous pouvez ajouter une question, diversifier les perspectives, modifier une consigne ou introduire un moment de dialogue et de réflexion.\n\nVeillez à ne pas présenter les cultures comme des ensembles homogènes ni à attribuer automatiquement un comportement à l’origine d’une personne.",
+      "repliee": false
     },
     {
       "type": "tableau",
       "id": "t4-2-ccm",
       "label": "Ce que nous conservons, modifions, ajoutons",
-      "colonnes": ["Nous conservons", "Nous modifions", "Nous ajoutons"],
+      "colonnes": [
+        "Nous conservons",
+        "Nous modifions",
+        "Nous ajoutons"
+      ],
       "exemples": [],
       "lignes": 3
     },
@@ -115,17 +123,58 @@
       "titre": "Plan d’études",
       "corps": "",
       "liens": [
-        { "label": "Rechercher « Kulturen »", "recherche": "Kulturen" },
-        { "label": "Page d’accueil du plan d’études", "url": "https://tg.lehrplan.ch/" }
+        {
+          "label": "Rechercher « Kulturen »",
+          "recherche": "Kulturen"
+        },
+        {
+          "label": "Page d’accueil du plan d’études",
+          "url": "https://tg.lehrplan.ch/"
+        }
       ]
+    },
+    {
+      "type": "repere",
+      "id": "t4-2-rsp",
+      "titre": "Pour aller plus loin : A Rounder Sense of Purpose",
+      "corps": "Un cadre européen de 12 compétences pour l’éducation au développement durable, destiné aux enseignant·e·s. Plusieurs de ses compétences rejoignent la compétence interculturelle. C’est un complément : la référence pour votre travail reste le plan d’études thurgovien.",
+      "liens": [
+        {
+          "label": "Empathie",
+          "url": "https://aroundersenseofpurpose.eu/fr/ec-inv"
+        },
+        {
+          "label": "Valeurs",
+          "url": "https://aroundersenseofpurpose.eu/fr/at-inv"
+        },
+        {
+          "label": "Esprit critique",
+          "url": "https://aroundersenseofpurpose.eu/fr/th-ref"
+        },
+        {
+          "label": "Participation",
+          "url": "https://aroundersenseofpurpose.eu/fr/at-int"
+        },
+        {
+          "label": "Attention",
+          "url": "https://aroundersenseofpurpose.eu/fr/th-inv"
+        },
+        {
+          "label": "Les 12 compétences",
+          "url": "https://aroundersenseofpurpose.eu/fr/"
+        }
+      ],
+      "source": "A Rounder Sense of Purpose, CC BY 4.0"
     },
     {
       "type": "consigne",
       "id": "t4-3",
       "titre": "3. Créez votre carte-incident",
+      "accroche": "Un grain de sable dans l’échange.",
       "duree": "30 min",
       "modalite": "Binôme",
-      "corps": "Imaginez un **incident critique** qui pourrait survenir pendant la réalisation de votre tâche : un événement bref qui perturbe l’échange, révèle une interprétation implicite ou rend la coopération plus difficile.\n\nL’incident doit être **plausible, directement lié à votre tâche et ouvert à plusieurs interprétations**. Il ne doit pas reposer sur une caricature culturelle. **Ne faites pas figurer la solution sur la carte.**\n\nExemples à adapter :\n\n- Une personne affirme : « Dans ce pays, tout le monde fait comme ça. »\n- Le silence d’un partenaire est interprété comme un manque d’intérêt.\n- Une proposition est retenue sans que les besoins d’un membre du groupe aient été entendus.\n- Deux personnes attribuent des sens différents à une même consigne ou à une même manière de communiquer."
+      "corps": "Imaginez un **incident critique** qui pourrait survenir pendant la réalisation de votre tâche : un événement bref qui perturbe l’échange, révèle une interprétation implicite ou rend la coopération plus difficile.\n\nL’incident doit être **plausible, directement lié à votre tâche et ouvert à plusieurs interprétations**. Il ne doit pas reposer sur une caricature culturelle. **Ne faites pas figurer la solution sur la carte.**\n\nExemples à adapter :\n\n- Une personne affirme : « Dans ce pays, tout le monde fait comme ça. »\n- Le silence d’un partenaire est interprété comme un manque d’intérêt.\n- Une proposition est retenue sans que les besoins d’un membre du groupe aient été entendus.\n- Deux personnes attribuent des sens différents à une même consigne ou à une même manière de communiquer.",
+      "repliee": false
     },
     {
       "type": "reponse",
@@ -172,15 +221,21 @@
       "type": "carte",
       "id": "t4-3-carte",
       "titre": "Carte-incident",
-      "champs": ["t4-3-moment", "t4-3-situation", "t4-3-roles"]
+      "champs": [
+        "t4-3-moment",
+        "t4-3-situation",
+        "t4-3-roles"
+      ]
     },
     {
       "type": "consigne",
       "id": "t4-4",
       "titre": "4. Mettez la tâche à l’essai avec la carte-incident",
+      "accroche": "Jouez, arrêtez-vous, rejouez.",
       "duree": "1 h",
       "modalite": "Binôme, hors de l’application",
-      "corps": "Parcourez d’abord votre tâche enrichie du point de vue des élèves : consignes, ressources, possibilités d’interaction.\n\nAu moment prévu, introduisez la carte-incident et jouez la scène. Explorez les réactions spontanées, puis marquez une pause pour analyser :\n\n- Que savons-nous réellement et quelles intentions supposons-nous ?\n- Quelles autres interprétations sont possibles ?\n- Quelles questions permettraient de mieux comprendre la situation ?\n- Quels moyens linguistiques ou quelles interventions pourraient faciliter la poursuite de la tâche ?\n\nDéfinissez **au moins deux pistes de résolution**, puis rejouez la scène en les essayant. Inversez les rôles si cela permet d’examiner un autre point de vue. Une clarification, une adaptation ou un désaccord exprimé avec respect peuvent constituer une issue pertinente.\n\n*Cet essai entre adultes sert à examiner votre dispositif ; il ne permet pas de démontrer les effets qu’il aurait dans une classe.*"
+      "corps": "Parcourez d’abord votre tâche enrichie du point de vue des élèves : consignes, ressources, possibilités d’interaction.\n\nAu moment prévu, introduisez la carte-incident et jouez la scène. Explorez les réactions spontanées, puis marquez une pause pour analyser :\n\n- Que savons-nous réellement et quelles intentions supposons-nous ?\n- Quelles autres interprétations sont possibles ?\n- Quelles questions permettraient de mieux comprendre la situation ?\n- Quels moyens linguistiques ou quelles interventions pourraient faciliter la poursuite de la tâche ?\n\nDéfinissez **au moins deux pistes de résolution**, puis rejouez la scène en les essayant. Inversez les rôles si cela permet d’examiner un autre point de vue. Une clarification, une adaptation ou un désaccord exprimé avec respect peuvent constituer une issue pertinente.\n\n*Cet essai entre adultes sert à examiner votre dispositif ; il ne permet pas de démontrer les effets qu’il aurait dans une classe.*",
+      "repliee": false
     },
     {
       "type": "reponse",
@@ -213,9 +268,11 @@
       "type": "consigne",
       "id": "t4-5",
       "titre": "5. Révisez et faites le bilan",
+      "accroche": "Ce que l’essai vous a appris.",
       "duree": "30 min à 1 h",
       "modalite": "Binôme",
-      "corps": "À partir de votre essai, améliorez les consignes, les aides ou le déroulement (directement dans l’étape 2). Rédigez ensuite ensemble un bref bilan."
+      "corps": "À partir de votre essai, améliorez les consignes, les aides ou le déroulement (directement dans l’étape 2). Rédigez ensuite ensemble un bref bilan.",
+      "repliee": false
     },
     {
       "type": "reponse",

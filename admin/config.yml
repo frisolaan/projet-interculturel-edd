@@ -48,7 +48,7 @@ collections:
     label: Tâche 1 · Qu’est-ce que la culture ?
     file: content/taches/t1.json
     format: json
-    fields: &id004
+    fields: &id010
     - label: ID (nicht ändern)
       name: id
       widget: string
@@ -80,7 +80,7 @@ collections:
         name: consigne
         widget: object
         fields:
-        - &id002
+        - &id006
           label: ID (nicht ändern)
           name: id
           widget: string
@@ -88,10 +88,14 @@ collections:
         - label: Titel
           name: titre
           widget: string
+        - &id002 label: Einstiegsfrage (kursiv, kurz und einladend)
+          &id003 name: accroche
+          &id004 widget: &id008 string
+          &id005 required: &id001 false
         - label: Dauer
           name: duree
           widget: string
-          required: &id001 false
+          required: *id001
         - label: Sozialform
           name: modalite
           widget: string
@@ -99,11 +103,16 @@ collections:
         - label: Text
           name: corps
           widget: markdown
+        - *id002: Text zugeklappt anzeigen («Consigne détaillée»)
+          *id003: repliee
+          *id004: boolean
+          *id005: *id001
+          default: *id001
       - label: Text (Lesetext, Situation, Gedicht)
         name: texte
         widget: object
         fields:
-        - *id002
+        - *id006
         - label: Titel
           name: titre
           widget: string
@@ -120,7 +129,7 @@ collections:
         name: reponse
         widget: object
         fields:
-        - *id002
+        - *id006
         - label: Beschriftung
           name: label
           widget: string
@@ -149,7 +158,7 @@ collections:
         name: tableau
         widget: object
         fields:
-        - *id002
+        - *id006
         - label: Beschriftung
           name: label
           widget: string
@@ -173,7 +182,7 @@ collections:
         name: tri
         widget: object
         fields:
-        - *id002
+        - *id006
         - label: Anweisung
           name: consigne
           widget: string
@@ -207,7 +216,7 @@ collections:
           name: ajout_libre
           widget: boolean
           default: *id001
-        - &id003
+        - &id007
           label: Redaktionsstatus (nur im Redaktionsmodus sichtbar)
           name: statut_contenu
           widget: string
@@ -217,7 +226,7 @@ collections:
         name: autocontrole
         widget: object
         fields:
-        - *id002
+        - *id006
         - label: Titel
           name: titre
           widget: string
@@ -232,12 +241,12 @@ collections:
           name: exemple
           widget: markdown
           required: *id001
-        - *id003
+        - *id007
       - label: Externe Ressource (ILIAS, Lehrmittel …)
         name: externe
         widget: object
         fields:
-        - *id002
+        - *id006
         - label: Titel
           name: titre
           widget: string
@@ -261,7 +270,7 @@ collections:
         name: lehrplan
         widget: object
         fields:
-        - *id002
+        - *id006
         - label: Titel
           name: titre
           widget: string
@@ -285,11 +294,39 @@ collections:
             name: url
             widget: string
             required: *id001
+      - *id002: Weiterführender Bezug (z. B. A Rounder Sense of Purpose)
+        *id003: repere
+        *id004: object
+        &id009 fields:
+        - *id002: ID (nicht ändern)
+          *id003: id
+          *id004: *id008
+        - *id002: Titel
+          *id003: titre
+          *id004: *id008
+        - *id002: Text
+          *id003: corps
+          *id004: markdown
+          *id005: *id001
+        - *id002: Links
+          *id003: liens
+          *id004: list
+          *id009:
+          - *id002: Beschriftung
+            *id003: *id002
+            *id004: *id008
+          - *id002: URL
+            *id003: url
+            *id004: *id008
+        - *id002: Quelle / Lizenz
+          *id003: source
+          *id004: *id008
+          *id005: *id001
       - label: Rückblick (zeigt eine frühere Antwort)
         name: rappel
         widget: object
         fields:
-        - *id002
+        - *id006
         - label: Titel
           name: titre
           widget: string
@@ -304,7 +341,7 @@ collections:
         name: silhouette
         widget: object
         fields:
-        - *id002
+        - *id006
         - label: Privat
           name: prive
           widget: boolean
@@ -313,7 +350,7 @@ collections:
         name: carte
         widget: object
         fields:
-        - *id002
+        - *id006
         - label: Titel
           name: titre
           widget: string
@@ -324,14 +361,14 @@ collections:
     label: Tâche 2 · Une personne, plusieurs facettes
     file: content/taches/t2.json
     format: json
-    fields: *id004
+    fields: *id010
   - name: t3
     label: Tâche 3 · Comprendre et traduire en pratique
     file: content/taches/t3.json
     format: json
-    fields: *id004
+    fields: *id010
   - name: t4
     label: Tâche finale · Enrichir une tâche
     file: content/taches/t4.json
     format: json
-    fields: *id004
+    fields: *id010

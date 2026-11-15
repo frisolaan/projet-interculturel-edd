@@ -12,12 +12,23 @@ Selbstlern-App zum Parcours «Compétences interculturelles et éducation au dé
 
 ```
 index.html, app.js, style.css   App (statisch, ohne Build-Schritt)
+motifs.js                       Motive «L’entre-deux»
+assets/fonts/                   Schriften (OFL)
 vendor/marked.esm.js            Markdown-Parser (MIT)
 content/parcours.json           Startseite, Rahmen, Ziele, Reihenfolge der Tâches
 content/taches/t1…t4.json       Tâches als Liste von Blöcken
 admin/                          Redaktionseditor (Sveltia CMS)
 vercel.json                     Hosting-Einstellungen
 ```
+
+## Gestaltung «L’entre-deux»
+
+- **Leitidee:** der Raum zwischen den Perspektiven. Motive aus halbtransparenten, organischen Formen, die sich überlagern (`motifs.js`) – keine Menschen, Flaggen, Globen oder Hände.
+- **Farben:** Papierweiss (#FAF7F2), Petrol (#1F5C63) als Anker, Terrakotta (#C65A3A) als einziger Akzent, Ocker für «beides möglich», Flieder für das private Feld. Keine Flaggenkombinationen.
+- **Schriften (lokal ausgeliefert, OFL):** Fraunces für Titel und Lesetexte, Atkinson Hyperlegible für die Oberfläche.
+- **Schrittmodus:** Jede Konsigne beginnt einen eigenen Schritt (`#/t1/3`). Fortschrittsbalken oben, Schrittliste in der Seitenleiste, Pfeiltasten ← → zum Blättern.
+- **Ton:** Jede Konsigne hat eine kurze Einstiegsfrage (`accroche`). Selbstchecks heissen «Regard sur mon travail», Musterlösungen «un regard possible», Sortierübungen vergleichen «avec notre proposition» – Hinweise statt Noten.
+- **Interdisziplinärer Bezug:** Tâche 3 (6a) und Tâche finale verweisen zusätzlich auf den ÉDD-Kompetenzrahmen *A Rounder Sense of Purpose* (Empathie, Valeurs, Esprit critique, Participation, Attention; CC BY 4.0). Massgebend bleibt der Lehrplan Thurgau.
 
 ## Einmalige Einrichtung
 
@@ -45,7 +56,7 @@ Die zweite Person braucht ein GitHub-Konto und muss im Repo als **Collaborator**
 
 | Typ | Zweck |
 |---|---|
-| Konsigne | Aufgabenstellung mit Titel, Dauer, Sozialform |
+| Konsigne | Aufgabenstellung mit Titel, Einstiegsfrage, Dauer, Sozialform; beginnt einen neuen Schritt |
 | Text | Lesetext, Situation, Gedicht (optional zugeklappt) |
 | Antwortfeld | Freitext, optional mit Zielwortzahl; «privat» = nicht im Dossier/Export (ausser auf Wunsch) |
 | Tabelle | Raster mit Spalten und Beispielzeilen |
@@ -53,6 +64,7 @@ Die zweite Person braucht ein GitHub-Konto und muss im Repo als **Collaborator**
 | Selbstcheck | Checkliste plus aufdeckbares Beispiel |
 | Externe Ressource | Hinweis auf ILIAS, Lehrmittel usw. |
 | Lehrplan-Fenster | Schaltflächen, die tg.lehrplan.ch im Seitenfenster öffnen (Suchwort oder URL) |
+| Weiterführender Bezug | Kasten mit Links, z. B. zu A Rounder Sense of Purpose |
 | Rückblick | zeigt eine frühere Antwort erneut an |
 | Silhouette | Wörter auf eine Figur ziehen |
 | Karte zum Drucken | z. B. Störkarte aus mehreren Antwortfeldern |
