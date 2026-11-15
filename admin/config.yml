@@ -38,6 +38,17 @@ collections:
     - label: Hinweis zum Speichern
       name: sauvegarde
       widget: markdown
+    - label: Mode d’emploi (Anleitung in der App)
+      name: mode_emploi
+      widget: list
+      summary: '{{fields.titre}}'
+      fields:
+      - label: Titel
+        name: titre
+        widget: string
+      - label: Text
+        name: texte
+        widget: markdown
     - label: Reihenfolge der Tâches (IDs)
       name: taches
       widget: list

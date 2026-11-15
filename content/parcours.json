@@ -11,5 +11,36 @@
     "Enrichir une tâche existante, mettre le dispositif à l’essai avec une carte-incident et proposer des pistes de résolution."
   ],
   "sauvegarde": "**Vos réponses restent sur votre ordinateur.** Rien n’est envoyé à un serveur.\n\nLa première fois, cliquez sur **« Enregistrer »** et choisissez où placer votre fichier de parcours (par exemple dans votre dossier de cours). Dans Chrome et Edge, l’application enregistre ensuite automatiquement dans ce fichier. Dans Safari et Firefox, un nouveau fichier est téléchargé à chaque enregistrement.\n\nPour continuer sur un autre ordinateur, ouvrez votre fichier avec **« Ouvrir »**.",
-  "taches": ["t1", "t2", "t3", "t4"]
+  "taches": [
+    "t1",
+    "t2",
+    "t3",
+    "t4"
+  ],
+  "mode_emploi": [
+    {
+      "titre": "Avancer étape par étape",
+      "texte": "Chaque tâche est découpée en étapes courtes. Avancez avec **Continuer**, revenez avec **Retour** ou cliquez sur une étape dans la colonne de gauche. Les flèches ← → du clavier fonctionnent aussi."
+    },
+    {
+      "titre": "Écrire directement dans l’application",
+      "texte": "Vos réponses sont gardées automatiquement dans ce navigateur, sur cet ordinateur. Vous pouvez fermer la page et revenir plus tard sur le même ordinateur."
+    },
+    {
+      "titre": "Enregistrer votre parcours dans un fichier",
+      "texte": "Cliquez régulièrement sur **Enregistrer** (en haut à droite) et choisissez un endroit sûr, par exemple votre dossier de cours. C’est votre sauvegarde : le navigateur peut effacer ses données sans prévenir. Dans Chrome et Edge, l’application met ensuite ce fichier à jour toute seule."
+    },
+    {
+      "titre": "Continuer ailleurs",
+      "texte": "Sur un autre ordinateur, ouvrez l’application et cliquez sur **Ouvrir mon fichier** pour reprendre là où vous en étiez."
+    },
+    {
+      "titre": "Votre espace privé",
+      "texte": "Les champs marqués **espace privé** (poème, carte « Moi », silhouette…) restent sur cet ordinateur. Ils n’entrent dans votre fichier ou votre dossier que si vous le décidez dans **Mon dossier**."
+    },
+    {
+      "titre": "Plan d’études et dossier",
+      "texte": "Le bouton **Plan d’études** ouvre le Lehrplan Thurgau dans un panneau latéral. **Mon dossier** rassemble toutes vos réponses : vous pouvez l’imprimer ou l’enregistrer en PDF."
+    }
+  ]
 }

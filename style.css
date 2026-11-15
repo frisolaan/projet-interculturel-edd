@@ -378,3 +378,31 @@ main:focus, main:focus-visible { outline: none; }
 .schema-svg .sch-s { font-size: 13px; fill: var(--ink-2); }
 .schema-svg .sch-center { font-family: var(--head); font-weight: 700; font-size: 11.5px; }
 .schema figcaption { text-align: center; font-size: .82rem; color: var(--ink-3); margin-top: 6px; }
+
+/* --- Enregistrer bien visible ---------------------------------------------------- */
+.btn.save { background: var(--petrol); color: var(--on-petrol); font-weight: 700; position: relative; }
+.btn.save:hover { background: var(--petrol-2); }
+.btn.save svg { width: 16px; height: 16px; }
+.dirty-dot { display: none; position: absolute; top: -3px; right: -3px; width: 11px; height: 11px; border-radius: 50%; background: var(--terre); box-shadow: 0 0 0 2px var(--paper); }
+body.needs-save .dirty-dot { display: block; }
+.foot-mid { margin: 0 auto; display: flex; align-items: center; gap: 10px; }
+.foot-save { display: none; }
+body.needs-save .foot-save { display: inline-flex; }
+.step-foot [data-save-status] { margin: 0; }
+
+/* --- Bienvenue et mode d’emploi --------------------------------------------------- */
+.welcome { margin: 0 0 28px; padding: 20px 24px; border: 2px solid var(--petrol); border-radius: 20px; background: var(--surface); }
+.welcome h2 { font-size: 1.3rem; }
+.welcome ol { margin: 8px 0 0; padding-left: 1.3em; }
+.welcome li { margin: 4px 0; }
+.aide-list { list-style: none; counter-reset: a; padding: 0; display: grid; gap: 12px; }
+.aide-list li { counter-increment: a; position: relative; padding: 16px 20px 6px 64px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
+.aide-list li::before { content: counter(a); position: absolute; left: 18px; top: 16px; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-family: var(--head); font-weight: 700; background: var(--terre); color: var(--ink); }
+.aide-list h3 { margin-bottom: 2px; }
+.sidebar > a.aide-link { font-weight: 400; color: var(--ink-2); }
+@media (max-width: 900px) {
+  .actions a[href="#/aide"], #btn-lp { display: none; }
+}
+@media (max-width: 520px) {
+  #btn-open { padding: 6px 8px; }
+}

@@ -179,6 +179,7 @@ function updateSaveStatus() {
     : `Enregistré ${relTime(state.savedAt)}`;
   const cls = 'save-status ' + (!txt ? '' : isDirty() && !fileHandle ? 'warn' : 'ok');
   document.querySelectorAll('[data-save-status]').forEach((s) => { s.textContent = txt; s.className = cls; });
+  document.body.classList.toggle('needs-save', !!(isDirty() && !fileHandle));
 }
 setInterval(updateSaveStatus, 60000);
 window.addEventListener('beforeunload', (e) => { if (isDirty()) { e.preventDefault(); e.returnValue = ''; } });
@@ -231,6 +232,10 @@ function renderSidebar(activeT, activeStep) {
     }
   }
   nav.append(el('a', { href: '#/dossier', class: activeT === 'dossier' ? 'active' : '' }, '<span class="lbl">Mon dossier</span>'));
+  nav.append(el('a', { href: '#/aide', class: 'aide-link' + (activeT === 'aide' ? ' active' : '') }, '<span class="lbl">Mode d’emploi</span>'));
+  const lp = el('a', { href: '#', class: 'aide-link' }, '<span class="lbl">Plan d’études</span>');
+  lp.addEventListener('click', (e) => { e.preventDefault(); openLP(); });
+  nav.append(lp);
   renderSidebarProgress();
 }
 function renderSidebarProgress() {
@@ -247,6 +252,7 @@ $('#menu-btn').addEventListener('click', () => document.body.classList.toggle('n
 // ---------------------------------------------------------------------------
 function renderHome(main) {
   const p = parcours;
+  if (!state.bienvenueVue) main.append(welcomeCard());
   main.append(el('section', { class: 'home-hero' }, `
     ${motif('accueil', 'hero-motif')}
     <div>
@@ -285,6 +291,36 @@ function renderHome(main) {
   main.append(sw);
 }
 
+
+function welcomeCard() {
+  const card = el('section', { class: 'welcome' }, `
+    <h2>Bienvenue ! Trois choses à savoir</h2>
+    <ol>
+      <li><strong>Avancez étape par étape</strong> avec « Continuer ».</li>
+      <li><strong>Vos réponses sont gardées dans ce navigateur</strong> — mais pas pour toujours.</li>
+      <li><strong>Cliquez régulièrement sur « Enregistrer »</strong> (en haut à droite) pour garder votre parcours dans un fichier et continuer plus tard, aussi sur un autre ordinateur.</li>
+    </ol>`);
+  const row = el('div', { class: 'row' });
+  row.append(el('a', { class: 'btn ghost small', href: '#/aide' }, 'Lire le mode d’emploi'));
+  row.append(el('button', { class: 'btn primary small', onclick: () => { state.bienvenueVue = true; persistLocal(); card.remove(); } }, 'Compris'));
+  card.append(row);
+  return card;
+}
+
+function renderAide(main) {
+  main.append(el('section', { class: 'tache-hero' }, `${motif('accueil', 'hero-motif')}<div><h1>Mode d’emploi</h1>
+    <p class="lead">Comment travailler avec l’application — en six points.</p></div>`));
+  const list = el('ol', { class: 'aide-list' });
+  (parcours.mode_emploi || []).forEach((p) => list.append(el('li', {}, `<h3>${esc(p.titre)}</h3><div class="prose">${md(p.texte)}</div>`)));
+  main.append(list);
+  const row = el('div', { class: 'row' });
+  row.append(el('button', { class: 'btn save', onclick: save }, 'Enregistrer mon parcours maintenant'));
+  row.append(el('button', { class: 'btn ghost', onclick: openFile }, 'Ouvrir mon fichier'));
+  row.append(el('a', { class: 'btn ghost', href: '#/' }, 'Retour à l’accueil'));
+  main.append(row);
+  state.bienvenueVue = true; persistLocal();
+}
+
 function stepHeader(id, steps, idx) {
   const t = taches[id];
   const bar = steps.map((s, i) => `<a href="#/${id}/${i}" class="seg ${i < idx ? 'done' : i === idx ? 'now' : ''}" title="${esc(s.titre.replace(/[*_]/g, ''))}" aria-label="Étape ${i + 1} : ${esc(s.titre.replace(/[*_]/g, ''))}"></a>`).join('');
@@ -320,7 +356,8 @@ function renderStep(main, id, idx) {
 
   const foot = el('footer', { class: 'step-foot' });
   const prev = idx > 0 ? el('a', { class: 'btn ghost', href: `#/${id}/${idx - 1}` }, '← Retour') : el('span');
-  const status = el('span', { 'data-save-status': '' });
+  const status = el('span', { class: 'foot-mid' });
+  status.append(el('span', { 'data-save-status': '' }), el('button', { class: 'btn save small foot-save', onclick: save }, 'Enregistrer'));
   const nextLabel = idx === steps.length - 1 ? 'Terminer la tâche' : idx === 0 ? 'Commencer' : 'Continuer';
   const next = el('a', { class: 'btn primary', href: `#/${id}/${idx + 1}` }, `${nextLabel} →`);
   foot.append(prev, status, next);
@@ -405,7 +442,7 @@ function blockReponse(b) {
     if (b.mots_cible) {
       const ok = n >= b.mots_cible * 0.8 && n <= b.mots_cible * 1.3;
       info.innerHTML = `<span class="${ok ? 'ok' : ''}">${n} / ~${b.mots_cible} mots</span>`;
-    } else info.textContent = n ? `${n} mots` : '';
+    } else info.textContent = n ? `${n} mot${n > 1 ? 's' : ''}` : '';
   };
   ta.addEventListener('input', () => { setA(b.id, ta.value); updInfo(); autoGrow(ta); });
   updInfo();
@@ -787,6 +824,7 @@ function route() {
   main.className = '';
   document.body.classList.remove('nav-open');
   if (r === 'dossier') { renderDossier(main); renderSidebar('dossier'); }
+  else if (r === 'aide') { main.className = 'step-mode'; renderAide(main); renderSidebar('aide'); }
   else if (taches[r]) {
     const idx = Number.isFinite(parseInt(s, 10)) ? parseInt(s, 10) : (state.etapes[r] || 0);
     main.className = 'step-mode';

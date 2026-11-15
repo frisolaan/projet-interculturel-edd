@@ -33,6 +33,12 @@ vercel.json                     Hosting-Einstellungen
 - **Ton:** Jede Konsigne hat eine kurze Einstiegsfrage (`accroche`). Selbstchecks heissen «Regard sur mon travail», Musterlösungen «un regard possible», Sortierübungen vergleichen «avec notre proposition» – Hinweise statt Noten.
 - **Interdisziplinärer Bezug:** Tâche 3 (6a) und Tâche finale verweisen zusätzlich auf den ÉDD-Kompetenzrahmen *A Rounder Sense of Purpose* (Empathie, Valeurs, Esprit critique, Participation, Attention; CC BY 4.0). Massgebend bleibt der Lehrplan Thurgau.
 
+## Speichern und Anleitung in der App
+
+- **Enregistrer** (oben rechts, gefüllter Knopf) speichert den Parcours in eine Datei. Ein Punkt am Knopf und ein zweiter Knopf in der Fusszeile jedes Schritts erscheinen, solange noch nicht in eine Datei gespeichert wurde.
+- **Ouvrir mon fichier** lädt eine gespeicherte Datei – auch auf einem anderen Gerät.
+- **Mode d’emploi** (`#/aide`): sechs Punkte zur Arbeit mit der App, im Editor unter «Parcours» bearbeitbar. Beim ersten Besuch erscheint auf der Startseite zusätzlich eine kurze Willkommenskarte.
+
 ## Einmalige Einrichtung
 
 ### 1. Vercel verbinden
