@@ -120,8 +120,10 @@ async function save() {
           suggestedName: 'mon-parcours-interculturel.json',
           types: [{ description: 'Fichier de parcours', accept: { 'application/json': ['.json'] } }],
         });
+        rememberHandle(fileHandle);
       }
       await saveToHandle();
+      const bar = $('#reconnect'); if (bar) bar.hidden = true;
     } else {
       const blob = new Blob([exportPayload()], { type: 'application/json' });
       const a = el('a', { href: URL.createObjectURL(blob), download: 'mon-parcours-interculturel.json' });
@@ -152,7 +154,7 @@ async function openFile() {
     try {
       const [h] = await window.showOpenFilePicker({ types: [{ description: 'Fichier de parcours', accept: { 'application/json': ['.json'] } }] });
       const text = await (await h.getFile()).text();
-      if (applyFile(text)) fileHandle = h;
+      if (applyFile(text)) { fileHandle = h; rememberHandle(h); updateSaveStatus(); }
     } catch (e) { if (e.name !== 'AbortError') alert('Ouverture impossible : ' + e.message); }
   } else {
     $('#file-input').click();
@@ -163,6 +165,44 @@ $('#file-input').addEventListener('change', async (ev) => {
   if (f) applyFile(await f.text());
   ev.target.value = '';
 });
+
+
+// ---------------------------------------------------------------------------
+// Mémoriser le fichier entre deux visites (Chrome/Edge, File System Access API)
+// ---------------------------------------------------------------------------
+function idb(mode, fn) {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open('pi-edd', 1);
+    req.onupgradeneeded = () => req.result.createObjectStore('kv');
+    req.onerror = () => reject(req.error);
+    req.onsuccess = () => {
+      const tx = req.result.transaction('kv', mode);
+      const r = fn(tx.objectStore('kv'));
+      tx.oncomplete = () => resolve(r && r.result);
+      tx.onerror = () => reject(tx.error);
+    };
+  });
+}
+const rememberHandle = (h) => idb('readwrite', (st) => st.put(h, 'fichier')).catch(() => {});
+const recallHandle = () => idb('readonly', (st) => st.get('fichier')).catch(() => null);
+
+async function reconnectFile() {
+  if (!('showSaveFilePicker' in window)) return;
+  const h = await recallHandle();
+  if (!h || !h.queryPermission) return;
+  const p = await h.queryPermission({ mode: 'readwrite' });
+  if (p === 'granted') { fileHandle = h; updateSaveStatus(); return; }
+  const bar = $('#reconnect');
+  bar.innerHTML = '';
+  bar.append(el('span', {}, `Continuer à enregistrer dans <strong>${esc(h.name)}</strong> ?`));
+  bar.append(el('button', { class: 'btn save small', onclick: async () => {
+    try {
+      if (await h.requestPermission({ mode: 'readwrite' }) === 'granted') { fileHandle = h; bar.hidden = true; await saveToHandle(); }
+    } catch (e) { bar.hidden = true; }
+  } }, 'Oui, continuer'));
+  bar.append(el('button', { class: 'link', onclick: () => { bar.hidden = true; } }, 'Plus tard'));
+  bar.hidden = false;
+}
 
 function relTime(iso) {
   const min = Math.round((Date.now() - new Date(iso)) / 60000);
@@ -252,7 +292,6 @@ $('#menu-btn').addEventListener('click', () => document.body.classList.toggle('n
 // ---------------------------------------------------------------------------
 function renderHome(main) {
   const p = parcours;
-  if (!state.bienvenueVue) main.append(welcomeCard());
   main.append(el('section', { class: 'home-hero' }, `
     ${motif('accueil', 'hero-motif')}
     <div>
@@ -292,19 +331,34 @@ function renderHome(main) {
 }
 
 
-function welcomeCard() {
-  const card = el('section', { class: 'welcome' }, `
-    <h2>Bienvenue ! Trois choses à savoir</h2>
-    <ol>
-      <li><strong>Avancez étape par étape</strong> avec « Continuer ».</li>
-      <li><strong>Vos réponses sont gardées dans ce navigateur</strong> — mais pas pour toujours.</li>
-      <li><strong>Cliquez régulièrement sur « Enregistrer »</strong> (en haut à droite) pour garder votre parcours dans un fichier et continuer plus tard, aussi sur un autre ordinateur.</li>
-    </ol>`);
-  const row = el('div', { class: 'row' });
-  row.append(el('a', { class: 'btn ghost small', href: '#/aide' }, 'Lire le mode d’emploi'));
-  row.append(el('button', { class: 'btn primary small', onclick: () => { state.bienvenueVue = true; persistLocal(); card.remove(); } }, 'Compris'));
-  card.append(row);
-  return card;
+
+function showInfo(force = false) {
+  let hide = false;
+  try { hide = localStorage.getItem('pi-edd-info-masquee') === '1'; } catch (e) { /* ignore */ }
+  if (hide && !force) return;
+  const back = el('div', { class: 'modal-back' });
+  const dlg = el('div', { class: 'modal', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'info-t' }, `
+    ${motif('accueil', 'modal-motif')}
+    <h2 id="info-t">${esc(parcours.info_titre || 'Avant de commencer')}</h2>
+    <div class="prose">${md(parcours.info || '')}</div>`);
+  const lab = el('label', { class: 'toggle small' });
+  const cb = el('input', { type: 'checkbox' });
+  cb.checked = hide;
+  lab.append(cb, document.createTextNode(' Ne plus afficher ce message au démarrage'));
+  const ok = el('button', { class: 'btn primary' }, 'J’ai compris');
+  ok.addEventListener('click', () => {
+    try { localStorage.setItem('pi-edd-info-masquee', cb.checked ? '1' : '0'); } catch (e) { /* ignore */ }
+    back.remove();
+    document.body.classList.remove('modal-open');
+  });
+  const foot = el('div', { class: 'modal-foot' });
+  foot.append(lab, ok);
+  dlg.append(foot);
+  back.append(dlg);
+  document.body.append(back);
+  document.body.classList.add('modal-open');
+  ok.focus({ preventScroll: true });
+  dlg.scrollTop = 0;
 }
 
 function renderAide(main) {
@@ -316,7 +370,7 @@ function renderAide(main) {
   const row = el('div', { class: 'row' });
   row.append(el('button', { class: 'btn save', onclick: save }, 'Enregistrer mon parcours maintenant'));
   row.append(el('button', { class: 'btn ghost', onclick: openFile }, 'Ouvrir mon fichier'));
-  row.append(el('a', { class: 'btn ghost', href: '#/' }, 'Retour à l’accueil'));
+  row.append(el('button', { class: 'btn ghost', onclick: () => showInfo(true) }, 'Revoir les informations importantes'));
   main.append(row);
   state.bienvenueVue = true; persistLocal();
 }
@@ -402,6 +456,7 @@ function renderBlock(b) {
     case 'carte': return blockCarte(b);
     case 'audio': return blockAudio(b);
     case 'schema': return blockSchema(b);
+    case 'remise': return blockRemise(b);
     default: return REDACTION ? el('div', { class: 'card' }, `Type inconnu : ${esc(b.type)}`) : null;
   }
 }
@@ -725,6 +780,19 @@ function blockSchema(b) {
   return el('figure', { class: 'schema' }, `${draw()}${b.legende ? `<figcaption>${mdInline(b.legende)}</figcaption>` : ''}`);
 }
 
+function blockRemise(b) {
+  const link = b.url
+    ? `<a class="btn save" href="${esc(b.url)}" target="_blank" rel="noopener">Ouvrir la remise sur ILIAS ↗</a>`
+    : `<span class="muted">${REDACTION ? '<span class="badge">lien ILIAS à compléter</span>' : 'Le lien vers ILIAS sera indiqué ici.'}</span>`;
+  const wrap = el('aside', { class: 'aside remise' }, `<p class="aside-kicker">À remettre sur ILIAS</p><h3>${esc(b.titre)}</h3>
+    ${b.echeance ? `<p class="chips"><span>Délai : ${esc(b.echeance)}</span></p>` : ''}
+    ${b.corps ? `<div class="prose">${md(b.corps)}</div>` : ''}`);
+  const row = el('div', { class: 'row' }, link);
+  row.append(el('a', { class: 'btn ghost small', href: '#/dossier' }, 'Préparer le PDF dans mon dossier'));
+  wrap.append(row);
+  return wrap;
+}
+
 function fmtTime(t) { t = Math.max(0, Math.round(t || 0)); return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`; }
 function blockAudio(b) {
   if (!b.fichier) return REDACTION ? el('div', { class: 'aside' }, 'Audio : fichier manquant') : null;
@@ -857,4 +925,6 @@ document.addEventListener('keydown', (e) => {
   if (REDACTION) document.body.classList.add('redaction');
   updateSaveStatus();
   route();
+  showInfo();
+  reconnectFile();
 })();

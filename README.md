@@ -37,7 +37,10 @@ vercel.json                     Hosting-Einstellungen
 
 - **Enregistrer** (oben rechts, gefüllter Knopf) speichert den Parcours in eine Datei. Ein Punkt am Knopf und ein zweiter Knopf in der Fusszeile jedes Schritts erscheinen, solange noch nicht in eine Datei gespeichert wurde.
 - **Ouvrir mon fichier** lädt eine gespeicherte Datei – auch auf einem anderen Gerät.
-- **Mode d’emploi** (`#/aide`): sechs Punkte zur Arbeit mit der App, im Editor unter «Parcours» bearbeitbar. Beim ersten Besuch erscheint auf der Startseite zusätzlich eine kurze Willkommenskarte.
+- **Infofenster beim Start** («Avant de commencer»): keine Daten auf Servern, automatisches Zwischenspeichern im Browser, Speichern in eine Datei, Abgaben über ILIAS. Muss mit «J’ai compris» bestätigt werden; «Ne plus afficher» blendet es künftig aus. Im Mode d’emploi jederzeit wieder aufrufbar. Text im Editor unter «Parcours».
+- **Datei merken (Chrome/Edge):** Die App merkt sich die gewählte Datei. Beim nächsten Besuch erscheint «Continuer à enregistrer dans … ?» – ein Klick genügt (der Browser verlangt diese Bestätigung).
+- **Mode d’emploi** (`#/aide`): sieben Punkte zur Arbeit mit der App, im Editor unter «Parcours» bearbeitbar.
+- **Abgaben auf ILIAS:** Blocktyp «Abgabe auf ILIAS» mit Link und optionalem Termin. Bisher eingefügt: Dossier final (Tâche finale) – **ILIAS-Link noch einzutragen**. Weitere Abgaben (z. B. Argumentaire Tâche 3) bei Bedarf im Editor ergänzen.
 
 ## Einmalige Einrichtung
 
@@ -76,6 +79,7 @@ Die zweite Person braucht ein GitHub-Konto und muss im Repo als **Collaborator**
 | Lehrplan-Fenster | Schaltflächen, die tg.lehrplan.ch im Seitenfenster öffnen (Suchwort oder URL) |
 | Weiterführender Bezug | Kasten mit Links, z. B. zu A Rounder Sense of Purpose |
 | Audio | MP3 im Editor hochladen, eigener Player in der App |
+| Abgabe auf ILIAS | Kasten «À remettre sur ILIAS» mit Link, Termin und Verweis aufs Dossier |
 | Rückblick | zeigt eine frühere Antwort erneut an |
 | Silhouette | Wörter auf eine Figur ziehen |
 | Karte zum Drucken | z. B. Störkarte aus mehreren Antwortfeldern |

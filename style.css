@@ -406,3 +406,22 @@ body.needs-save .foot-save { display: inline-flex; }
 @media (max-width: 520px) {
   #btn-open { padding: 6px 8px; }
 }
+
+/* --- Fenêtre d’information -------------------------------------------------------- */
+.modal-back { position: fixed; inset: 0; z-index: 50; background: rgba(10, 14, 24, .45); display: grid; place-items: center; padding: 20px; }
+.modal { position: relative; width: min(640px, 100%); max-height: calc(100vh - 40px); overflow: auto; background: var(--surface); border-radius: 22px; padding: 28px 30px 22px; box-shadow: 0 30px 80px -30px rgba(0,0,0,.5); }
+.modal h2 { margin-right: 90px; }
+.modal-motif { position: absolute; right: 22px; top: 18px; width: 86px; height: 58px; }
+.modal .prose p { margin-bottom: .9em; }
+.modal-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 12px; padding-top: 14px; border-top: 1px solid var(--line); }
+.toggle.small { font-size: .88rem; color: var(--ink-2); align-items: center; }
+.toggle.small input { margin-top: 0; accent-color: var(--petrol); }
+body.modal-open { overflow: hidden; }
+
+/* --- Reprendre l’enregistrement --------------------------------------------------- */
+.reconnect { position: sticky; top: var(--top); z-index: 15; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; padding: 8px 16px; background: var(--terre-soft); border-bottom: 1px solid var(--line); font-size: .92rem; }
+.reconnect[hidden] { display: none; }
+
+/* --- Remise ILIAS ------------------------------------------------------------------ */
+.aside.remise { background: var(--surface); border: 2px solid var(--petrol); }
+.aside.remise .aside-kicker { color: var(--petrol); }

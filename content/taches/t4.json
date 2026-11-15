@@ -326,6 +326,14 @@
       "corps": "Remettez un **dossier compact de trois à quatre pages**, hors supports, comprenant :\n\n- la référence à la tâche initiale et une brève analyse ;\n- la tâche enrichie, ses objectifs et sa justification théorique et curriculaire ;\n- la carte-incident ;\n- les pistes de résolution, les modifications apportées et le bilan.\n\nJoignez uniquement les supports nécessaires. **L’ensemble sera rédigé en français.** Le bouton **« Dossier »** en haut de l’écran rassemble vos réponses comme point de départ."
     },
     {
+      "type": "remise",
+      "id": "t4-remise",
+      "titre": "Dossier final (trois à quatre pages)",
+      "corps": "Remettez votre dossier en binôme, en PDF, avec les supports nécessaires.",
+      "url": "",
+      "echeance": ""
+    },
+    {
       "type": "autocontrole",
       "id": "t4-criteres",
       "titre": "Critères de réussite — auto-évaluation avant la remise",

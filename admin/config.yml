@@ -35,6 +35,12 @@ collections:
     - label: Objectifs
       name: objectifs
       widget: list
+    - label: 'Infofenster: Titel'
+      name: info_titre
+      widget: string
+    - label: 'Infofenster: Text (erscheint beim Start, muss bestätigt werden)'
+      name: info
+      widget: markdown
     - label: Hinweis zum Speichern
       name: sauvegarde
       widget: markdown
@@ -445,6 +451,28 @@ collections:
           name: legende
           widget: string
           required: false
+      - label: Abgabe auf ILIAS
+        name: remise
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Was wird abgegeben?
+          name: titre
+          widget: string
+        - label: Hinweise
+          name: corps
+          widget: markdown
+          required: false
+        - label: Link zur ILIAS-Abgabe
+          name: url
+          widget: string
+          required: false
+        - label: Termin (optional)
+          name: echeance
+          widget: string
+          required: false
   - name: t2
     label: Tâche 2 · Une personne, plusieurs facettes
     file: content/taches/t2.json
@@ -833,6 +861,28 @@ collections:
             value: tete-coeur-main
         - label: Bildlegende
           name: legende
+          widget: string
+          required: false
+      - label: Abgabe auf ILIAS
+        name: remise
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Was wird abgegeben?
+          name: titre
+          widget: string
+        - label: Hinweise
+          name: corps
+          widget: markdown
+          required: false
+        - label: Link zur ILIAS-Abgabe
+          name: url
+          widget: string
+          required: false
+        - label: Termin (optional)
+          name: echeance
           widget: string
           required: false
   - name: t3
@@ -1225,6 +1275,28 @@ collections:
           name: legende
           widget: string
           required: false
+      - label: Abgabe auf ILIAS
+        name: remise
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Was wird abgegeben?
+          name: titre
+          widget: string
+        - label: Hinweise
+          name: corps
+          widget: markdown
+          required: false
+        - label: Link zur ILIAS-Abgabe
+          name: url
+          widget: string
+          required: false
+        - label: Termin (optional)
+          name: echeance
+          widget: string
+          required: false
   - name: t4
     label: Tâche finale · Enrichir une tâche
     file: content/taches/t4.json
@@ -1613,5 +1685,27 @@ collections:
             value: tete-coeur-main
         - label: Bildlegende
           name: legende
+          widget: string
+          required: false
+      - label: Abgabe auf ILIAS
+        name: remise
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Was wird abgegeben?
+          name: titre
+          widget: string
+        - label: Hinweise
+          name: corps
+          widget: markdown
+          required: false
+        - label: Link zur ILIAS-Abgabe
+          name: url
+          widget: string
+          required: false
+        - label: Termin (optional)
+          name: echeance
           widget: string
           required: false
