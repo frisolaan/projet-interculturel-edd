@@ -716,7 +716,7 @@ function blockLehrplan(b) {
 
 function blockRepere(b) {
   const links = (b.liens || []).filter((l) => l.url).map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)}</a>`).join('');
-  return el('aside', { class: 'aside repere' }, `<p class="aside-kicker">Pour aller plus loin</p><h3>${esc(b.titre.replace(/^Pour aller plus loin : /, ''))}</h3><div class="prose">${md(b.corps)}</div><p class="tags">${links}</p>${b.source ? `<p class="hint">${esc(b.source)}</p>` : ''}`);
+  return el('aside', { class: 'aside repere' }, `<p class="aside-kicker">Pour aller plus loin</p><h3>${esc(b.titre.replace(/^Pour aller plus loin : /, '').replace(/^./, c => c.toUpperCase()))}</h3><div class="prose">${md(b.corps)}</div><p class="tags">${links}</p>${b.source ? `<p class="hint">${esc(b.source)}</p>` : ''}`);
 }
 
 function blockRappel(b) {

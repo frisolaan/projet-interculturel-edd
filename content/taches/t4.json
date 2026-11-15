@@ -272,6 +272,23 @@
       "prive": false
     },
     {
+      "type": "repere",
+      "id": "t4-4-matchmove",
+      "titre": "Pour aller plus loin : de la carte-incident à un vrai échange",
+      "corps": "Votre tâche peut devenir le point de départ d’un échange réel avec une classe de Suisse romande. Sur la plateforme match&move de Movetia, les enseignant·e·s publient leur projet, trouvent une classe partenaire et des idées d’activités déjà testées. Movetia soutient aussi financièrement les échanges de classes en Suisse.",
+      "liens": [
+        {
+          "label": "match&move",
+          "url": "https://www.matchnmove.ch/"
+        },
+        {
+          "label": "Échanges de classes en Suisse (Movetia)",
+          "url": "https://movetia.ch/de/foerderangebote/klassenaustausch/klassenaustausch-in-der-schweiz"
+        }
+      ],
+      "source": "Movetia"
+    },
+    {
       "type": "consigne",
       "id": "t4-5",
       "titre": "5. Révisez et faites le bilan",

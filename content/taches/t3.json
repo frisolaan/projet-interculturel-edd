@@ -166,6 +166,27 @@
       "prive": false
     },
     {
+      "type": "repere",
+      "id": "t3-2-ari",
+      "titre": "Pour aller plus loin : l’Autobiographie de rencontres interculturelles",
+      "corps": "Un outil du Conseil de l’Europe pour revenir sur une rencontre interculturelle vécue en face à face, à travers des médias visuels ou sur Internet : ce qui s’est passé, ce que j’ai ressenti, comment j’ai interprété l’autre. Il existe une version pour adultes et une version pour jeunes apprenant·e·s, ainsi qu’un cours d’autoformation pour enseignant·e·s. La démarche prolonge la réflexion de cette étape et peut servir en classe.",
+      "liens": [
+        {
+          "label": "Site de l’Autobiographie",
+          "url": "https://www.coe.int/fr/web/autobiography-intercultural-encounters"
+        },
+        {
+          "label": "Versions adultes et jeunes",
+          "url": "https://www.coe.int/fr/web/autobiography-intercultural-encounters/autobiography-of-intercultural-encounters"
+        },
+        {
+          "label": "Images de l’Autre (médias visuels)",
+          "url": "https://www.coe.int/fr/web/autobiography-intercultural-encounters/images-of-others"
+        }
+      ],
+      "source": "Conseil de l’Europe"
+    },
+    {
       "type": "consigne",
       "id": "t3-3",
       "titre": "3. Mettez en relation la théorie, le plan d’études et le schéma",
@@ -267,6 +288,23 @@
       "id": "t3-3-entrees",
       "titre": "Quatre entrées didactiques",
       "corps": "Pour passer de ces dimensions à la conception d’une tâche, vous pouvez vous appuyer sur quatre entrées didactiques :\n\n- **Observer et situer :** décrire une situation et reconnaître les limites de ses connaissances.\n- **Rester ouvert :** suspendre un jugement trop rapide.\n- **Explorer des perspectives :** envisager plusieurs interprétations et poser des questions.\n- **Construire la compréhension :** mobiliser le français pour clarifier un besoin ou négocier une solution.\n\nCes entrées constituent une aide à la planification, et non un modèle exhaustif."
+    },
+    {
+      "type": "repere",
+      "id": "t3-3-carap",
+      "titre": "Pour aller plus loin : le CARAP",
+      "corps": "Le Cadre de référence pour les approches plurielles des langues et des cultures (Centre européen pour les langues vivantes, Graz) décrit sous forme de descripteurs les savoirs, savoir-être et savoir-faire d’une compétence plurilingue et interculturelle. On y retrouve les trois dimensions de cette étape. Le site propose aussi une base de matériaux didactiques. La référence pour votre travail reste le plan d’études thurgovien.",
+      "liens": [
+        {
+          "label": "Site du CARAP",
+          "url": "https://carap.ecml.at/"
+        },
+        {
+          "label": "Référentiel (PDF)",
+          "url": "https://carap.ecml.at/Portals/11/documents/CARAP-FR-web.pdf"
+        }
+      ],
+      "source": "CELV / Conseil de l’Europe"
     },
     {
       "type": "consigne",
