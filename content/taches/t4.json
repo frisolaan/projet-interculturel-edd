@@ -330,8 +330,9 @@
       "id": "t4-remise",
       "titre": "Dossier final (trois à quatre pages)",
       "corps": "Remettez votre dossier en binôme, en PDF, avec les supports nécessaires.",
-      "url": "",
-      "echeance": ""
+      "url": "https://ilias.phtg.ch/",
+      "echeance": "",
+      "statut_contenu": "Platzhalter-Link: genaue ILIAS-Adresse eintragen"
     },
     {
       "type": "autocontrole",

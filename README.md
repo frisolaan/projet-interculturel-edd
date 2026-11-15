@@ -89,7 +89,7 @@ Die zweite Person braucht ein GitHub-Konto und muss im Repo als **Collaborator**
 ## Offene Punkte (inhaltlich)
 
 - [ ] **Musterlösungen und Sortierlisten** sind Entwürfe (Status «Entwurf – à valider»): t1-a3-arbre, t1-a4-check, t2-2-check, t3-2-tri, t3-3-tri, t3-4-check, t3-5-check.
-- [ ] **ILIAS-Links** eintragen: Classeur 5. Séance (t3-1-ressources) und Abgabe Dossier final (t4-remise). Bis dahin zeigt die App «lien à venir».
+- [ ] **ILIAS-Links**: Classeur 5. Séance (t3-1-ressources) und Abgabe Dossier final (t4-remise) zeigen vorläufig auf `https://ilias.phtg.ch/` – genaue Adressen eintragen.
 - [ ] **Schema** (t3-3-schema): als Kopf–Herz–Hand-Grafik nachgezeichnet. Falls im Kurs ein bestimmtes Schema aus der Lektüre gemeint ist, dieses prüfen bzw. ersetzen.
 - [ ] **Kontrollfragen zu Fäcke / Chaves et al.** (t3-1) – bisher nur Selbsteinschätzung; inhaltliche Fragen sollten aus den Texten formuliert werden.
 

@@ -31,9 +31,10 @@
       "liens": [
         {
           "label": "Classeur ILIAS — séance 5",
-          "url": ""
+          "url": "https://ilias.phtg.ch/"
         }
-      ]
+      ],
+      "statut_contenu": "Platzhalter-Link: genaue ILIAS-Adresse eintragen"
     },
     {
       "type": "reponse",
