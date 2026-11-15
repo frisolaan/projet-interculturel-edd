@@ -31,7 +31,7 @@
       "type": "texte",
       "id": "t2-poeme-de",
       "titre": "ICH (version originale en allemand)",
-      "corps": "Ich:\nMädchen, groß, Tochter, geliebt\nFreundin, hilfsbereit, Schwester, liebenswert.\n\nUnd Ich:\nSängerin, begabt, Tänzerin, körperbetont\nMathegenie, intelligent, Musikerin, kreativ.\n\nUnd Ich:\nRussin, multikulti, Migrantin, verurteilt\nSprachgenie, angepasst, Deutsche, pünktlich.\n\nUnd Ich:\nGefangene, eingeschlossen, Heimatlose, auf der Suche,\nZwischen-den-Welten-Lebende, unsicher.\n\nErst wir alle zusammen sind Ich.\n\n*Source de l’original : à compléter.*",
+      "corps": "Ich:\nMädchen, groß, Tochter, geliebt\nFreundin, hilfsbereit, Schwester, liebenswert.\n\nUnd Ich:\nSängerin, begabt, Tänzerin, körperbetont\nMathegenie, intelligent, Musikerin, kreativ.\n\nUnd Ich:\nRussin, multikulti, Migrantin, verurteilt\nSprachgenie, angepasst, Deutsche, pünktlich.\n\nUnd Ich:\nGefangene, eingeschlossen, Heimatlose, auf der Suche,\nZwischen-den-Welten-Lebende, unsicher.\n\nErst wir alle zusammen sind Ich.",
       "repliable": true
     },
     {
@@ -46,10 +46,19 @@
       "type": "tableau",
       "id": "t2-2-tableau",
       "label": "Cinq mots ou expressions",
-      "colonnes": ["Mot ou expression", "Interprétation possible dans le poème"],
+      "colonnes": [
+        "Mot ou expression",
+        "Interprétation possible dans le poème"
+      ],
       "exemples": [
-        ["Sœur", "Une relation familiale qui constitue une facette de l’identité"],
-        ["Vivant entre plusieurs mondes", "Le sentiment d’appartenir à plusieurs milieux, sans toujours parvenir à les concilier"]
+        [
+          "Sœur",
+          "Une relation familiale qui constitue une facette de l’identité"
+        ],
+        [
+          "Vivant entre plusieurs mondes",
+          "Le sentiment d’appartenir à plusieurs milieux, sans toujours parvenir à les concilier"
+        ]
       ],
       "lignes": 5
     },

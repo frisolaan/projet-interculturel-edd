@@ -11,7 +11,7 @@
       "type": "texte",
       "id": "t1-texte",
       "titre": "Texte : Qu’est-ce que la culture ?",
-      "corps": "**¶1** Le mot **culture** vient du latin *cultura*, qui désigne la culture de la terre. Par opposition à ce que produit la nature, la culture désigne « ce qui est créé par les êtres humains » : l’art, la littérature, la musique, mais aussi un système de valeurs qui s’est développé à travers des traditions et des coutumes.\n\n**¶2** La culture n’a jamais été figée : elle a toujours été façonnée par les échanges. Cependant, elle a aussi servi, à toutes les époques, à affirmer une identité collective, en répondant aux questions suivantes : qui fait partie de « notre groupe » et qui n’en fait pas partie ? Qui sommes-« nous » et qui sont « les autres » ?\n\n**¶3** Dans la Grèce antique, les Athéniens pouvaient faire la guerre aux Spartiates. Mais lorsqu’il s’agissait de combattre les ennemis perses, ils se rappelaient ce qu’ils avaient en commun. En effet, selon la conception grecque antique, toutes les personnes extérieures à leur propre univers culturel étaient des « barbares », même si, comme les Perses, elles produisaient des réalisations au moins équivalentes dans les domaines de l’architecture, de la littérature ou de l’art.\n\n**¶4** « Là-bas », les hommes portaient la barbe et les gens parlaient une autre langue qui, aux oreilles des Grecs, ressemblait à un charabia incompréhensible. Surtout, ils vénéraient « d’autres dieux et d’autres sanctuaires ». Leurs dieux portaient des noms inconnus et ils avaient une autre conception de ce qui était permis ou interdit. Même les opinions sur le bien et le mal divergeaient. En matière de religion, les êtres humains ont toujours eu tendance à supposer rapidement que seule leur propre foi détenait les vérités ultimes et offrait l’unique voie vers le salut.\n\n*Source : à compléter.*"
+      "corps": "**¶1** Le mot **culture** vient du latin *cultura*, qui désigne la culture de la terre. Par opposition à ce que produit la nature, la culture désigne « ce qui est créé par les êtres humains » : l’art, la littérature, la musique, mais aussi un système de valeurs qui s’est développé à travers des traditions et des coutumes.\n\n**¶2** La culture n’a jamais été figée : elle a toujours été façonnée par les échanges. Cependant, elle a aussi servi, à toutes les époques, à affirmer une identité collective, en répondant aux questions suivantes : qui fait partie de « notre groupe » et qui n’en fait pas partie ? Qui sommes-« nous » et qui sont « les autres » ?\n\n**¶3** Dans la Grèce antique, les Athéniens pouvaient faire la guerre aux Spartiates. Mais lorsqu’il s’agissait de combattre les ennemis perses, ils se rappelaient ce qu’ils avaient en commun. En effet, selon la conception grecque antique, toutes les personnes extérieures à leur propre univers culturel étaient des « barbares », même si, comme les Perses, elles produisaient des réalisations au moins équivalentes dans les domaines de l’architecture, de la littérature ou de l’art.\n\n**¶4** « Là-bas », les hommes portaient la barbe et les gens parlaient une autre langue qui, aux oreilles des Grecs, ressemblait à un charabia incompréhensible. Surtout, ils vénéraient « d’autres dieux et d’autres sanctuaires ». Leurs dieux portaient des noms inconnus et ils avaient une autre conception de ce qui était permis ou interdit. Même les opinions sur le bien et le mal divergeaient. En matière de religion, les êtres humains ont toujours eu tendance à supposer rapidement que seule leur propre foi détenait les vérités ultimes et offrait l’unique voie vers le salut."
     },
     {
       "type": "consigne",
@@ -69,22 +69,76 @@
       "id": "t1-a3-arbre",
       "consigne": "Cliquez sur un élément, puis sur la partie de l’arbre où il vous semble appartenir (ou faites-le glisser).",
       "categories": [
-        { "id": "feuillage", "label": "Feuillage — visible" },
-        { "id": "racines", "label": "Racines — invisible" }
+        {
+          "id": "feuillage",
+          "label": "Feuillage — visible"
+        },
+        {
+          "id": "racines",
+          "label": "Racines — invisible"
+        }
       ],
       "elements": [
-        { "texte": "les fêtes et les célébrations", "solution": "feuillage", "explication": "" },
-        { "texte": "la cuisine et les repas", "solution": "feuillage", "explication": "" },
-        { "texte": "les vêtements", "solution": "feuillage", "explication": "" },
-        { "texte": "la musique et l’art", "solution": "feuillage", "explication": "" },
-        { "texte": "l’architecture", "solution": "feuillage", "explication": "" },
-        { "texte": "les valeurs", "solution": "racines", "explication": "" },
-        { "texte": "les croyances religieuses", "solution": "racines", "explication": "" },
-        { "texte": "les idées sur le bien et le mal", "solution": "racines", "explication": "" },
-        { "texte": "le rapport au temps", "solution": "racines", "explication": "" },
-        { "texte": "ce qui est permis ou interdit", "solution": "racines", "explication": "" },
-        { "texte": "la langue", "solution": "les-deux", "explication": "On entend la langue, mais elle porte aussi des manières de voir le monde qui restent invisibles." },
-        { "texte": "les manières de saluer", "solution": "les-deux", "explication": "Le geste est visible ; les règles de politesse qui le guident sont invisibles." }
+        {
+          "texte": "les fêtes et les célébrations",
+          "solution": "feuillage",
+          "explication": ""
+        },
+        {
+          "texte": "la cuisine et les repas",
+          "solution": "feuillage",
+          "explication": ""
+        },
+        {
+          "texte": "les vêtements",
+          "solution": "feuillage",
+          "explication": ""
+        },
+        {
+          "texte": "la musique et l’art",
+          "solution": "feuillage",
+          "explication": ""
+        },
+        {
+          "texte": "l’architecture",
+          "solution": "feuillage",
+          "explication": ""
+        },
+        {
+          "texte": "les valeurs",
+          "solution": "racines",
+          "explication": ""
+        },
+        {
+          "texte": "les croyances religieuses",
+          "solution": "racines",
+          "explication": ""
+        },
+        {
+          "texte": "les idées sur le bien et le mal",
+          "solution": "racines",
+          "explication": ""
+        },
+        {
+          "texte": "le rapport au temps",
+          "solution": "racines",
+          "explication": ""
+        },
+        {
+          "texte": "ce qui est permis ou interdit",
+          "solution": "racines",
+          "explication": ""
+        },
+        {
+          "texte": "la langue",
+          "solution": "les-deux",
+          "explication": "On entend la langue, mais elle porte aussi des manières de voir le monde qui restent invisibles."
+        },
+        {
+          "texte": "les manières de saluer",
+          "solution": "les-deux",
+          "explication": "Le geste est visible ; les règles de politesse qui le guident sont invisibles."
+        }
       ],
       "ajout_libre": true,
       "statut_contenu": "Entwurf – à valider"

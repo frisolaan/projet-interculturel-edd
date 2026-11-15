@@ -60,7 +60,6 @@ Die zweite Person braucht ein GitHub-Konto und muss im Repo als **Collaborator**
 ## Offene Punkte (inhaltlich)
 
 - [ ] **Musterlösungen und Sortierlisten** sind Entwürfe (Status «Entwurf – à valider»): t1-a3-arbre, t1-a4-check, t2-2-check, t3-2-tri, t3-3-tri, t3-4-check, t3-5-check.
-- [ ] **Quelle** des Texts «Qu’est-ce que la culture ?» (t1-texte) und des deutschen Originalgedichts (t2-poeme-de) ergänzen.
 - [ ] **ILIAS-Link** zum Classeur der 5. Séance (t3-1-ressources).
 - [ ] **Schema** der interkulturellen Kompetenz (t3-3-dimensions) fehlt noch als Bild.
 - [ ] **Kontrollfragen zu Fäcke / Chaves et al.** (t3-1) – bisher nur Selbsteinschätzung; inhaltliche Fragen sollten aus den Texten formuliert werden.
@@ -73,5 +72,7 @@ Die zweite Person braucht ein GitHub-Konto und muss im Repo als **Collaborator**
 - Kulturbaum und Silhouette sind interaktiv in der App statt als Bild.
 
 ## Datenschutz
+
+Quellenangaben zu Text und Gedicht werden beim Erklären der Aufgabe im Kurs ausgewiesen, nicht in der App.
 
 Die App sendet keine Antworten an einen Server. Vercel liefert nur die statischen Dateien und Inhalte aus. Private Felder (Gedicht, Carte «Moi», Silhouette, persönliches Beispiel) werden standardmässig weder in die Sicherungsdatei noch ins Dossier übernommen.
