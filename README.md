@@ -49,7 +49,15 @@ vercel.json                     Hosting-Einstellungen
 2. Framework Preset: **Other**. Build Command und Output Directory leer lassen.
 3. **Deploy.** Danach baut Vercel bei jeder Änderung im Repo automatisch neu (ca. 1 Minute).
 
-### 2. Zugang zum Redaktionseditor (pro Person)
+### 2. Anmeldung mit Benutzername und Passwort (empfohlen)
+Einmalig in Vercel → Projekt → Settings → **Environment Variables** eintragen (Production):
+- `GITHUB_TOKEN` – ein fine-grained GitHub-Token (nur dieses Repo, Contents: Read and write; Erstellung siehe unten).
+- `EDITOR_USERS` – `friso:STARKES-PASSWORT;kollege:ANDERES-PASSWORT` (Name und Passwort durch Doppelpunkt, Personen durch Semikolon).
+
+Danach **Redeploy** (Deployments → ⋯ → Redeploy). Im Editor dann «Mit GitHub anmelden» → Login-Formular.
+Hinweis: Alle Änderungen erscheinen auf GitHub unter dem Konto, dem das Token gehört.
+
+### 2b. Alternative: Zugang mit eigenem Token (pro Person)
 1. GitHub → Settings → Developer settings → **Personal access tokens → Fine-grained tokens → Generate new token**.
 2. Repository access: **Only select repositories** → `projet-interculturel-edd`.
 3. Permissions → Repository permissions → **Contents: Read and write**.

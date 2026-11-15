@@ -1,11 +1,13 @@
 # Redaktionseditor (Sveltia CMS) – https://github.com/sveltia/sveltia-cms
-# Anmeldung: «Sign in with Token» mit einem fine-grained GitHub-Token
-# (nur dieses Repo, Contents: Read and Write).
+# Anmeldung: «Mit GitHub anmelden» öffnet das eigene Login (Benutzername/Passwort, api/auth.js).
+# Alternativ weiterhin «Mit Zugriffstoken anmelden».
 
 backend:
   name: github
   repo: frisolaan/projet-interculturel-edd
   branch: main
+  base_url: https://projet-interculturel-edd.vercel.app
+  auth_endpoint: api/auth
 media_folder: assets/uploads
 public_folder: /assets/uploads
 collections:
