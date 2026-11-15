@@ -273,6 +273,16 @@ function renderHome(main) {
   more.append(el('details', { class: 'soft' }, `<summary>Objectifs du parcours</summary><ul class="prose">${p.objectifs.map((o) => `<li>${mdInline(o)}</li>`).join('')}</ul>`));
   more.append(el('details', { class: 'soft private-note' }, `<summary>Vos réponses restent chez vous</summary><div class="prose">${md(p.sauvegarde)}</div>`));
   main.append(more);
+  const sw = el('div', { class: 'theme-switch' }, '<span>Variante de couleurs (test) :</span>');
+  const cur = document.documentElement.dataset.theme || 'bleu';
+  for (const [k, label] of [['bleu', 'A · Bleu'], ['phtg', 'B · PHTG']]) {
+    sw.append(el('button', { type: 'button', 'aria-pressed': String(cur === k), onclick: () => {
+      if (k === 'bleu') delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = k;
+      try { localStorage.setItem('pi-edd-theme', k); } catch (e) { /* ignore */ }
+      route();
+    } }, label));
+  }
+  main.append(sw);
 }
 
 function stepHeader(id, steps, idx) {

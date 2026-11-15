@@ -2,11 +2,12 @@
 // Là où elles se recouvrent naît une troisième couleur – l’espace entre les perspectives.
 // Aucune figure humaine, aucun drapeau, aucun globe.
 
+// Couleurs reprises du thème actif (variables CSS --m1 à --m4).
 const C = {
-  petrol: '#1F5C63',
-  terre: '#C65A3A',
-  ocre: '#D9A441',
-  lilas: '#8E77B8',
+  petrol: 'var(--m1)',
+  terre: 'var(--m2)',
+  ocre: 'var(--m3)',
+  lilas: 'var(--m4)',
 };
 
 // Pseudo-aléatoire déterministe : même graine → même forme.
@@ -35,14 +36,14 @@ export function blob(cx, cy, r, seed, { points = 7, wobble = 0.16, sx = 1, sy = 
   return d + 'Z';
 }
 
-const shape = (d, color, op = 0.78) => `<path d="${d}" fill="${color}" fill-opacity="${op}" style="mix-blend-mode:multiply"/>`;
+const shape = (d, color, op = 0.78) => `<path d="${d}" style="fill:${color};fill-opacity:${op};mix-blend-mode:multiply"/>`;
 
 const MOTIFS = {
   accueil: () =>
     shape(blob(78, 62, 46, 11), C.petrol) +
     shape(blob(122, 66, 44, 23), C.terre, 0.72),
   t1: () => // arbre : feuillage visible, racines invisibles
-    `<path d="M100 66 C 98 80, 102 92, 100 104" stroke="${C.petrol}" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/>` +
+    `<path d="M100 66 C 98 80, 102 92, 100 104" style="stroke:${C.petrol}" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/>` +
     shape(blob(100, 48, 40, 5, { sx: 1.25, sy: 0.85 }), C.petrol) +
     shape(blob(100, 108, 30, 9, { sx: 1.5, sy: 0.55, wobble: 0.25 }), C.terre, 0.7),
   t2: () => // plusieurs facettes, un seul « moi »
@@ -54,12 +55,12 @@ const MOTIFS = {
     shape(blob(100, 66, 30, 12), C.terre, 0.72) +
     shape(blob(142, 66, 30, 21), C.ocre, 0.8),
   t4: () => // une carte, un grain de sable
-    `<g transform="rotate(-8 100 66)"><rect x="56" y="30" width="78" height="74" rx="10" fill="${C.ocre}" fill-opacity=".8" style="mix-blend-mode:multiply"/></g>` +
+    `<g transform="rotate(-8 100 66)"><rect x="56" y="30" width="78" height="74" rx="10" style="fill:${C.ocre};fill-opacity:.8;mix-blend-mode:multiply"/></g>` +
     shape(blob(124, 72, 34, 31), C.petrol, 0.75) +
-    `<circle cx="86" cy="94" r="8" fill="${C.terre}" fill-opacity=".85"/>`,
+    `<circle cx="86" cy="94" r="8" style="fill:${C.terre};fill-opacity:.85"/>`,
   dossier: () =>
-    `<rect x="58" y="34" width="70" height="80" rx="8" fill="${C.petrol}" fill-opacity=".75" style="mix-blend-mode:multiply"/>` +
-    `<rect x="74" y="24" width="70" height="80" rx="8" fill="${C.terre}" fill-opacity=".6" style="mix-blend-mode:multiply"/>`,
+    `<rect x="58" y="34" width="70" height="80" rx="8" style="fill:${C.petrol};fill-opacity:.75;mix-blend-mode:multiply"/>` +
+    `<rect x="74" y="24" width="70" height="80" rx="8" style="fill:${C.terre};fill-opacity:.6;mix-blend-mode:multiply"/>`,
   prive: () =>
     shape(blob(100, 66, 40, 41), C.lilas, 0.6),
 };

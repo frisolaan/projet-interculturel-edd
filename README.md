@@ -24,8 +24,11 @@ vercel.json                     Hosting-Einstellungen
 ## Gestaltung «L’entre-deux»
 
 - **Leitidee:** der Raum zwischen den Perspektiven. Motive aus halbtransparenten, organischen Formen, die sich überlagern (`motifs.js`) – keine Menschen, Flaggen, Globen oder Hände.
-- **Farben:** Papierweiss (#FAF7F2), Petrol (#1F5C63) als Anker, Terrakotta (#C65A3A) als einziger Akzent, Ocker für «beides möglich», Flieder für das private Feld. Keine Flaggenkombinationen.
-- **Schriften (lokal ausgeliefert, OFL):** Fraunces für Titel und Lesetexte, Atkinson Hyperlegible für die Oberfläche.
+- **Farben – zwei Varianten zum Vergleich** (Umschalter unten auf der Startseite oder `?theme=phtg` in der Adresse):
+  - **A «Bleu»** (Standard): Palette #2559A1 / #469BD4 / #50AFD5 / #EBC655 / #F2F2F2 auf Weiss.
+  - **B «PHTG»**: Schwarz auf Weiss, Lime #DEF428 und Blau #0059FF als Akzente (wie phtg.ch).
+  Nach dem Entscheid wird die andere Variante entfernt.
+- **Schriften (lokal ausgeliefert, OFL):** Schibsted Grotesk für Titel (nahe an der PHTG-Grotesk), Atkinson Hyperlegible für Text.
 - **Schrittmodus:** Jede Konsigne beginnt einen eigenen Schritt (`#/t1/3`). Fortschrittsbalken oben, Schrittliste in der Seitenleiste, Pfeiltasten ← → zum Blättern.
 - **Ton:** Jede Konsigne hat eine kurze Einstiegsfrage (`accroche`). Selbstchecks heissen «Regard sur mon travail», Musterlösungen «un regard possible», Sortierübungen vergleichen «avec notre proposition» – Hinweise statt Noten.
 - **Interdisziplinärer Bezug:** Tâche 3 (6a) und Tâche finale verweisen zusätzlich auf den ÉDD-Kompetenzrahmen *A Rounder Sense of Purpose* (Empathie, Valeurs, Esprit critique, Participation, Attention; CC BY 4.0). Massgebend bleibt der Lehrplan Thurgau.
