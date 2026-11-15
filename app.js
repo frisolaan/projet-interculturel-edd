@@ -353,6 +353,7 @@ function renderBlock(b) {
     case 'rappel': return blockRappel(b);
     case 'silhouette': return blockSilhouette(b);
     case 'carte': return blockCarte(b);
+    case 'audio': return blockAudio(b);
     default: return REDACTION ? el('div', { class: 'card' }, `Type inconnu : ${esc(b.type)}`) : null;
   }
 }
@@ -634,6 +635,38 @@ function blockCarte(b) {
   document.addEventListener('answer-change', onChange);
   wrap.append(el('div', { class: 'row' }, ''));
   wrap.lastChild.append(el('button', { class: 'btn ghost small', onclick: () => printHTML(render(), 'print-carte') }, 'Imprimer la carte'));
+  return wrap;
+}
+
+
+function fmtTime(t) { t = Math.max(0, Math.round(t || 0)); return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`; }
+function blockAudio(b) {
+  if (!b.fichier) return REDACTION ? el('div', { class: 'aside' }, 'Audio : fichier manquant') : null;
+  const wrap = el('section', { class: 'audio' });
+  const audio = el('audio', { src: b.fichier, preload: 'metadata' });
+  const btn = el('button', { class: 'audio-btn', type: 'button', 'aria-label': 'Lire' }, '<span class="ic play"></span>');
+  const bar = el('input', { type: 'range', min: 0, max: 1000, value: 0, 'aria-label': 'Position', class: 'audio-bar' });
+  const time = el('span', { class: 'audio-time' }, '0:00');
+  const body = el('div', { class: 'audio-body' }, `<p class="audio-title">${esc(b.titre || 'Écouter')}</p>`);
+  const ctrl = el('div', { class: 'audio-ctrl' });
+  ctrl.append(bar, time);
+  body.append(ctrl);
+  if (b.legende) body.append(el('p', { class: 'hint' }, esc(b.legende)));
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('audio').forEach((a) => { if (a !== audio) a.pause(); });
+    if (audio.paused) audio.play(); else audio.pause();
+  });
+  const setIc = () => { btn.innerHTML = `<span class="ic ${audio.paused ? 'play' : 'pause'}"></span>`; btn.setAttribute('aria-label', audio.paused ? 'Lire' : 'Pause'); };
+  audio.addEventListener('play', setIc);
+  audio.addEventListener('pause', setIc);
+  audio.addEventListener('ended', setIc);
+  audio.addEventListener('timeupdate', () => {
+    if (audio.duration) bar.value = Math.round((audio.currentTime / audio.duration) * 1000);
+    time.textContent = `${fmtTime(audio.currentTime)} / ${fmtTime(audio.duration)}`;
+  });
+  audio.addEventListener('loadedmetadata', () => { time.textContent = `0:00 / ${fmtTime(audio.duration)}`; });
+  bar.addEventListener('input', () => { if (audio.duration) audio.currentTime = (bar.value / 1000) * audio.duration; });
+  wrap.append(btn, body, audio);
   return wrap;
 }
 

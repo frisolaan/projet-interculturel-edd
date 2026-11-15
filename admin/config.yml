@@ -389,6 +389,24 @@ collections:
         - label: IDs der Antwortfelder auf der Karte
           name: champs
           widget: list
+      - label: Audio (MP3 hochladen)
+        name: audio
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Datei
+          name: fichier
+          widget: file
+          hint: MP3, möglichst unter 5 MB
+        - label: Legende (z. B. Quelle, Stimme)
+          name: legende
+          widget: string
+          required: false
   - name: t2
     label: Tâche 2 · Une personne, plusieurs facettes
     file: content/taches/t2.json
@@ -734,6 +752,24 @@ collections:
         - label: IDs der Antwortfelder auf der Karte
           name: champs
           widget: list
+      - label: Audio (MP3 hochladen)
+        name: audio
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Datei
+          name: fichier
+          widget: file
+          hint: MP3, möglichst unter 5 MB
+        - label: Legende (z. B. Quelle, Stimme)
+          name: legende
+          widget: string
+          required: false
   - name: t3
     label: Tâche 3 · Comprendre et traduire en pratique
     file: content/taches/t3.json
@@ -1079,6 +1115,24 @@ collections:
         - label: IDs der Antwortfelder auf der Karte
           name: champs
           widget: list
+      - label: Audio (MP3 hochladen)
+        name: audio
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Datei
+          name: fichier
+          widget: file
+          hint: MP3, möglichst unter 5 MB
+        - label: Legende (z. B. Quelle, Stimme)
+          name: legende
+          widget: string
+          required: false
   - name: t4
     label: Tâche finale · Enrichir une tâche
     file: content/taches/t4.json
@@ -1424,3 +1478,21 @@ collections:
         - label: IDs der Antwortfelder auf der Karte
           name: champs
           widget: list
+      - label: Audio (MP3 hochladen)
+        name: audio
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Titel
+          name: titre
+          widget: string
+        - label: Datei
+          name: fichier
+          widget: file
+          hint: MP3, möglichst unter 5 MB
+        - label: Legende (z. B. Quelle, Stimme)
+          name: legende
+          widget: string
+          required: false

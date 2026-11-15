@@ -30,11 +30,25 @@
       "corps": "Moi :\nFille, grande, aimée,\nAmie, serviable, sœur, attachante.\n\nEt moi :\nChanteuse, douée, danseuse, expressive dans mes mouvements,\nGénie des maths, intelligente, musicienne, créative.\n\nEt moi :\nRusse, multiculturelle, migrante, jugée,\nDouée pour les langues, adaptée, Allemande, ponctuelle.\n\nEt moi :\nPrisonnière, enfermée, sans véritable chez-moi, en quête,\nVivant entre plusieurs mondes, incertaine.\n\nC’est ensemble que toutes ces facettes forment mon « moi ».\n\n*Traduction en français par Adrian Juric*"
     },
     {
+      "type": "audio",
+      "id": "t2-poeme-audio-fr",
+      "titre": "Écouter le poème",
+      "fichier": "/assets/uploads/poeme-moi-fr.mp3",
+      "legende": "Voix de synthèse (Piper, voix « siwis », CC BY 4.0)."
+    },
+    {
       "type": "texte",
       "id": "t2-poeme-de",
       "titre": "ICH (version originale en allemand)",
       "corps": "Ich:\nMädchen, groß, Tochter, geliebt\nFreundin, hilfsbereit, Schwester, liebenswert.\n\nUnd Ich:\nSängerin, begabt, Tänzerin, körperbetont\nMathegenie, intelligent, Musikerin, kreativ.\n\nUnd Ich:\nRussin, multikulti, Migrantin, verurteilt\nSprachgenie, angepasst, Deutsche, pünktlich.\n\nUnd Ich:\nGefangene, eingeschlossen, Heimatlose, auf der Suche,\nZwischen-den-Welten-Lebende, unsicher.\n\nErst wir alle zusammen sind Ich.",
       "repliable": true
+    },
+    {
+      "type": "audio",
+      "id": "t2-poeme-audio-de",
+      "titre": "Das Original anhören",
+      "fichier": "/assets/uploads/poeme-ich-de.mp3",
+      "legende": "Synthetische Stimme (Piper, Stimme « thorsten », CC0)."
     },
     {
       "type": "consigne",

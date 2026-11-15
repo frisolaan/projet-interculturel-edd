@@ -65,6 +65,7 @@ Die zweite Person braucht ein GitHub-Konto und muss im Repo als **Collaborator**
 | Externe Ressource | Hinweis auf ILIAS, Lehrmittel usw. |
 | Lehrplan-Fenster | Schaltflächen, die tg.lehrplan.ch im Seitenfenster öffnen (Suchwort oder URL) |
 | Weiterführender Bezug | Kasten mit Links, z. B. zu A Rounder Sense of Purpose |
+| Audio | MP3 im Editor hochladen, eigener Player in der App |
 | Rückblick | zeigt eine frühere Antwort erneut an |
 | Silhouette | Wörter auf eine Figur ziehen |
 | Karte zum Drucken | z. B. Störkarte aus mehreren Antwortfeldern |
@@ -82,6 +83,14 @@ Die zweite Person braucht ein GitHub-Konto und muss im Repo als **Collaborator**
 - Tâche 3, Schritt 6: 6a und 6b je ~30 min (statt 20 + 20 bei «~60 min»), damit die Summe 3 h ergibt.
 - Doppelte Nennung der Silhouette bei den Resultaten von Tâche 2 entfernt; Tippfehler «Reprenezz» korrigiert.
 - Kulturbaum und Silhouette sind interaktiv in der App statt als Bild.
+
+## Audio
+
+Das Gedicht «MOI / ICH» (Tâche 2) liegt als synthetische Lesung bei (`assets/uploads/`), erzeugt mit der freien Sprachsynthese Piper:
+- Französisch: Stimme «siwis» (Datensatz CC BY 4.0) – sehr gut verständlich.
+- Deutsch: Stimme «thorsten» (CC0) – gut verständlich, Männerstimme, einzelne Wörter (z. B. «Russin») unsauber.
+
+Eine echte Lesung (z. B. von einer Studentin) ersetzt die Datei jederzeit über den Editor.
 
 ## Datenschutz
 
