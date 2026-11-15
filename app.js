@@ -11,7 +11,7 @@ const STORE_KEY = 'pi-edd-v1';
 const LP_BASE = 'https://tg.lehrplan.ch/';
 const LP_SEARCH = (q) => `${LP_BASE}index.php?code=s&suchwort=${encodeURIComponent(q)}`;
 const REDACTION = new URLSearchParams(location.search).has('redaction');
-const ANSWER_TYPES = ['reponse', 'tableau', 'tri', 'autocontrole', 'silhouette', 'mindmap'];
+const ANSWER_TYPES = ['reponse', 'tableau', 'tri', 'autocontrole', 'silhouette', 'mindmap', 'carte'];
 
 const md = (s) => marked.parse(s || '');
 const mdInline = (s) => marked.parseInline(s || '');
@@ -290,6 +290,7 @@ $('#menu-btn').addEventListener('click', () => document.body.classList.toggle('n
 // ---------------------------------------------------------------------------
 // Pages
 // ---------------------------------------------------------------------------
+function fmtH(h) { const H = Math.floor(h); const m = Math.round((h - H) * 60 / 15) * 15; return m === 60 ? `${H + 1} h` : (H ? `${H} h${m ? ' ' + String(m).padStart(2, '0') : ''}` : `${m} min`); }
 function renderHome(main) {
   const p = parcours;
   main.append(el('section', { class: 'home-hero' }, `
@@ -297,25 +298,33 @@ function renderHome(main) {
     <div>
       <p class="eyebrow">${esc(p.sous_titre)} · ${esc(p.semestre)}</p>
       <h1>${esc(p.titre)}</h1>
+      <p class="facts">${(p.eckdaten || []).map((x) => `<span>${esc(x)}</span>`).join('')}</p>
       <div class="lead">${md(p.intro)}</div>
     </div>`));
+  const goals = el('section', { class: 'goals' }, `<h2>Objectifs du parcours</h2><ol>${p.objectifs.map((o) => `<li>${mdInline(o)}</li>`).join('')}</ol>`);
+  main.append(goals);
+  const done = p.taches.reduce((sum, id) => sum + (tacheProgress(id) / 100) * (taches[id].heures || 0), 0);
+  const total = p.taches.reduce((sum, id) => sum + (taches[id].heures || 0), 0);
+  const prog = el('section', { class: 'overall' }, `
+    <div class="overall-bar">${p.taches.map((id) => `<span style="flex:${taches[id].heures || 1}"><i style="width:${tacheProgress(id)}%"></i></span>`).join('')}</div>
+    <p>${done > 0.05 ? `Avancement estimé : environ <strong>${fmtH(done)}</strong> sur ${fmtH(total)} à 12 h prévues.` : `Temps prévu : <strong>10 à 12 heures</strong>, réparties sur quatre tâches.`}</p>`);
+  main.append(prog);
   const grid = el('div', { class: 'tache-grid' });
   for (const id of p.taches) {
     const t = taches[id];
-    const prog = tacheProgress(id);
-    const card = el('a', { class: 'tache-card', href: `#/${id}/${state.etapes[id] || 0}` }, `
+    const pr = tacheProgress(id);
+    grid.append(el('a', { class: 'tache-card', href: `#/${id}/${state.etapes[id] || 0}` }, `
       ${motif(id)}
       <span class="eyebrow">${esc(tacheLabel(t))}</span>
       <h2>${esc(t.titre_court || t.titre)}</h2>
       <p class="chips"><span>${esc(t.duree)}</span><span>${esc(t.modalite)}</span></p>
-      <span class="prog"><span style="width:${prog}%"></span></span>
-      <span class="go">${prog ? 'Continuer' : 'Commencer'} →</span>`);
-    grid.append(card);
+      ${t.produits ? `<p class="produits"><span>Produit :</span> ${esc(t.produits)}</p>` : ''}
+      <span class="prog"><span style="width:${pr}%"></span></span>
+      <span class="go">${pr ? 'Continuer' : 'Commencer'} →</span>`));
   }
   main.append(grid);
   const more = el('div', { class: 'home-more' });
-  more.append(el('details', { class: 'soft' }, `<summary>Cadre de travail</summary><div class="prose">${md(p.cadre)}</div>`));
-  more.append(el('details', { class: 'soft' }, `<summary>Objectifs du parcours</summary><ul class="prose">${p.objectifs.map((o) => `<li>${mdInline(o)}</li>`).join('')}</ul>`));
+  more.append(el('section', { class: 'cadre' }, `<h2>Cadre de travail</h2><div class="prose">${md(p.cadre)}</div>`));
   more.append(el('details', { class: 'soft private-note' }, `<summary>Vos réponses restent chez vous</summary><div class="prose">${md(p.sauvegarde)}</div>`));
   main.append(more);
   const sw = el('div', { class: 'theme-switch' }, '<span>Variante de couleurs (test) :</span>');
@@ -378,8 +387,9 @@ function renderAide(main) {
 function stepHeader(id, steps, idx) {
   const t = taches[id];
   const bar = steps.map((s, i) => `<a href="#/${id}/${i}" class="seg ${i < idx ? 'done' : i === idx ? 'now' : ''}" title="${esc(s.titre.replace(/[*_]/g, ''))}" aria-label="Étape ${i + 1} : ${esc(s.titre.replace(/[*_]/g, ''))}"></a>`).join('');
+  const dur = steps[idx] && steps[idx].consigne && steps[idx].consigne.duree;
   return el('header', { class: 'step-head' }, `
-    <span class="eyebrow">${esc(tacheLabel(t))} · étape ${idx + 1} / ${steps.length}</span>
+    <span class="eyebrow">${esc(tacheLabel(t))} · étape ${idx + 1} / ${steps.length}${dur ? ` · ${esc(dur)}` : idx === 0 ? ` · tâche : ${esc(t.duree)}` : ''}</span>
     <nav class="segbar" aria-label="Étapes">${bar}</nav>`);
 }
 
@@ -794,27 +804,48 @@ function blockSilhouette(b) {
 }
 
 function blockCarte(b) {
-  const wrap = el('section', { class: 'answer' });
-  const render = () => {
-    const parts = b.champs.map((id) => {
-      const blk = allBlocks().find((x) => x.id === id);
-      return `<div class="carte-field"><h4>${esc(blk ? blk.label : id)}</h4><p>${esc(getA(id, '') || '…').replace(/\n/g, '<br>')}</p></div>`;
-    }).join('');
-    return `<div class="carte">${motif('t4', 'carte-motif')}<div class="carte-head">${esc(b.titre)}</div>${parts}</div>`;
-  };
-  wrap.innerHTML = `<label>Aperçu de la carte</label><div class="carte-slot">${render()}</div>`;
+  const wrap = el('section', { class: 'answer carte-step' });
+  const cfg = acConfig(b.id);
+  const slot = el('div', { class: 'carte-slot ac-mini' });
+  const render = () => { slot.innerHTML = acFace(acCards(b, cfg)[0], cfg, 'recto'); };
+  render();
+  wrap.append(el('label', {}, 'Aperçu de votre carte-incident'), slot);
+  const row = el('div', { class: 'row' });
+  row.append(el('a', { class: 'btn primary', href: '#/atelier' }, 'Ouvrir l’atelier de cartes →'));
+  row.append(el('span', { class: 'hint' }, 'Cartes de rôle, verso d’analyse, image, couleurs, impression A5, projection et masque Word.'));
+  wrap.append(row);
   const onChange = (e) => {
     if (!wrap.isConnected) { document.removeEventListener('answer-change', onChange); return; }
-    if (b.champs.includes(e.detail)) wrap.querySelector('.carte-slot').innerHTML = render();
+    if (b.champs.includes(e.detail)) render();
   };
   document.addEventListener('answer-change', onChange);
-  wrap.append(el('div', { class: 'row' }, ''));
-  wrap.lastChild.append(el('button', { class: 'btn ghost small', onclick: () => printHTML(render(), 'print-carte') }, 'Imprimer la carte'));
   return wrap;
 }
 
 
 const SCHEMAS = {
+  'carte-incident': () => `
+<svg viewBox="0 0 640 260" role="img" aria-labelledby="ci-t" class="schema-svg">
+  <title id="ci-t">Recto et verso d’une carte-incident</title>
+  <g transform="rotate(-3 170 130)">
+    <rect x="40" y="30" width="260" height="190" rx="16" style="fill:var(--surface);stroke:var(--ink);stroke-width:2"/>
+    <rect x="40" y="30" width="260" height="34" rx="16" style="fill:var(--m1)"/><rect x="40" y="48" width="260" height="16" style="fill:var(--m1)"/>
+    <text x="58" y="53" class="sch-t" style="fill:var(--on-petrol)">Carte-incident</text>
+    <text x="58" y="92" class="sch-s">MOMENT</text><rect x="58" y="98" width="200" height="8" rx="4" style="fill:var(--line-2)"/>
+    <text x="58" y="130" class="sch-s">SITUATION</text><rect x="58" y="136" width="220" height="8" rx="4" style="fill:var(--line-2)"/><rect x="58" y="150" width="170" height="8" rx="4" style="fill:var(--line-2)"/>
+    <text x="58" y="184" class="sch-s">RÔLES</text><rect x="58" y="190" width="60" height="16" rx="8" style="fill:var(--m3)"/><rect x="124" y="190" width="60" height="16" rx="8" style="fill:var(--m2)"/>
+  </g>
+  <g transform="rotate(2 470 130)">
+    <rect x="340" y="34" width="260" height="190" rx="16" style="fill:var(--paper-2);stroke:var(--ink);stroke-width:2;stroke-dasharray:6 5"/>
+    <text x="358" y="66" class="sch-t">Pause d’analyse</text>
+    <text x="358" y="96" class="sch-s">Que savons-nous réellement ?</text>
+    <text x="358" y="120" class="sch-s">Quelles autres interprétations ?</text>
+    <text x="358" y="144" class="sch-s">Quelles questions poser ?</text>
+    <text x="358" y="168" class="sch-s">Quels moyens linguistiques ?</text>
+    <text x="358" y="204" class="sch-s" style="font-style:italic">Pas de solution sur la carte.</text>
+  </g>
+  <text x="170" y="252" text-anchor="middle" class="sch-s">recto</text><text x="470" y="252" text-anchor="middle" class="sch-s">verso</text>
+</svg>`,
   'tete-coeur-main': () => `
 <svg viewBox="0 0 640 430" role="img" aria-labelledby="sch-t sch-d" class="schema-svg">
   <title id="sch-t">Les trois dimensions de la compétence interculturelle</title>
@@ -1021,6 +1052,246 @@ function blockAudio(b) {
 }
 
 // ---------------------------------------------------------------------------
+// Atelier de cartes : générateur de cartes-incidents (Störkarte)
+// ---------------------------------------------------------------------------
+const PICTOS = {
+  aucun: '',
+  bulle: '<path d="M8 10h32a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4H22l-9 8v-8H8a4 4 0 0 1-4-4V14a4 4 0 0 1 4-4z"/>',
+  silence: '<path d="M8 10h32a4 4 0 0 1 4 4v16a4 4 0 0 1-4 4H22l-9 8v-8H8a4 4 0 0 1-4-4V14a4 4 0 0 1 4-4z"/><circle cx="16" cy="22" r="2.2" class="f"/><circle cx="24" cy="22" r="2.2" class="f"/><circle cx="32" cy="22" r="2.2" class="f"/>',
+  question: '<circle cx="24" cy="24" r="19"/><path d="M18.5 18.5a5.5 5.5 0 1 1 8 4.9c-1.6.8-2.5 2-2.5 3.6v1.5"/><circle cx="24" cy="34" r="1.6" class="f"/>',
+  horloge: '<circle cx="24" cy="24" r="19"/><path d="M24 13v11l7 5"/>',
+  fleches: '<path d="M6 17h30m-7-7 7 7-7 7M42 31H12m7-7-7 7 7 7"/>',
+  main: '<path d="M17 40V20a3 3 0 0 1 6 0v8M23 26V12a3 3 0 0 1 6 0v14M29 26V14a3 3 0 0 1 6 0v14M35 28v-6a3 3 0 0 1 6 0v8c0 7-5 12-12 12h-4c-4 0-7-2-9-5l-6-9a3 3 0 0 1 5-3l4 5"/>',
+  loupe: '<circle cx="20" cy="20" r="13"/><path d="m30 30 12 12"/>',
+};
+const PICTO_LABELS = { aucun: 'Aucun', bulle: 'Bulle', silence: 'Silence', question: 'Question', horloge: 'Moment', fleches: 'Malentendu', main: 'Prendre la parole', loupe: 'Observer' };
+const AC_EXEMPLES = [
+  'Une personne affirme : « Dans ce pays, tout le monde fait comme ça. »',
+  'Le silence d’un partenaire est interprété comme un manque d’intérêt.',
+  'Une proposition est retenue sans que les besoins d’un membre du groupe aient été entendus.',
+  'Deux personnes attribuent des sens différents à une même consigne ou à une même manière de communiquer.',
+];
+const AC_QUESTIONS = {
+  etudiants: ['Que savons-nous réellement et quelles intentions supposons-nous ?', 'Quelles autres interprétations sont possibles ?', 'Quelles questions permettraient de mieux comprendre la situation ?', 'Quels moyens linguistiques ou quelles interventions pourraient faciliter la poursuite de la tâche ?'],
+  eleves: ['Qu’est-ce qu’on sait vraiment ?', 'Il y a peut-être une autre explication ?', 'Quelle question est-ce que je peux poser ?', 'Qu’est-ce que je peux dire en français ?'],
+};
+const AC_PHRASES = ['Tu veux dire que… ?', 'Je ne suis pas sûr·e d’avoir compris.', 'Chez moi, c’est un peu différent : …', 'On peut essayer autrement ?'];
+
+function acConfig(carteId) {
+  const c = getA(carteId, null) || {};
+  return {
+    titre: c.titre || 'Carte-incident',
+    picto: c.picto || 'bulle',
+    image: c.image || null,
+    couleur: c.couleur || 'theme',
+    fond: c.fond || 'entre-deux',
+    taille: c.taille || 'normal',
+    niveau: c.niveau || 'etudiants',
+    phrases: c.phrases !== false,
+    phrasesListe: c.phrasesListe || AC_PHRASES.slice(),
+    roles: c.roles && c.roles.length ? c.roles : [{ nom: 'Personne A', texte: '' }, { nom: 'Personne B', texte: '' }],
+  };
+}
+function acCards(b, cfg) {
+  const [mId, sId] = b.champs;
+  const cards = [{ kind: 'incident', titre: cfg.titre, moment: getA(mId, ''), situation: getA(sId, ''), roles: cfg.roles.map((r) => r.nom) }];
+  cfg.roles.forEach((r) => cards.push({ kind: 'role', titre: r.nom, texte: r.texte }));
+  return cards;
+}
+function acPicto(cfg) {
+  if (cfg.image) return `<img class="ac-img" src="${cfg.image}" alt="">`;
+  if (!PICTOS[cfg.picto]) return '';
+  return `<svg class="ac-picto" viewBox="0 0 48 48" aria-hidden="true">${PICTOS[cfg.picto]}</svg>`;
+}
+function acFace(card, cfg, side) {
+  const cls = `ac-card c-${cfg.couleur} f-${cfg.fond} t-${cfg.taille} ${side} k-${card.kind}`;
+  const deco = cfg.fond === 'entre-deux' ? `<svg class="ac-deco" viewBox="0 0 200 132" aria-hidden="true">${motif('accueil').replace(/^<svg[^>]*>|<\/svg>$/g, '')}</svg>` : '';
+  if (side === 'recto' && card.kind === 'incident') {
+    const kick = card.titre.trim().toLowerCase() === 'carte-incident' ? 'Störkarte' : 'Carte-incident';
+    return `<div class="${cls}">${deco}<header><span class="ac-kicker">${kick}</span><h3>${esc(card.titre)}</h3>${acPicto(cfg)}</header>
+      <div class="ac-body"><p class="ac-l">Moment</p><p>${esc(card.moment || '…').replace(/\n/g, '<br>')}</p>
+      <p class="ac-l">Situation</p><p>${esc(card.situation || '…').replace(/\n/g, '<br>')}</p>
+      <p class="ac-l">Rôles</p><p class="ac-roles">${card.roles.map((r) => `<span>${esc(r)}</span>`).join('')}</p></div></div>`;
+  }
+  if (side === 'recto') {
+    return `<div class="${cls}">${deco}<header><span class="ac-kicker">Carte de rôle · à garder pour soi</span><h3>${esc(card.titre)}</h3>${acPicto(cfg)}</header>
+      <div class="ac-body"><p>${esc(card.texte || '…').replace(/\n/g, '<br>')}</p></div></div>`;
+  }
+  if (card.kind === 'incident') {
+    const qs = AC_QUESTIONS[cfg.niveau] || AC_QUESTIONS.etudiants;
+    return `<div class="${cls}"><header><span class="ac-kicker">Verso</span><h3>Pause d’analyse</h3></header>
+      <div class="ac-body"><ol>${qs.map((q) => `<li>${esc(q)}</li>`).join('')}</ol>
+      ${cfg.phrases ? `<p class="ac-l">Phrases utiles</p><p class="ac-phr">${cfg.phrasesListe.filter(Boolean).map((p) => `<span>${esc(p)}</span>`).join('')}</p>` : ''}</div></div>`;
+  }
+  return `<div class="${cls} ac-back-role">${deco}<p class="ac-backname">${esc(card.titre)}</p></div>`;
+}
+
+// Impression A5 paysage, deux par A4 portrait, recto verso (bord long) :
+// après une coupe au milieu, on pose la pile du haut sur la pile du bas, sans trier.
+function acPrintHTML(cards, cfg) {
+  const S = Math.ceil(cards.length / 2);
+  let html = '';
+  for (let k = 0; k < S; k++) {
+    const top = cards[k]; const bot = cards[S + k];
+    html += `<div class="ac-sheet">${acFace(top, cfg, 'recto')}${bot ? acFace(bot, cfg, 'recto') : '<div class="ac-card ac-empty"></div>'}</div>`;
+    html += `<div class="ac-sheet">${acFace(top, cfg, 'verso')}${bot ? acFace(bot, cfg, 'verso') : '<div class="ac-card ac-empty"></div>'}</div>`;
+  }
+  return html;
+}
+
+async function acWord(cards, cfg) {
+  const d = await import('./vendor/docx.mjs');
+  const { Document, Packer, Paragraph, TextRun, HeadingLevel, PageOrientation, ImageRun } = d;
+  const qs = AC_QUESTIONS[cfg.niveau] || AC_QUESTIONS.etudiants;
+  let imgData = null;
+  if (cfg.image) { const r = await fetch(cfg.image); imgData = new Uint8Array(await r.arrayBuffer()); }
+  const label = (t) => new Paragraph({ spacing: { before: 160 }, children: [new TextRun({ text: t.toUpperCase(), bold: true, size: 18, color: '666666' })] });
+  const para = (t) => new Paragraph({ children: [new TextRun({ text: t || '…', size: 24 })] });
+  const sections = [];
+  const page = { size: { orientation: PageOrientation.LANDSCAPE, width: 11906, height: 8391 }, margin: { top: 720, bottom: 720, left: 900, right: 900 } };
+  for (const c of cards) {
+    const front = [new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun({ text: c.kind === 'incident' ? c.titre : c.titre, bold: true })] })];
+    if (imgData) front.push(new Paragraph({ children: [new ImageRun({ type: 'jpg', data: imgData, transformation: { width: 90, height: 90 } })] }));
+    if (c.kind === 'incident') { front.push(label('Moment'), para(c.moment), label('Situation'), para(c.situation), label('Rôles'), para(c.roles.join(' · '))); } else { front.push(label('Carte de rôle · à garder pour soi'), para(c.texte)); }
+    sections.push({ properties: { page }, children: front });
+    const back = [];
+    if (c.kind === 'incident') {
+      back.push(new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun({ text: 'Pause d’analyse', bold: true })] }));
+      qs.forEach((q, i) => back.push(para(`${i + 1}. ${q}`)));
+      if (cfg.phrases) { back.push(label('Phrases utiles')); cfg.phrasesListe.filter(Boolean).forEach((p) => back.push(para(`– ${p}`))); }
+    } else back.push(new Paragraph({ children: [new TextRun({ text: c.titre, bold: true, size: 40 })] }));
+    sections.push({ properties: { page }, children: back });
+  }
+  const blob = await Packer.toBlob(new Document({ creator: 'Compétences interculturelles', sections }));
+  const a = el('a', { href: URL.createObjectURL(blob), download: 'cartes-incident.docx' });
+  document.body.append(a); a.click(); a.remove();
+}
+
+function acProjection(cards, cfg) {
+  let i = 0; let side = 'recto';
+  const back = el('div', { class: 'ac-proj', role: 'dialog', 'aria-modal': 'true' });
+  const stage = el('div', { class: 'ac-proj-stage' });
+  const bar = el('div', { class: 'ac-proj-bar' });
+  const show = () => { stage.innerHTML = acFace(cards[i], cfg, side); info.textContent = `${i + 1} / ${cards.length} · ${side}`; };
+  const info = el('span');
+  const btn = (t, f) => { const b = el('button', { class: 'btn ghost small', type: 'button' }, t); b.addEventListener('click', f); return b; };
+  bar.append(btn('←', () => { i = (i - 1 + cards.length) % cards.length; side = 'recto'; show(); }), info, btn('Retourner', () => { side = side === 'recto' ? 'verso' : 'recto'; show(); }), btn('→', () => { i = (i + 1) % cards.length; side = 'recto'; show(); }), btn('Fermer', () => close()));
+  const key = (e) => { if (e.key === 'Escape') close(); if (e.key === 'ArrowRight') { i = (i + 1) % cards.length; side = 'recto'; show(); } if (e.key === 'ArrowLeft') { i = (i - 1 + cards.length) % cards.length; side = 'recto'; show(); } if (e.key === ' ') { e.preventDefault(); side = side === 'recto' ? 'verso' : 'recto'; show(); } };
+  const close = () => { document.removeEventListener('keydown', key); back.remove(); };
+  document.addEventListener('keydown', key);
+  back.append(stage, bar); document.body.append(back); show();
+}
+
+function renderAtelier(main) {
+  const b = allBlocks().find((x) => x.type === 'carte');
+  if (!b) { main.append(el('p', {}, 'Aucune carte à générer.')); return; }
+  const cfg = acConfig(b.id);
+  const saveCfg = () => setA(b.id, JSON.parse(JSON.stringify(cfg)));
+  let current = 0; let side = 'recto';
+  main.append(el('section', { class: 'tache-hero' }, `${motif('t4', 'hero-motif')}<div><p class="eyebrow">Tâche finale · étape 4</p><h1>Atelier de cartes</h1>
+    <p class="lead">Mettez en forme votre carte-incident (Störkarte) et les cartes de rôle, puis imprimez-les ou projetez-les.</p></div>`));
+  const grid = el('div', { class: 'ac-grid' });
+  const form = el('div', { class: 'ac-form' });
+  const prev = el('div', { class: 'ac-prev' });
+  grid.append(form, prev); main.append(grid);
+
+  const field = (label, node, hint = '') => { const w = el('div', { class: 'ac-field' }, `<label>${label}</label>`); w.append(node); if (hint) w.append(el('p', { class: 'hint' }, hint)); return w; };
+  const seg = (name, opts, val, onPick) => {
+    const w = el('div', { class: 'ac-seg', role: 'radiogroup' });
+    for (const [v, l] of opts) { const bt = el('button', { type: 'button', 'aria-pressed': String(v === val) }, l); bt.addEventListener('click', () => { onPick(v); saveCfg(); draw(); }); w.append(bt); }
+    return w;
+  };
+  const draw = () => {
+    form.innerHTML = '';
+    const [mId, sId] = b.champs;
+    // Contenu
+    form.append(el('h2', {}, 'Contenu'));
+    const ti = el('input', { type: 'text', value: cfg.titre }); ti.addEventListener('input', () => { cfg.titre = ti.value; saveCfg(); drawPrev(); });
+    form.append(field('Titre de la carte', ti));
+    const mo = el('textarea', { rows: 2 }); mo.value = getA(mId, ''); mo.addEventListener('input', () => { setA(mId, mo.value); drawPrev(); });
+    form.append(field('Moment où l’incident survient', mo));
+    const si = el('textarea', { rows: 4 }); si.value = getA(sId, ''); si.addEventListener('input', () => { setA(sId, si.value); drawPrev(); });
+    const ex = el('select', {}, `<option value="">Partir d’un exemple du document…</option>${AC_EXEMPLES.map((e, i) => `<option value="${i}">${esc(e.slice(0, 70))}${e.length > 70 ? '…' : ''}</option>`).join('')}`);
+    ex.addEventListener('change', () => {
+      if (ex.value === '') return;
+      const txt = AC_EXEMPLES[+ex.value];
+      if (si.value.trim() && !confirm('Remplacer la situation actuelle par cet exemple ?')) { ex.value = ''; return; }
+      si.value = txt; setA(sId, txt); ex.value = ''; drawPrev();
+    });
+    form.append(field('Situation : paroles ou comportements observables', si), ex);
+    // Rôles
+    form.append(el('h2', {}, 'Cartes de rôle'));
+    form.append(el('p', { class: 'hint' }, 'Chaque personne reçoit sa carte et la garde pour elle : c’est ce qui rend la situation ouverte. Les rôles portent des lettres, pas des prénoms, pour ne suggérer aucune origine.'));
+    cfg.roles.forEach((r, i) => {
+      const ta = el('textarea', { rows: 2, placeholder: 'Ce que cette personne fait, pense ou ignore…' }); ta.value = r.texte;
+      ta.addEventListener('input', () => { r.texte = ta.value; saveCfg(); drawPrev(); });
+      form.append(field(esc(r.nom), ta));
+    });
+    const rr = el('div', { class: 'row' });
+    if (cfg.roles.length < 4) rr.append(el('button', { type: 'button', class: 'btn ghost small', onclick: () => { cfg.roles.push({ nom: `Personne ${'ABCD'[cfg.roles.length]}`, texte: '' }); saveCfg(); draw(); } }, '+ un rôle'));
+    if (cfg.roles.length > 2) rr.append(el('button', { type: 'button', class: 'link', onclick: () => { cfg.roles.pop(); saveCfg(); current = 0; draw(); } }, 'Retirer le dernier rôle'));
+    form.append(rr);
+    // Verso
+    form.append(el('h2', {}, 'Verso : pause d’analyse'));
+    form.append(field('Niveau de langue', seg('niveau', [['etudiants', 'Étudiant·e·s'], ['eleves', 'Élèves (A1/A2)']], cfg.niveau, (v) => { cfg.niveau = v; })));
+    const ph = el('label', { class: 'toggle small' }); const phc = el('input', { type: 'checkbox' }); phc.checked = cfg.phrases;
+    phc.addEventListener('change', () => { cfg.phrases = phc.checked; saveCfg(); draw(); });
+    ph.append(phc, document.createTextNode(' Ajouter des phrases utiles'));
+    form.append(ph);
+    if (cfg.phrases) {
+      const pl = el('textarea', { rows: 4 }); pl.value = cfg.phrasesListe.join('\n');
+      pl.addEventListener('input', () => { cfg.phrasesListe = pl.value.split('\n'); saveCfg(); drawPrev(); });
+      form.append(field('Une phrase par ligne', pl));
+    }
+    // Apparence
+    form.append(el('h2', {}, 'Apparence'));
+    const pg = el('div', { class: 'ac-pictos' });
+    for (const k of Object.keys(PICTOS)) {
+      const bt = el('button', { type: 'button', title: PICTO_LABELS[k], 'aria-pressed': String(!cfg.image && cfg.picto === k) }, k === 'aucun' ? '∅' : `<svg viewBox="0 0 48 48">${PICTOS[k]}</svg>`);
+      bt.addEventListener('click', () => { cfg.picto = k; cfg.image = null; saveCfg(); draw(); });
+      pg.append(bt);
+    }
+    form.append(field('Pictogramme', pg, 'Des pictogrammes neutres : pas de drapeaux, de costumes ni de visages.'));
+    const up = el('input', { type: 'file', accept: 'image/*' });
+    up.addEventListener('change', async () => {
+      const f = up.files[0]; if (!f) return;
+      const img = new Image(); img.src = URL.createObjectURL(f); await img.decode();
+      const scale = Math.min(1, 800 / Math.max(img.width, img.height));
+      const c = document.createElement('canvas'); c.width = Math.round(img.width * scale); c.height = Math.round(img.height * scale);
+      c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      cfg.image = c.toDataURL('image/jpeg', 0.85); saveCfg(); draw();
+    });
+    form.append(field('Ou votre propre image', up, 'Vérifiez vos droits sur l’image. Demandez-vous : l’image renforce-t-elle un stéréotype ?'));
+    if (cfg.image) form.append(el('button', { type: 'button', class: 'link', onclick: () => { cfg.image = null; saveCfg(); draw(); } }, 'Retirer mon image'));
+    form.append(field('Couleur', seg('couleur', [['theme', 'Couleur du parcours'], ['m2', 'Accent clair'], ['m3', 'Accent chaud'], ['nb', 'Noir et blanc']], cfg.couleur, (v) => { cfg.couleur = v; })));
+    form.append(field('Fond', seg('fond', [['entre-deux', 'Motif'], ['lignes', 'Lignes'], ['uni', 'Uni']], cfg.fond, (v) => { cfg.fond = v; })));
+    form.append(field('Taille du texte', seg('taille', [['normal', 'Normale'], ['grand', 'Lisible de loin']], cfg.taille, (v) => { cfg.taille = v; })));
+    drawPrev();
+  };
+  const drawPrev = () => {
+    const cards = acCards(b, cfg);
+    if (current >= cards.length) current = 0;
+    prev.innerHTML = '';
+    const tabs = el('div', { class: 'ac-tabs' });
+    cards.forEach((c, i) => { const t = el('button', { type: 'button', 'aria-pressed': String(i === current) }, c.kind === 'incident' ? 'Carte-incident' : c.titre); t.addEventListener('click', () => { current = i; drawPrev(); }); tabs.append(t); });
+    const flip = el('button', { type: 'button', class: 'btn ghost small' }, side === 'recto' ? 'Voir le verso' : 'Voir le recto');
+    flip.addEventListener('click', () => { side = side === 'recto' ? 'verso' : 'recto'; drawPrev(); });
+    prev.append(tabs, el('div', { class: 'ac-stage' }, acFace(cards[current], cfg, side)), flip);
+    const out = el('div', { class: 'ac-out' }, '<h2>Utiliser les cartes</h2>');
+    const r = el('div', { class: 'row' });
+    r.append(el('button', { type: 'button', class: 'btn primary', onclick: () => printHTML(acPrintHTML(cards, cfg), 'print-cartes') }, 'Imprimer (A5, recto verso)'));
+    r.append(el('button', { type: 'button', class: 'btn ghost', onclick: () => acProjection(cards, cfg) }, 'Projeter'));
+    r.append(el('button', { type: 'button', class: 'btn ghost', onclick: () => acWord(cards, cfg).catch((e) => alert('Export Word impossible : ' + e.message)) }, 'Masque Word (.docx)'));
+    out.append(r, el('p', { class: 'hint' }, `Impression : A4 recto verso (bord long), ${Math.ceil(cards.length / 2)} feuille(s). Coupez au milieu, posez la pile du haut sur celle du bas — les cartes sont dans l’ordre.`));
+    prev.append(out);
+    const chk = allBlocks().find((x) => x.id === 't4-3-check');
+    if (chk) prev.append(renderBlock(chk));
+    prev.append(el('a', { class: 'btn ghost', href: '#/t4/3' }, '← Retour à l’étape'));
+  };
+  draw();
+}
+
+// ---------------------------------------------------------------------------
 // Dossier
 // ---------------------------------------------------------------------------
 function answerHTML(b) {
@@ -1039,6 +1310,9 @@ function answerHTML(b) {
       return `<p><strong>${esc(c.label)} :</strong> ${esc(items.join(', ') || '—')}</p>`;
     }).join('');
     return `<div class="d-item"><h4>Classement (${esc(b.categories.map((c) => c.label).join(' / '))})</h4>${lists}</div>`;
+  }
+  if (b.type === 'carte' && v && v.roles) {
+    return `<div class="d-item"><h4>Cartes de rôle</h4>${v.roles.map((r) => `<p><strong>${esc(r.nom)} :</strong> ${esc(r.texte || '—')}</p>`).join('')}</div>`;
   }
   if (b.type === 'mindmap' && v.noeuds?.length > 1) {
     const list = (pid) => { const k = v.noeuds.filter((n) => n.parent === pid); return k.length ? `<ul>${k.map((n) => `<li>${esc(n.texte)}${list(n.id)}</li>`).join('')}</ul>` : ''; };
@@ -1092,6 +1366,7 @@ function route() {
   main.className = '';
   document.body.classList.remove('nav-open');
   if (r === 'dossier') { renderDossier(main); renderSidebar('dossier'); }
+  else if (r === 'atelier') { main.className = 'atelier-mode'; renderAtelier(main); renderSidebar('t4', 3); }
   else if (r === 'aide') { main.className = 'step-mode'; renderAide(main); renderSidebar('aide'); }
   else if (taches[r]) {
     const idx = Number.isFinite(parseInt(s, 10)) ? parseInt(s, 10) : (state.etapes[r] || 0);

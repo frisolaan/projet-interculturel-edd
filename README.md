@@ -108,6 +108,14 @@ Das Gedicht «MOI / ICH» (Tâche 2) liegt als synthetische Lesung bei (`assets/
 
 Eine echte Lesung (z. B. von einer Studentin) ersetzt die Datei jederzeit über den Editor.
 
+## Atelier de cartes (Störkarte)
+
+`#/atelier` – erreichbar aus Tâche finale, Schritt 4. Erzeugt die Carte-incident und 2–4 Rollenkarten.
+- **Inhalt:** Titel, Moment, Situation (oder ein Beispiel aus dem Dokument als Start), Rollen «Personne A–D» (bewusst ohne Vornamen).
+- **Rückseite:** «Pause d’analyse» mit den vier Analysefragen – Version Studierende oder vereinfacht für Schüler:innen (A1/A2) – und optional Phrases utiles (editierbar).
+- **Gestaltung:** neutrale Piktogramme oder eigenes Bild (lokal gespeichert, Hinweis zu Rechten und Stereotypen), Farbe (Parcours, zwei Akzente, Schwarz-Weiss), Hintergrund (Motiv, Linien, uni), Schriftgrösse (normal, «lisible de loin»).
+- **Ausgabe:** Druck A5 quer, zwei pro A4, beidseitig (langer Rand) – nach einem Schnitt den oberen Stapel auf den unteren legen, Reihenfolge stimmt ohne Sortieren; Projektionsmodus (← → Leertaste); Word-Maske (.docx).
+
 ## Antworten wiederverwenden
 
 Frühere Antworten lassen sich in späteren Schritten aufnehmen:

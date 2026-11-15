@@ -14,6 +14,12 @@
       "corps": "À partir des connaissances acquises dans les trois premières tâches, vous allez enrichir une tâche existante de ***dis donc ! 7*** ou ***dis donc ! 8*** afin qu’elle permette également aux élèves de développer leurs compétences interculturelles.\n\nVous vous appuierez sur le matériel et les ressources disponibles. Il s’agit de faire **évoluer une tâche du manuel en lui donnant une dimension interculturelle explicite**, tout en conservant son objectif communicatif. Vous montrerez également comment cet enrichissement contribue à l’**ÉDD**.\n\nVous mettrez ensuite votre proposition à l’essai en binôme en y introduisant une **carte-incident** (*= Störkarte*) : une situation susceptible de compliquer la réalisation de la tâche et de solliciter les compétences interculturelles des élèves."
     },
     {
+      "type": "schema",
+      "id": "t4-intro-carte",
+      "modele": "carte-incident",
+      "legende": "La carte-incident (Störkarte) : une situation brève, des rôles, et des questions pour analyser — jamais la solution. Vous la créerez à l’étape 4, dans l’atelier de cartes."
+    },
+    {
       "type": "consigne",
       "id": "t4-1",
       "titre": "1. Choisissez et analysez une tâche",
@@ -169,7 +175,7 @@
     {
       "type": "consigne",
       "id": "t4-3",
-      "titre": "3. Créez votre carte-incident",
+      "titre": "3. Créez votre carte-incident (Störkarte)",
       "accroche": "Un grain de sable dans l’échange.",
       "duree": "30 min",
       "modalite": "Binôme",
@@ -211,7 +217,8 @@
         "L’incident est plausible et directement lié à notre tâche.",
         "Il est ouvert à plusieurs interprétations.",
         "Il ne repose sur aucune caricature culturelle.",
-        "La solution ne figure pas sur la carte."
+        "La solution ne figure pas sur la carte.",
+        "L’image ou le pictogramme ne renforce aucun stéréotype."
       ],
       "exemple_titre": "",
       "exemple": "",
@@ -350,5 +357,7 @@
       "exemple": "",
       "statut_contenu": ""
     }
-  ]
+  ],
+  "produits": "Tâche enrichie et carte-incident (Störkarte)",
+  "heures": 4.5
 }

@@ -465,3 +465,90 @@ body.modal-open { overflow: hidden; }
 .btn.disabled { opacity: .55; cursor: default; border-style: dashed; }
 
 .answer-help { margin: -2px 0 8px; color: var(--ink-2); font-size: .95rem; }
+
+/* --- Accueil : repères visibles --------------------------------------------------- */
+.facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 14px; }
+.facts span { font-weight: 700; font-size: .9rem; padding: 6px 12px; border-radius: 999px; background: var(--petrol-soft); color: var(--petrol); }
+[data-theme="phtg"] .facts span { background: var(--terre); color: #000; }
+.goals { margin: 0 0 22px; padding: 20px 24px; border-radius: 20px; background: var(--surface); border: 1px solid var(--line); }
+.goals h2 { font-size: 1.2rem; }
+.goals ol { margin: 6px 0 0; padding-left: 1.3em; display: grid; gap: 6px; }
+.overall { margin: 0 0 22px; }
+.overall-bar { display: flex; gap: 4px; height: 10px; }
+.overall-bar span { background: var(--line); border-radius: 5px; overflow: hidden; }
+.overall-bar i { display: block; height: 100%; background: var(--petrol); }
+.overall p { margin: 8px 0 0; font-size: .92rem; color: var(--ink-2); }
+.produits { font-size: .88rem; color: var(--ink-2); margin: 0 0 12px; }
+.produits span { font-weight: 700; color: var(--ink); }
+.cadre { padding: 4px 0 10px; }
+.cadre h2 { font-size: 1.2rem; }
+
+/* --- Atelier de cartes ------------------------------------------------------------- */
+main.atelier-mode { max-width: 1180px; }
+.ac-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 28px; align-items: start; }
+.ac-form h2 { font-size: 1.15rem; margin: 22px 0 8px; }
+.ac-form h2:first-child { margin-top: 0; }
+.ac-field { margin: 10px 0; }
+.ac-field > label { display: block; font-weight: 700; font-size: .9rem; margin-bottom: 4px; }
+.ac-form input[type=text], .ac-form textarea, .ac-form select { width: 100%; font: inherit; padding: 9px 12px; border: 1px solid var(--line-2); border-radius: 12px; background: var(--surface); }
+.ac-form select { margin-top: 6px; color: var(--ink-2); }
+.ac-seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.ac-seg button, .ac-tabs button { font: inherit; font-size: .85rem; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line-2); background: var(--surface); cursor: pointer; color: var(--ink); }
+.ac-seg button[aria-pressed=true], .ac-tabs button[aria-pressed=true] { background: var(--petrol); color: var(--on-petrol); border-color: var(--petrol); }
+.ac-pictos { display: flex; flex-wrap: wrap; gap: 6px; }
+.ac-pictos button { width: 46px; height: 46px; border-radius: 12px; border: 1px solid var(--line-2); background: var(--surface); cursor: pointer; display: grid; place-items: center; font-size: 1.1rem; color: var(--ink); }
+.ac-pictos button[aria-pressed=true] { border: 2px solid var(--petrol); background: var(--petrol-soft); }
+.ac-pictos svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.ac-pictos svg .f { fill: currentColor; stroke: none; }
+.ac-prev { position: sticky; top: calc(var(--top) + 16px); display: grid; gap: 12px; }
+.ac-tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.ac-stage { filter: drop-shadow(0 14px 22px rgba(0,0,0,.12)); }
+.ac-out { padding: 14px 16px; border-radius: 16px; background: var(--paper-2); }
+.ac-out h2 { font-size: 1.05rem; }
+.ac-mini { max-width: 520px; }
+
+/* La carte : A5 paysage (210 × 148 mm) */
+.ac-card { --c: var(--m1); --c-on: var(--on-petrol); position: relative; container-type: inline-size; aspect-ratio: 210 / 148; width: 100%; overflow: hidden; background: var(--surface); border: 1px solid var(--line-2); border-radius: 14px; color: var(--ink); font-family: var(--sans); display: flex; flex-direction: column; }
+.ac-card.c-m2 { --c: var(--m2); --c-on: #fff; }
+.ac-card.c-m3 { --c: var(--m3); --c-on: var(--ink); }
+.ac-card.c-nb { --c: #000; --c-on: #fff; }
+.ac-card.c-nb .ac-deco { filter: grayscale(1); opacity: .25; }
+.ac-card header { position: relative; z-index: 1; background: var(--c); color: var(--c-on); padding: 3.2cqw 4cqw 2.6cqw; display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 3cqw; }
+.ac-card header h3 { grid-column: 1; margin: 0; font-family: var(--head); font-weight: 700; font-size: 5.2cqw; line-height: 1.1; color: inherit; }
+.ac-kicker { grid-column: 1; font-size: 2.1cqw; letter-spacing: .1em; text-transform: uppercase; opacity: .85; font-weight: 700; }
+.ac-picto, .ac-img { grid-column: 2; grid-row: 1 / span 2; width: 11cqw; height: 11cqw; }
+.ac-picto { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.ac-picto .f { fill: currentColor; stroke: none; }
+.ac-img { object-fit: cover; border-radius: 2cqw; background: #fff; }
+.ac-body { position: relative; z-index: 1; padding: 2.6cqw 4cqw 3cqw; font-size: 2.9cqw; line-height: 1.35; flex: 1; }
+.ac-body p { margin: 0 0 1.2cqw; }
+.ac-l { font-size: 1.9cqw !important; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--ink-3); margin: 1.6cqw 0 .4cqw !important; }
+.ac-roles span, .ac-phr span { display: inline-block; margin: 0 1.2cqw .8cqw 0; padding: .6cqw 2cqw; border-radius: 99px; border: .3cqw solid var(--c); font-size: 2.5cqw; }
+.ac-body ol { margin: 0; padding-left: 4cqw; display: grid; gap: .8cqw; }
+.ac-card.t-grand .ac-body { font-size: 3.6cqw; }
+.ac-card.t-grand header h3 { font-size: 6.4cqw; }
+.ac-deco { position: absolute; right: -6cqw; bottom: -8cqw; width: 48cqw; height: auto; opacity: .16; z-index: 0; }
+.ac-card.f-lignes { background-image: repeating-linear-gradient(180deg, transparent 0 5.4cqw, var(--line) 5.4cqw calc(5.4cqw + 1px)); }
+.ac-card.f-uni .ac-deco { display: none; }
+.ac-card.verso.k-incident { background: var(--paper-2); }
+.ac-back-role { align-items: center; justify-content: center; background: var(--c) !important; }
+.ac-back-role .ac-deco { opacity: .25; right: auto; left: 50%; bottom: 50%; transform: translate(-50%, 50%); width: 60cqw; }
+.ac-backname { position: relative; z-index: 1; font-family: var(--head); font-weight: 700; font-size: 7cqw; color: var(--c-on); margin: 0; }
+.ac-empty { border: 0; }
+
+/* Projection */
+.ac-proj { position: fixed; inset: 0; z-index: 60; background: rgba(10,14,24,.88); display: grid; place-items: center; gap: 16px; padding: 24px; grid-template-rows: 1fr auto; }
+.ac-proj-stage { width: min(92vw, calc((100vh - 120px) * 210 / 148)); }
+.ac-proj-bar { display: flex; gap: 10px; align-items: center; color: #fff; }
+.ac-proj-bar .btn.ghost { color: #fff; border-color: rgba(255,255,255,.5); }
+
+@media (max-width: 960px) { .ac-grid { grid-template-columns: 1fr; } .ac-prev { position: static; } }
+
+/* Impression : A4 portrait, deux A5 paysage par feuille, recto verso */
+@media print {
+  body.print-cartes .print-area { width: 210mm; }
+  body.print-cartes .ac-sheet { page: cartes; width: 210mm; height: 297mm; display: grid; grid-template-rows: 148.5mm 148.5mm; page-break-after: always; break-after: page; }
+  body.print-cartes .ac-card { width: 210mm; height: 148.5mm; aspect-ratio: auto; border: 0; border-radius: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body.print-cartes .ac-sheet .ac-card:first-child { border-bottom: .2mm dashed #bbb; }
+}
+@page cartes { size: A4 portrait; margin: 0; }

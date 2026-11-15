@@ -48,5 +48,11 @@
     }
   ],
   "info_titre": "Avant de commencer",
-  "info": "**Vos données restent chez vous.** L’application n’envoie rien à un serveur. Vos réponses sont gardées uniquement dans ce navigateur, sur cet ordinateur — personne d’autre ne les voit.\n\n**Le navigateur garde vos réponses automatiquement.** En revenant sur le même ordinateur et dans le même navigateur, vous retrouvez tout. Attention : en navigation privée, en effaçant les données du navigateur ou, dans Safari, après une longue pause, elles peuvent disparaître.\n\n**Enregistrez votre parcours dans un fichier.** Le bouton **Enregistrer** (en haut à droite) crée votre sauvegarde. C’est aussi le seul moyen de continuer sur un autre ordinateur, avec **Ouvrir mon fichier**. Dans Chrome et Edge, le fichier est ensuite mis à jour automatiquement ; à votre prochaine visite, un clic suffit pour reprendre. Dans Safari et Firefox, chaque clic télécharge une nouvelle version du fichier.\n\n**Les remises se font sur ILIAS.** L’application ne transmet rien à vos enseignant·e·s. Quand une production est à remettre, le lien vers ILIAS apparaît au bon moment dans le parcours."
+  "info": "**Vos données restent chez vous.** L’application n’envoie rien à un serveur. Vos réponses sont gardées uniquement dans ce navigateur, sur cet ordinateur — personne d’autre ne les voit.\n\n**Le navigateur garde vos réponses automatiquement.** En revenant sur le même ordinateur et dans le même navigateur, vous retrouvez tout. Attention : en navigation privée, en effaçant les données du navigateur ou, dans Safari, après une longue pause, elles peuvent disparaître.\n\n**Enregistrez votre parcours dans un fichier.** Le bouton **Enregistrer** (en haut à droite) crée votre sauvegarde. C’est aussi le seul moyen de continuer sur un autre ordinateur, avec **Ouvrir mon fichier**. Dans Chrome et Edge, le fichier est ensuite mis à jour automatiquement ; à votre prochaine visite, un clic suffit pour reprendre. Dans Safari et Firefox, chaque clic télécharge une nouvelle version du fichier.\n\n**Les remises se font sur ILIAS.** L’application ne transmet rien à vos enseignant·e·s. Quand une production est à remettre, le lien vers ILIAS apparaît au bon moment dans le parcours.",
+  "eckdaten": [
+    "10 à 12 h au total",
+    "4 tâches",
+    "en français",
+    "seul·e et en binôme"
+  ]
 }
