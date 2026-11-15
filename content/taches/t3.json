@@ -175,7 +175,13 @@
       "type": "texte",
       "id": "t3-3-dimensions",
       "titre": "Trois dimensions de la compétence interculturelle",
-      "corps": "- **Les connaissances — la tête :** ce que l’on sait et ce que l’on apprend sur les pratiques, les contextes et les références des personnes.\n- **Les attitudes — le cœur :** la curiosité, l’ouverture et la disposition à questionner ses propres évidences.\n- **Les capacités d’agir — la main :** les démarches permettant de clarifier une interprétation, de communiquer et de construire une compréhension mutuelle.\n\n*Schéma : à ajouter.*"
+      "corps": "- **Les connaissances — la tête :** ce que l’on sait et ce que l’on apprend sur les pratiques, les contextes et les références des personnes.\n- **Les attitudes — le cœur :** la curiosité, l’ouverture et la disposition à questionner ses propres évidences.\n- **Les capacités d’agir — la main :** les démarches permettant de clarifier une interprétation, de communiquer et de construire une compréhension mutuelle."
+    },
+    {
+      "type": "schema",
+      "id": "t3-3-schema",
+      "modele": "tete-coeur-main",
+      "legende": "Les trois dimensions sont complémentaires : la compétence interculturelle naît de leur rencontre."
     },
     {
       "type": "tri",

@@ -63,7 +63,8 @@ Die zweite Person braucht ein GitHub-Konto und muss im Repo als **Collaborator**
 | Text | Lesetext, Situation, Gedicht (optional zugeklappt) |
 | Antwortfeld | Freitext, optional mit Zielwortzahl; «privat» = nicht im Dossier/Export (ausser auf Wunsch) |
 | Tabelle | Raster mit Spalten und Beispielzeilen |
-| Sortierübung | Elemente in Kategorien ordnen, mit Prüfung; Lösung `les-deux` = beide möglich |
+| Sortierübung | Elemente in Kategorien ordnen, mit Prüfung; Lösung `les-deux` = beide möglich; Darstellung «Baum» (Krone / Wurzeln) für zwei Kategorien |
+| Schema | vordefinierte Grafik, z. B. Kopf – Herz – Hand |
 | Selbstcheck | Checkliste plus aufdeckbares Beispiel |
 | Externe Ressource | Hinweis auf ILIAS, Lehrmittel usw. |
 | Lehrplan-Fenster | Schaltflächen, die tg.lehrplan.ch im Seitenfenster öffnen (Suchwort oder URL) |
@@ -77,7 +78,7 @@ Die zweite Person braucht ein GitHub-Konto und muss im Repo als **Collaborator**
 
 - [ ] **Musterlösungen und Sortierlisten** sind Entwürfe (Status «Entwurf – à valider»): t1-a3-arbre, t1-a4-check, t2-2-check, t3-2-tri, t3-3-tri, t3-4-check, t3-5-check.
 - [ ] **ILIAS-Link** zum Classeur der 5. Séance (t3-1-ressources).
-- [ ] **Schema** der interkulturellen Kompetenz (t3-3-dimensions) fehlt noch als Bild.
+- [ ] **Schema** (t3-3-schema): als Kopf–Herz–Hand-Grafik nachgezeichnet. Falls im Kurs ein bestimmtes Schema aus der Lektüre gemeint ist, dieses prüfen bzw. ersetzen.
 - [ ] **Kontrollfragen zu Fäcke / Chaves et al.** (t3-1) – bisher nur Selbsteinschätzung; inhaltliche Fragen sollten aus den Texten formuliert werden.
 
 ### Gegenüber dem Word-Dokument bereits angepasst

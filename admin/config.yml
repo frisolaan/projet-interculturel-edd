@@ -197,6 +197,16 @@ collections:
         - label: Anweisung
           name: consigne
           widget: string
+        - label: Darstellung
+          name: visuel
+          widget: select
+          options:
+          - label: Spalten
+            value: colonnes
+          - label: 'Baum (2 Kategorien: Krone / Wurzeln)'
+            value: arbre
+          default: colonnes
+          required: false
         - label: Kategorien
           name: categories
           widget: list
@@ -404,6 +414,23 @@ collections:
           widget: file
           hint: MP3, möglichst unter 5 MB
         - label: Legende (z. B. Quelle, Stimme)
+          name: legende
+          widget: string
+          required: false
+      - label: Schema (vordefinierte Grafik)
+        name: schema
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Modell
+          name: modele
+          widget: select
+          options:
+          - label: Kopf – Herz – Hand
+            value: tete-coeur-main
+        - label: Bildlegende
           name: legende
           widget: string
           required: false
@@ -560,6 +587,16 @@ collections:
         - label: Anweisung
           name: consigne
           widget: string
+        - label: Darstellung
+          name: visuel
+          widget: select
+          options:
+          - label: Spalten
+            value: colonnes
+          - label: 'Baum (2 Kategorien: Krone / Wurzeln)'
+            value: arbre
+          default: colonnes
+          required: false
         - label: Kategorien
           name: categories
           widget: list
@@ -767,6 +804,23 @@ collections:
           widget: file
           hint: MP3, möglichst unter 5 MB
         - label: Legende (z. B. Quelle, Stimme)
+          name: legende
+          widget: string
+          required: false
+      - label: Schema (vordefinierte Grafik)
+        name: schema
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Modell
+          name: modele
+          widget: select
+          options:
+          - label: Kopf – Herz – Hand
+            value: tete-coeur-main
+        - label: Bildlegende
           name: legende
           widget: string
           required: false
@@ -923,6 +977,16 @@ collections:
         - label: Anweisung
           name: consigne
           widget: string
+        - label: Darstellung
+          name: visuel
+          widget: select
+          options:
+          - label: Spalten
+            value: colonnes
+          - label: 'Baum (2 Kategorien: Krone / Wurzeln)'
+            value: arbre
+          default: colonnes
+          required: false
         - label: Kategorien
           name: categories
           widget: list
@@ -1133,6 +1197,23 @@ collections:
           name: legende
           widget: string
           required: false
+      - label: Schema (vordefinierte Grafik)
+        name: schema
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Modell
+          name: modele
+          widget: select
+          options:
+          - label: Kopf – Herz – Hand
+            value: tete-coeur-main
+        - label: Bildlegende
+          name: legende
+          widget: string
+          required: false
   - name: t4
     label: Tâche finale · Enrichir une tâche
     file: content/taches/t4.json
@@ -1286,6 +1367,16 @@ collections:
         - label: Anweisung
           name: consigne
           widget: string
+        - label: Darstellung
+          name: visuel
+          widget: select
+          options:
+          - label: Spalten
+            value: colonnes
+          - label: 'Baum (2 Kategorien: Krone / Wurzeln)'
+            value: arbre
+          default: colonnes
+          required: false
         - label: Kategorien
           name: categories
           widget: list
@@ -1493,6 +1584,23 @@ collections:
           widget: file
           hint: MP3, möglichst unter 5 MB
         - label: Legende (z. B. Quelle, Stimme)
+          name: legende
+          widget: string
+          required: false
+      - label: Schema (vordefinierte Grafik)
+        name: schema
+        widget: object
+        fields:
+        - label: ID (nicht ändern)
+          name: id
+          widget: string
+        - label: Modell
+          name: modele
+          widget: select
+          options:
+          - label: Kopf – Herz – Hand
+            value: tete-coeur-main
+        - label: Bildlegende
           name: legende
           widget: string
           required: false

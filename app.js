@@ -364,6 +364,7 @@ function renderBlock(b) {
     case 'silhouette': return blockSilhouette(b);
     case 'carte': return blockCarte(b);
     case 'audio': return blockAudio(b);
+    case 'schema': return blockSchema(b);
     default: return REDACTION ? el('div', { class: 'card' }, `Type inconnu : ${esc(b.type)}`) : null;
   }
 }
@@ -455,12 +456,14 @@ function blockTri(b) {
   const draw = () => {
     wrap.innerHTML = `<p class="tri-consigne">${mdInline(b.consigne)}</p>`;
     const pool = el('div', { class: 'tri-pool', 'data-cat': '' });
-    const cats = el('div', { class: 'tri-cats', style: `--n:${b.categories.length}` });
+    const arbre = b.visuel === 'arbre' && b.categories.length === 2;
+    const cats = el('div', arbre ? { class: 'tri-arbre' } : { class: 'tri-cats', style: `--n:${b.categories.length}` });
     const boxes = {};
     b.categories.forEach((c, ci) => {
-      const box = el('div', { class: `tri-cat tone-${ci % 3}`, 'data-cat': c.id }, `<h4>${esc(c.label)}</h4>`);
+      const box = el('div', { class: `tri-cat tone-${ci % 3}${arbre ? (ci === 0 ? ' couronne' : ' racines') : ''}`, 'data-cat': c.id }, `<h4>${esc(c.label)}</h4>`);
       boxes[c.id] = box;
       cats.append(box);
+      if (arbre && ci === 0) cats.append(el('div', { class: 'arbre-sol', 'aria-hidden': 'true' }, ARBRE_SOL));
     });
     const drop = (catId, idx) => {
       if (catId) st.placements[idx] = catId; else delete st.placements[idx];
@@ -521,6 +524,11 @@ function blockTri(b) {
   draw();
   return wrap;
 }
+
+const ARBRE_SOL = `<svg viewBox="0 0 220 96" class="tronc">
+  <path d="M98 0 C 100 34, 96 58, 100 70 L 120 70 C 124 58, 120 34, 122 0 Z" style="fill:var(--m1);fill-opacity:.9"/>
+  <path d="M104 70 C 86 80, 58 86, 20 94 M110 70 C 110 80, 109 88, 110 96 M116 70 C 134 80, 162 86, 200 94" style="stroke:var(--m2)" stroke-width="5" fill="none" stroke-linecap="round" opacity=".85"/>
+</svg><span class="sol-ligne"></span><span class="sol-label">surface</span>`;
 
 function blockAutocontrole(b) {
   const wrap = el('details', { class: 'check' });
@@ -648,6 +656,37 @@ function blockCarte(b) {
   return wrap;
 }
 
+
+const SCHEMAS = {
+  'tete-coeur-main': () => `
+<svg viewBox="0 0 640 430" role="img" aria-labelledby="sch-t sch-d" class="schema-svg">
+  <title id="sch-t">Les trois dimensions de la compétence interculturelle</title>
+  <desc id="sch-d">Trois cercles qui se chevauchent : les connaissances (la tête), les attitudes (le cœur) et les capacités d’agir (la main). Leur zone commune représente la compétence interculturelle.</desc>
+  <circle cx="320" cy="150" r="128" style="fill:var(--m1);fill-opacity:.22;stroke:var(--m1);stroke-width:2.5"/>
+  <circle cx="232" cy="290" r="128" style="fill:var(--m3);fill-opacity:.32;stroke:var(--m3);stroke-width:2.5"/>
+  <circle cx="408" cy="290" r="128" style="fill:var(--m2);fill-opacity:.22;stroke:var(--m2);stroke-width:2.5"/>
+  <circle cx="320" cy="245" r="46" class="sch-disc" style="fill:var(--surface);fill-opacity:.92"/>
+  <text x="320" y="240" text-anchor="middle" class="sch-center">compétence</text>
+  <text x="320" y="258" text-anchor="middle" class="sch-center">interculturelle</text>
+  <text x="320" y="78" text-anchor="middle" class="sch-h">la tête</text>
+  <text x="320" y="102" text-anchor="middle" class="sch-t">Connaissances</text>
+  <text x="320" y="122" text-anchor="middle" class="sch-s">pratiques, contextes,</text>
+  <text x="320" y="140" text-anchor="middle" class="sch-s">références des personnes</text>
+  <text x="178" y="312" text-anchor="middle" class="sch-h">le cœur</text>
+  <text x="178" y="336" text-anchor="middle" class="sch-t">Attitudes</text>
+  <text x="178" y="356" text-anchor="middle" class="sch-s">curiosité, ouverture,</text>
+  <text x="178" y="374" text-anchor="middle" class="sch-s">questionner ses évidences</text>
+  <text x="462" y="312" text-anchor="middle" class="sch-h">la main</text>
+  <text x="462" y="336" text-anchor="middle" class="sch-t">Capacités d’agir</text>
+  <text x="462" y="356" text-anchor="middle" class="sch-s">clarifier, communiquer,</text>
+  <text x="462" y="374" text-anchor="middle" class="sch-s">se comprendre</text>
+</svg>`,
+};
+function blockSchema(b) {
+  const draw = SCHEMAS[b.modele];
+  if (!draw) return REDACTION ? el('div', { class: 'aside' }, `Schéma inconnu : ${esc(b.modele)}`) : null;
+  return el('figure', { class: 'schema' }, `${draw()}${b.legende ? `<figcaption>${mdInline(b.legende)}</figcaption>` : ''}`);
+}
 
 function fmtTime(t) { t = Math.max(0, Math.round(t || 0)); return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`; }
 function blockAudio(b) {

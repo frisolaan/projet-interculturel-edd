@@ -147,7 +147,8 @@
         }
       ],
       "ajout_libre": true,
-      "statut_contenu": "Entwurf – à valider"
+      "statut_contenu": "Entwurf – à valider",
+      "visuel": "arbre"
     },
     {
       "type": "consigne",
