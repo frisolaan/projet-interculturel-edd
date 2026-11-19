@@ -36,15 +36,15 @@
     },
     {
       "titre": "Votre espace privé",
-      "texte": "Les champs marqués **espace privé** (poème, carte « Moi », silhouette…) restent sur cet ordinateur. Ils n’entrent dans votre fichier ou votre dossier que si vous le décidez dans **Mon dossier**."
+      "texte": "Les champs marqués **espace privé** (poème, carte « Moi », silhouette…) restent sur cet ordinateur. À côté de chacun, un bouton **Privé / Partagé** vous permet de décider s’il figure dans votre PDF de remise. Par défaut, tout reste privé."
     },
     {
       "titre": "Remettre vos productions sur ILIAS",
-      "texte": "L’application ne transmet rien à vos enseignant·e·s. Quand une production est à remettre, un encadré **À remettre sur ILIAS** apparaît dans le parcours, avec le lien. Utilisez **Mon dossier → Imprimer ou enregistrer en PDF** pour préparer votre fichier."
+      "texte": "L’application ne transmet rien à vos enseignant·e·s. Quand une production est à remettre, un encadré **À remettre sur ILIAS** apparaît dans le parcours, avec le lien. Dans **Mon dossier**, créez deux PDF : un pour les tâches 1 à 3 (individuel), un pour la tâche finale (en binôme)."
     },
     {
       "titre": "Plan d’études et dossier",
-      "texte": "Le bouton **Plan d’études** ouvre le Lehrplan Thurgau dans un panneau latéral. **Mon dossier** rassemble toutes vos réponses : vous pouvez l’imprimer ou l’enregistrer en PDF."
+      "texte": "Le bouton **Plan d’études** ouvre le Lehrplan Thurgau dans un panneau latéral. **Mon dossier** rassemble vos réponses et crée vos PDF de remise : la tâche, l’activité et votre réponse, sans les consignes. Cartes mentales, arbre et silhouette y figurent sous forme de graphique."
     }
   ],
   "info_titre": "Avant de commencer",

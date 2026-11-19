@@ -36,7 +36,8 @@
       "aide": "dis donc ! 7, unité …, p. …, tâche …",
       "longueur": "court",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Référence de la tâche"
     },
     {
       "type": "reponse",
@@ -45,7 +46,8 @@
       "aide": "",
       "longueur": "long",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Analyse de la tâche initiale"
     },
     {
       "type": "consigne",
@@ -76,7 +78,8 @@
       "aide": "",
       "longueur": "moyen",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Objectifs interculturels"
     },
     {
       "type": "reponse",
@@ -85,7 +88,8 @@
       "aide": "",
       "longueur": "long",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Consigne destinée aux élèves"
     },
     {
       "type": "reponse",
@@ -112,7 +116,8 @@
       "aide": "",
       "longueur": "court",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Indice d’apprentissage interculturel"
     },
     {
       "type": "reponse",
@@ -121,7 +126,8 @@
       "aide": "Justifiez brièvement votre enrichissement en vous appuyant sur les lectures théoriques et sur le plan d’études : enseignement du français, compétences transversales et ÉDD. Expliquez notamment quel enjeu de compréhension, de participation ou de vivre-ensemble votre proposition permet de travailler.",
       "longueur": "long",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Justification"
     },
     {
       "type": "lehrplan",
@@ -189,7 +195,8 @@
       "aide": "",
       "longueur": "court",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Moment"
     },
     {
       "type": "reponse",
@@ -198,7 +205,8 @@
       "aide": "",
       "longueur": "moyen",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Situation"
     },
     {
       "type": "reponse",
@@ -207,7 +215,8 @@
       "aide": "",
       "longueur": "moyen",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Rôles"
     },
     {
       "type": "autocontrole",
@@ -251,7 +260,8 @@
       "aide": "",
       "longueur": "long",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Protocole de l’essai"
     },
     {
       "type": "reponse",
@@ -260,7 +270,8 @@
       "aide": "Piste 1 : …\nPiste 2 : …",
       "longueur": "long",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Pistes de résolution"
     },
     {
       "type": "reponse",
@@ -269,7 +280,8 @@
       "aide": "",
       "longueur": "moyen",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Élèves ou enseignant·e ?"
     },
     {
       "type": "repere",
@@ -305,7 +317,8 @@
       "aide": "",
       "longueur": "moyen",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Compétences interculturelles développées"
     },
     {
       "type": "reponse",
@@ -314,7 +327,8 @@
       "aide": "",
       "longueur": "moyen",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Ce qu’a révélé la carte-incident"
     },
     {
       "type": "reponse",
@@ -323,7 +337,8 @@
       "aide": "",
       "longueur": "moyen",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Pistes explorées et leurs limites"
     },
     {
       "type": "reponse",
@@ -332,7 +347,8 @@
       "aide": "",
       "longueur": "moyen",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Modifications après l’essai"
     },
     {
       "type": "reponse",
@@ -341,7 +357,8 @@
       "aide": "",
       "longueur": "moyen",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Argument pour les parents et la direction"
     },
     {
       "type": "texte",

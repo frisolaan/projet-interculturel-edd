@@ -552,3 +552,44 @@ main.atelier-mode { max-width: 1180px; }
   body.print-cartes .ac-sheet .ac-card:first-child { border-bottom: .2mm dashed #bbb; }
 }
 @page cartes { size: A4 portrait; margin: 0; }
+
+/* --- Partage de l’espace privé ---------------------------------------------------- */
+.share-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin-top: 10px; }
+.share-toggle { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border-radius: 999px; border: 1.5px solid var(--lilas); background: var(--surface); color: var(--lilas); font: inherit; font-size: .88rem; font-weight: 700; cursor: pointer; }
+.share-toggle .dot { width: 10px; height: 10px; border-radius: 50%; border: 2px solid currentColor; }
+.share-toggle.on { background: var(--petrol); border-color: var(--petrol); color: var(--on-petrol); }
+.share-toggle.on .dot { background: currentColor; }
+.share-row .hint { margin: 0; }
+.field { display: grid; gap: 4px; margin-bottom: 12px; max-width: 460px; }
+.field span { font-weight: 700; font-size: .9rem; }
+.field input { font: inherit; padding: 9px 12px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--surface); color: var(--ink); }
+.prive-liste h3 { margin: 0 0 4px; }
+.prive-item { padding: 10px 0; border-top: 1px solid var(--line); }
+.dossier-sep { margin-top: 32px; }
+.dossier + .dossier { margin-top: 18px; }
+.pdf-head { border-bottom: 2px solid var(--petrol); padding-bottom: 8px; margin-bottom: 8px; }
+.pdf-kicker { margin: 0; font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); }
+.pdf-head h1 { margin: 2px 0; }
+.pdf-meta { margin: 0; color: var(--ink-2); }
+.d-step h3 { font-size: 1rem; margin: 18px 0 6px; color: var(--petrol); }
+.pdf-mm { position: relative; width: 100%; max-width: 680px; aspect-ratio: 170 / 100; border-radius: 16px; background: var(--paper-2); margin: 6px 0; }
+.pdf-mm .mm-node { cursor: default; max-width: none; }
+.pdf-sil { max-width: 420px; margin: 6px 0; }
+.pdf-sil .sil-word { padding: 4px 10px; cursor: default; }
+.pdf-arbre .chips-wrap { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.pdf-arbre .chip { cursor: default; }
+@media print {
+  .print-area { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .print-area .pdf-head h1 { font-size: 18pt; }
+  .print-area .d-step h3 { font-size: 11.5pt; color: #000; break-after: avoid; }
+  .print-area .d-item { break-inside: avoid; }
+  .print-area .d-item h4 { margin: 8pt 0 2pt; }
+  .print-area .d-item p { margin: 0 0 4pt; font-size: 10.5pt; line-height: 1.4; }
+  .print-area .d-tache + .d-tache { break-before: page; }
+  .print-area .pdf-mm { width: 170mm; height: 100mm; max-width: none; aspect-ratio: auto; }
+  .print-area .pdf-mm .mm-node { font-size: 8.5pt; padding: 3pt 8pt; }
+  .print-area .pdf-sil { width: 120mm; height: 147.7mm; max-width: none; aspect-ratio: auto; margin: 4pt auto; }
+  .print-area .pdf-sil .sil-word { font-size: 9pt; padding: 2pt 7pt; }
+  .print-area .pdf-arbre { width: 160mm; margin: 0 auto; }
+  .print-area .pdf-arbre .chip { font-size: 9pt; padding: 3pt 8pt; }
+}

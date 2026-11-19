@@ -40,7 +40,7 @@ let fileHandle = null;
 let autosaveTimer = null;
 
 function freshState() {
-  return { app: APP_ID, version: 1, answers: {}, inclurePrive: false, savedAt: null, changedAt: null, etapes: {} };
+  return { app: APP_ID, version: 1, answers: {}, partage: {}, nom: '', binome: '', inclurePrive: false, savedAt: null, changedAt: null, etapes: {} };
 }
 function loadLocal() {
   try {
@@ -52,6 +52,13 @@ function loadLocal() {
 function persistLocal() {
   try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { /* ignore */ }
 }
+function touchState() {
+  state.changedAt = new Date().toISOString();
+  persistLocal();
+  updateSaveStatus();
+  if (fileHandle) { clearTimeout(autosaveTimer); autosaveTimer = setTimeout(() => saveToHandle().catch(() => {}), 1500); }
+}
+const isShared = (b) => !b.prive || !!(state.partage || {})[b.id];
 const getA = (id, fallback) => (state.answers[id] !== undefined ? state.answers[id] : fallback);
 function setA(id, value) {
   state.answers[id] = value;
@@ -97,9 +104,9 @@ function exportPayload() {
   const priv = privateIds();
   const answers = {};
   for (const [k, v] of Object.entries(state.answers)) {
-    if (!priv.has(k) || state.inclurePrive) answers[k] = v;
+    if (!priv.has(k) || state.inclurePrive || (state.partage || {})[k]) answers[k] = v;
   }
-  return JSON.stringify({ app: APP_ID, version: 1, savedAt: new Date().toISOString(), inclurePrive: state.inclurePrive, answers }, null, 2);
+  return JSON.stringify({ app: APP_ID, version: 1, savedAt: new Date().toISOString(), inclurePrive: state.inclurePrive, partage: state.partage || {}, nom: state.nom || '', binome: state.binome || '', answers }, null, 2);
 }
 async function saveToHandle() {
   const w = await fileHandle.createWritable();
@@ -143,6 +150,9 @@ function applyFile(text) {
   for (const id of priv) if (state.answers[id] !== undefined && data.answers[id] === undefined) kept[id] = state.answers[id];
   state.answers = { ...data.answers, ...kept };
   state.inclurePrive = !!data.inclurePrive;
+  state.partage = data.partage || {};
+  if (data.nom) state.nom = data.nom;
+  if (data.binome) state.binome = data.binome;
   state.changedAt = data.savedAt || new Date().toISOString();
   markSaved();
   renderSidebarProgress();
@@ -516,7 +526,7 @@ function blockReponse(b) {
   ta.addEventListener('input', () => { setA(b.id, ta.value); updInfo(); autoGrow(ta); });
   updInfo();
   wrap.append(ta, info);
-  if (b.prive) wrap.append(el('p', { class: 'hint' }, 'Reste sur cet ordinateur. N’entre dans votre fichier ou votre dossier que si vous le décidez.'));
+  if (b.prive) wrap.append(shareControl(b));
   requestAnimationFrame(() => autoGrow(ta));
   return wrap;
 }
@@ -800,6 +810,7 @@ function blockSilhouette(b) {
   tools.append(linkBtn, clear, el('span', { class: 'hint' }, 'Liens : cliquez sur un mot, puis sur un autre.'));
   wrap.append(f, tools, stage, el('p', { class: 'hint' }, 'Faites glisser les mots sur la silhouette ou autour d’elle. Il n’existe pas de placement correct.'));
   requestAnimationFrame(redraw);
+  if (b.prive) wrap.append(shareControl(b));
   return wrap;
 }
 
@@ -847,27 +858,29 @@ const SCHEMAS = {
   <text x="170" y="252" text-anchor="middle" class="sch-s">recto</text><text x="470" y="252" text-anchor="middle" class="sch-s">verso</text>
 </svg>`,
   'tete-coeur-main': () => `
-<svg viewBox="0 0 640 430" role="img" aria-labelledby="sch-t sch-d" class="schema-svg">
+<svg viewBox="0 0 680 490" role="img" aria-labelledby="sch-t sch-d" class="schema-svg">
   <title id="sch-t">Les trois dimensions de la compétence interculturelle</title>
   <desc id="sch-d">Trois cercles qui se chevauchent : les connaissances (la tête), les attitudes (le cœur) et les capacités d’agir (la main). Leur zone commune représente la compétence interculturelle.</desc>
-  <circle cx="320" cy="150" r="128" style="fill:var(--m1);fill-opacity:.22;stroke:var(--m1);stroke-width:2.5"/>
-  <circle cx="232" cy="290" r="128" style="fill:var(--m3);fill-opacity:.32;stroke:var(--m3);stroke-width:2.5"/>
-  <circle cx="408" cy="290" r="128" style="fill:var(--m2);fill-opacity:.22;stroke:var(--m2);stroke-width:2.5"/>
-  <circle cx="320" cy="245" r="46" class="sch-disc" style="fill:var(--surface);fill-opacity:.92"/>
-  <text x="320" y="240" text-anchor="middle" class="sch-center">compétence</text>
-  <text x="320" y="258" text-anchor="middle" class="sch-center">interculturelle</text>
-  <text x="320" y="78" text-anchor="middle" class="sch-h">la tête</text>
-  <text x="320" y="102" text-anchor="middle" class="sch-t">Connaissances</text>
-  <text x="320" y="122" text-anchor="middle" class="sch-s">pratiques, contextes,</text>
-  <text x="320" y="140" text-anchor="middle" class="sch-s">références des personnes</text>
-  <text x="178" y="312" text-anchor="middle" class="sch-h">le cœur</text>
-  <text x="178" y="336" text-anchor="middle" class="sch-t">Attitudes</text>
-  <text x="178" y="356" text-anchor="middle" class="sch-s">curiosité, ouverture,</text>
-  <text x="178" y="374" text-anchor="middle" class="sch-s">questionner ses évidences</text>
-  <text x="462" y="312" text-anchor="middle" class="sch-h">la main</text>
-  <text x="462" y="336" text-anchor="middle" class="sch-t">Capacités d’agir</text>
-  <text x="462" y="356" text-anchor="middle" class="sch-s">clarifier, communiquer,</text>
-  <text x="462" y="374" text-anchor="middle" class="sch-s">se comprendre</text>
+  <circle cx="340" cy="168" r="150" style="fill:var(--m1);fill-opacity:.22;stroke:var(--m1);stroke-width:2.5"/>
+  <circle cx="250" cy="322" r="150" style="fill:var(--m3);fill-opacity:.32;stroke:var(--m3);stroke-width:2.5"/>
+  <circle cx="430" cy="322" r="150" style="fill:var(--m2);fill-opacity:.22;stroke:var(--m2);stroke-width:2.5"/>
+  <circle cx="340" cy="268" r="50" class="sch-disc" style="fill:var(--surface);fill-opacity:.92"/>
+  <text x="340" y="263" text-anchor="middle" class="sch-center">compétence</text>
+  <text x="340" y="281" text-anchor="middle" class="sch-center">interculturelle</text>
+  <text x="340" y="72" text-anchor="middle" class="sch-h">la tête</text>
+  <text x="340" y="96" text-anchor="middle" class="sch-t">Connaissances</text>
+  <text x="340" y="116" text-anchor="middle" class="sch-s">pratiques, contextes,</text>
+  <text x="340" y="134" text-anchor="middle" class="sch-s">références des personnes</text>
+  <text x="192" y="352" text-anchor="middle" class="sch-h">le cœur</text>
+  <text x="192" y="376" text-anchor="middle" class="sch-t">Attitudes</text>
+  <text x="192" y="396" text-anchor="middle" class="sch-s">curiosité, ouverture,</text>
+  <text x="192" y="414" text-anchor="middle" class="sch-s">questionner</text>
+  <text x="192" y="432" text-anchor="middle" class="sch-s">ses évidences</text>
+  <text x="488" y="352" text-anchor="middle" class="sch-h">la main</text>
+  <text x="488" y="376" text-anchor="middle" class="sch-t">Capacités d’agir</text>
+  <text x="488" y="396" text-anchor="middle" class="sch-s">clarifier,</text>
+  <text x="488" y="414" text-anchor="middle" class="sch-s">communiquer,</text>
+  <text x="488" y="432" text-anchor="middle" class="sch-s">se comprendre</text>
 </svg>`,
 };
 function blockSchema(b) {
@@ -884,7 +897,8 @@ function blockRemise(b) {
     ${b.echeance ? `<p class="chips"><span>Délai : ${esc(b.echeance)}</span></p>` : ''}
     ${b.corps ? `<div class="prose">${md(b.corps)}</div>` : ''}`);
   const row = el('div', { class: 'row' }, link);
-  row.append(el('a', { class: 'btn ghost small', href: '#/dossier' }, 'Préparer le PDF dans mon dossier'));
+  row.append(el('button', { class: 'btn ghost small', type: 'button', onclick: () => exportPDF('finale') }, 'Télécharger le PDF de la tâche finale'));
+  row.append(el('a', { class: 'link', href: '#/dossier' }, 'Mon dossier'));
   wrap.append(row);
   return wrap;
 }
@@ -1007,6 +1021,7 @@ function blockMindmap(b) {
   wrap.append(bar, stage, tools);
   requestAnimationFrame(draw);
   window.addEventListener('resize', () => { if (wrap.isConnected) draw(); });
+  if (b.prive) wrap.append(shareControl(b));
   return wrap;
 }
 
@@ -1294,57 +1309,156 @@ function renderAtelier(main) {
 // ---------------------------------------------------------------------------
 // Dossier
 // ---------------------------------------------------------------------------
-function answerHTML(b) {
-  const v = state.answers[b.id];
-  if (v === undefined) return '';
-  if (b.type === 'reponse') return v.trim() ? `<div class="d-item"><h4>${mdInline(b.label)}</h4><p>${esc(v).replace(/\n/g, '<br>')}</p></div>` : '';
-  if (b.type === 'tableau') {
-    const rows = v.filter((r) => r.some((c) => c && c.trim()));
-    if (!rows.length) return '';
-    return `<div class="d-item"><h4>${esc(b.label)}</h4><table class="grid"><thead><tr>${b.colonnes.map((c) => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${rows.map((r) => `<tr>${r.map((c) => `<td>${esc(c).replace(/\n/g, '<br>')}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
-  }
-  if (b.type === 'tri') {
-    const lists = b.categories.map((c) => {
-      const items = b.elements.filter((_, i) => v.placements?.[i] === c.id).map((x) => x.texte)
-        .concat((v.ajouts || []).filter((a) => a.cat === c.id).map((a) => a.texte + ' *'));
-      return `<p><strong>${esc(c.label)} :</strong> ${esc(items.join(', ') || '—')}</p>`;
-    }).join('');
-    return `<div class="d-item"><h4>Classement (${esc(b.categories.map((c) => c.label).join(' / '))})</h4>${lists}</div>`;
-  }
-  if (b.type === 'carte' && v && v.roles) {
-    return `<div class="d-item"><h4>Cartes de rôle</h4>${v.roles.map((r) => `<p><strong>${esc(r.nom)} :</strong> ${esc(r.texte || '—')}</p>`).join('')}</div>`;
-  }
-  if (b.type === 'mindmap' && v.noeuds?.length > 1) {
-    const list = (pid) => { const k = v.noeuds.filter((n) => n.parent === pid); return k.length ? `<ul>${k.map((n) => `<li>${esc(n.texte)}${list(n.id)}</li>`).join('')}</ul>` : ''; };
-    return `<div class="d-item"><h4>${esc(b.label || 'Carte mentale')} — ${esc(v.noeuds[0].texte)}</h4>${list('c')}</div>`;
-  }
-  if (b.type === 'silhouette' && v.mots?.length) return `<div class="d-item"><h4>Silhouette — mots placés</h4><p>${esc(v.mots.map((m) => m.texte).join(', '))}</p></div>`;
-  return '';
+function shareControl(b) {
+  const box = el('div', { class: 'share-row' });
+  const draw = () => {
+    const on = isShared(b);
+    box.innerHTML = '';
+    const btn = el('button', { type: 'button', class: 'share-toggle' + (on ? ' on' : ''), 'aria-pressed': String(on) },
+      on ? '<span class="dot"></span>Partagé : figure dans mon PDF' : '<span class="dot"></span>Privé : ne figure pas dans mon PDF');
+    btn.addEventListener('click', () => {
+      state.partage = state.partage || {};
+      state.partage[b.id] = !on;
+      touchState();
+      document.querySelectorAll(`[data-share="${b.id}"]`).forEach((n) => n.dispatchEvent(new Event('redraw')));
+    });
+    box.append(btn, el('span', { class: 'hint' }, on
+      ? 'Cette réponse sera incluse dans votre PDF de remise. Cliquez pour la garder privée.'
+      : 'Reste sur cet ordinateur. Cliquez si vous souhaitez la partager dans votre PDF.'));
+  };
+  box.dataset.share = b.id;
+  box.addEventListener('redraw', draw);
+  draw();
+  return box;
 }
-function dossierHTML() {
-  const priv = privateIds();
-  return parcours.taches.map((id) => {
-    const t = taches[id];
-    const items = t.blocs.filter((b) => ANSWER_TYPES.includes(b.type) && (!priv.has(b.id) || state.inclurePrive)).map(answerHTML).join('');
-    return `<section class="d-tache"><h2>${esc(tacheLabel(t))} — ${mdInline(t.titre)}</h2>${items || '<p class="muted">Aucune réponse pour l’instant.</p>'}</section>`;
+
+// --- PDF de remise ---------------------------------------------------------------
+const PDF_EXCLUS = ['autocontrole'];
+const hasContent = (b, v) => {
+  if (v === undefined || v === null) return false;
+  if (b.type === 'reponse') return !!String(v).trim();
+  if (b.type === 'tableau') return Array.isArray(v) && v.some((r) => r.some((c) => c && c.trim()));
+  if (b.type === 'tri') return Object.keys(v.placements || {}).length > 0 || (v.ajouts || []).length > 0;
+  if (b.type === 'mindmap') return (v.noeuds || []).length > 1;
+  if (b.type === 'silhouette') return (v.mots || []).length > 0;
+  if (b.type === 'carte') return !!(v.roles && v.roles.some((r) => r.texte));
+  return false;
+};
+const pdfTitre = (b) => b.titre_pdf || b.label || '';
+function pdfTri(b, v) {
+  const items = (cid) => b.elements.map((x, i) => (v.placements?.[i] === cid ? x.texte : null)).filter(Boolean)
+    .concat((v.ajouts || []).filter((a) => a.cat === cid).map((a) => a.texte));
+  if (b.visuel === 'arbre' && b.categories.length === 2) {
+    const [c1, c2] = b.categories;
+    const chips = (cid) => items(cid).map((t) => `<span class="chip">${esc(t)}</span>`).join('') || '<span class="muted">—</span>';
+    return `<div class="tri-arbre pdf-arbre"><div class="tri-cat tone-0 couronne"><h4>${esc(c1.label)}</h4><div class="chips-wrap">${chips(c1.id)}</div></div>
+      <div class="arbre-sol" aria-hidden="true">${ARBRE_SOL}</div>
+      <div class="tri-cat tone-1 racines"><h4>${esc(c2.label)}</h4><div class="chips-wrap">${chips(c2.id)}</div></div></div>`;
+  }
+  return b.categories.map((c) => `<p><strong>${esc(c.label)} :</strong> ${esc(items(c.id).join(', ') || '—')}</p>`).join('');
+}
+function pdfMindmap(v) {
+  const W = 170; const H = 100;
+  const byId = (id) => v.noeuds.find((n) => n.id === id);
+  const lines = v.noeuds.filter((n) => n.parent !== null && byId(n.parent)).map((n) => {
+    const p = byId(n.parent);
+    const x1 = p.x / 100 * W; const y1 = p.y / 100 * H; const x2 = n.x / 100 * W; const y2 = n.y / 100 * H; const mx = (x1 + x2) / 2;
+    return `<path class="mm-line d${Math.min(mmDepth(v.noeuds, n), 3)}" d="M${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}"/>`;
   }).join('');
+  const nodes = v.noeuds.filter((n) => n.texte.trim()).map((n) => `<span class="mm-node d${Math.min(mmDepth(v.noeuds, n), 3)}" style="left:${n.x}%;top:${n.y}%">${esc(n.texte)}</span>`).join('');
+  return `<div class="pdf-mm"><svg class="mm-lines" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">${lines}</svg>${nodes}</div>`;
+}
+function pdfSilhouette(v) {
+  const W = 120; const H = W * 16 / 13; // mm, même proportion que l’écran
+  const centre = (m) => [m.x / 100 * W + (String(m.texte).length * 1.75 + 5) / 2, m.y / 100 * H + 3];
+  const lines = (v.liens || []).map(([a, c]) => {
+    const ma = v.mots.find((m) => m.id === a); const mc = v.mots.find((m) => m.id === c);
+    if (!ma || !mc) return '';
+    const [x1, y1] = centre(ma); const [x2, y2] = centre(mc);
+    return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"/>`;
+  }).join('');
+  const words = v.mots.map((m) => `<span class="sil-word" style="left:${m.x}%;top:${m.y}%">${esc(m.texte)}</span>`).join('');
+  return `<div class="sil-stage pdf-sil">${SILHOUETTE_SVG}<svg class="sil-links" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">${lines}</svg>${words}</div>`;
+}
+function pdfAnswer(b) {
+  const v = state.answers[b.id];
+  if (!hasContent(b, v)) return '';
+  const titre = b.type === 'silhouette' ? 'Ma silhouette' : b.type === 'carte' ? 'Cartes de rôle' : pdfTitre(b);
+  let body = '';
+  if (b.type === 'reponse') body = `<p>${esc(v).replace(/\n/g, '<br>')}</p>`;
+  else if (b.type === 'tableau') {
+    const rows = v.filter((r) => r.some((c) => c && c.trim()));
+    body = `<table class="grid"><thead><tr>${b.colonnes.map((c) => `<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${rows.map((r) => `<tr>${r.map((c) => `<td>${esc(c).replace(/\n/g, '<br>')}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+  } else if (b.type === 'tri') body = pdfTri(b, v);
+  else if (b.type === 'mindmap') body = pdfMindmap(v);
+  else if (b.type === 'silhouette') body = pdfSilhouette(v);
+  else if (b.type === 'carte') body = v.roles.filter((r) => r.texte).map((r) => `<p><strong>${esc(r.nom)} :</strong> ${esc(r.texte)}</p>`).join('');
+  return `<div class="d-item">${titre ? `<h4>${mdInline(titre)}</h4>` : ''}${body}</div>`;
+}
+function pdfTache(id) {
+  const t = taches[id];
+  const parts = stepsOf(id).map((step) => {
+    const items = step.blocs.filter((b) => ANSWER_TYPES.includes(b.type) && !PDF_EXCLUS.includes(b.type) && isShared(b)).map(pdfAnswer).join('');
+    return items ? `<section class="d-step"><h3>${mdInline(step.intro ? 'Introduction' : step.titre)}</h3>${items}</section>` : '';
+  }).join('');
+  return `<section class="d-tache"><h2>${esc(tacheLabel(t))} — ${mdInline(t.titre)}</h2>${parts || '<p class="muted">Aucune réponse pour l’instant.</p>'}</section>`;
+}
+const PDF_LOTS = {
+  parcours: { titre: 'Tâches 1 à 3', ids: () => parcours.taches.filter((id) => taches[id].numero !== 'finale'), nom: () => state.nom },
+  finale: { titre: 'Tâche finale', ids: () => parcours.taches.filter((id) => taches[id].numero === 'finale'), nom: () => state.binome || state.nom },
+};
+function pdfHTML(lot) {
+  const L = PDF_LOTS[lot];
+  const date = new Date().toLocaleDateString('fr-CH', { day: 'numeric', month: 'long', year: 'numeric' });
+  return `<header class="pdf-head"><p class="pdf-kicker">${esc(parcours.titre)} · ${esc(parcours.semestre || '')}</p>
+    <h1>${esc(L.titre)}</h1><p class="pdf-meta">${esc(L.nom() || 'Nom : …')} · ${esc(date)}</p></header>${L.ids().map(pdfTache).join('')}`;
+}
+function exportPDF(lot) {
+  const L = PDF_LOTS[lot];
+  if (!L.nom()) { alert(lot === 'finale' ? 'Indiquez d’abord les noms du binôme en haut de la page « Mon dossier ».' : 'Indiquez d’abord votre nom en haut de la page « Mon dossier ».'); location.hash = '#/dossier'; return; }
+  const prev = document.title;
+  document.title = `${L.titre} – ${L.nom()}`.replace(/[\\/:*?"<>|]/g, '');
+  printHTML(pdfHTML(lot), 'print-dossier');
+  setTimeout(() => { document.title = prev; }, 1500);
 }
 function renderDossier(main) {
   main.append(el('section', { class: 'tache-hero' }, `${motif('dossier', 'hero-motif')}<div><h1>Mon dossier</h1>
-    <p class="lead">Toutes vos réponses au même endroit — un point de départ pour votre dossier final.</p></div>`));
+    <p class="lead">Vos réponses, prêtes à être remises sous forme de PDF : un PDF pour les tâches 1 à 3, un PDF pour la tâche finale. Les consignes n’y figurent pas, seulement la tâche, l’activité et votre réponse.</p></div>`));
   const opts = el('section', { class: 'dossier-opts' });
+  const field = (key, label, ph) => {
+    const lab = el('label', { class: 'field' }, `<span>${label}</span>`);
+    const inp = el('input', { type: 'text', value: state[key] || '', placeholder: ph });
+    inp.addEventListener('input', () => { state[key] = inp.value; touchState(); });
+    lab.append(inp); return lab;
+  };
+  opts.append(field('nom', 'Votre prénom et nom', 'Prénom Nom'), field('binome', 'Tâche finale : noms du binôme', 'Prénom Nom & Prénom Nom'));
+  const row = el('div', { class: 'row' });
+  row.append(el('button', { class: 'btn save', onclick: () => exportPDF('parcours') }, 'PDF des tâches 1 à 3'));
+  row.append(el('button', { class: 'btn save', onclick: () => exportPDF('finale') }, 'PDF de la tâche finale'));
+  row.append(el('button', { class: 'btn ghost', onclick: save }, 'Enregistrer mon parcours'));
+  opts.append(row, el('p', { class: 'hint' }, 'Dans la fenêtre d’impression, choisissez « Enregistrer au format PDF » comme imprimante.'));
+  main.append(opts);
+
+  const privs = allBlocks().filter((b) => b.prive);
+  const pv = el('section', { class: 'dossier-opts prive-liste' }, '<h3>Espace privé</h3><p class="hint">Ces réponses restent privées tant que vous ne choisissez pas de les partager. Vous décidez pour chacune.</p>');
+  for (const b of privs) {
+    const t = taches[b.tache];
+    const r = el('div', { class: 'prive-item' }, `<strong>${esc(tacheLabel(t))} — ${mdInline(b.label || (b.type === 'silhouette' ? 'Ma silhouette' : ''))}</strong>`);
+    const ctl = shareControl(b);
+    ctl.addEventListener('redraw', () => { main.innerHTML = ''; renderDossier(main); });
+    r.append(ctl); pv.append(r);
+  }
   const lab = el('label', { class: 'toggle' });
   const cb = el('input', { type: 'checkbox' });
   cb.checked = state.inclurePrive;
-  cb.addEventListener('change', () => { state.inclurePrive = cb.checked; persistLocal(); main.innerHTML = ''; renderDossier(main); });
-  lab.append(cb, document.createTextNode(' Inclure mon espace privé (poème, carte « Moi », silhouette, exemple personnel) dans le dossier et dans mon fichier'));
-  opts.append(lab);
-  const row = el('div', { class: 'row' });
-  row.append(el('button', { class: 'btn primary', onclick: () => printHTML(`<h1>${esc(parcours.titre)}</h1>${dossierHTML()}`, 'print-dossier') }, 'Imprimer ou enregistrer en PDF'));
-  row.append(el('button', { class: 'btn ghost', onclick: save }, 'Enregistrer mon parcours'));
-  opts.append(row);
-  main.append(opts);
-  main.append(el('div', { class: 'dossier' }, dossierHTML()));
+  cb.addEventListener('change', () => { state.inclurePrive = cb.checked; touchState(); });
+  lab.append(cb, document.createTextNode(' Conserver aussi les réponses privées non partagées dans mon fichier de sauvegarde (utile pour continuer sur un autre ordinateur)'));
+  pv.append(lab);
+  main.append(pv);
+
+  main.append(el('h2', { class: 'dossier-sep' }, 'Aperçu'));
+  main.append(el('div', { class: 'dossier' }, pdfHTML('parcours')));
+  main.append(el('div', { class: 'dossier' }, pdfHTML('finale')));
 }
 
 function printHTML(html, cls) {

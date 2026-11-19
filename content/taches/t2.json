@@ -48,7 +48,7 @@
       "id": "t2-poeme-audio-de",
       "titre": "Das Original anhören",
       "fichier": "/assets/uploads/poeme-ich-de.mp3",
-      "legende": "Synthetische Stimme (Piper, Stimme « thorsten », CC0)."
+      "legende": "Synthetische Frauenstimme (Piper, Stimme « eva_k »)."
     },
     {
       "type": "consigne",
@@ -78,7 +78,8 @@
           "Le sentiment d’appartenir à plusieurs milieux, sans toujours parvenir à les concilier"
         ]
       ],
-      "lignes": 5
+      "lignes": 5,
+      "titre_pdf": "Cinq mots ou expressions"
     },
     {
       "type": "autocontrole",
@@ -108,7 +109,8 @@
       "id": "t2-3-mindmap",
       "label": "Ma carte « Moi »",
       "centre": "Moi",
-      "prive": true
+      "prive": true,
+      "titre_pdf": "Carte mentale « Moi »"
     },
     {
       "type": "reponse",
@@ -160,7 +162,8 @@
       "aide": "Pour mieux comprendre une personne, plutôt que de supposer que …, je peux …",
       "longueur": "court",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Ma phrase de conclusion"
     },
     {
       "type": "autocontrole",

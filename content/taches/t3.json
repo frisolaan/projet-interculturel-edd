@@ -43,7 +43,8 @@
       "aide": "Idée : … (p. …)",
       "longueur": "moyen",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Une idée importante — Fäcke"
     },
     {
       "type": "reponse",
@@ -52,7 +53,8 @@
       "aide": "Idée : … (p. …)",
       "longueur": "moyen",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Une idée importante — Chaves, Favier et Pélissier"
     },
     {
       "type": "autocontrole",
@@ -145,7 +147,8 @@
         }
       ],
       "ajout_libre": false,
-      "statut_contenu": "Entwurf – à valider"
+      "statut_contenu": "Entwurf – à valider",
+      "titre_pdf": "Classement : établi, supposé, généralisé"
     },
     {
       "type": "reponse",
@@ -154,7 +157,8 @@
       "aide": "Établi : …\nSupposé ou généralisé : …",
       "longueur": "moyen",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Mes notes"
     },
     {
       "type": "reponse",
@@ -281,7 +285,8 @@
         }
       ],
       "ajout_libre": false,
-      "statut_contenu": "Entwurf – à valider"
+      "statut_contenu": "Entwurf – à valider",
+      "titre_pdf": "Classement : la tête, le cœur, la main"
     },
     {
       "type": "texte",
@@ -356,7 +361,8 @@
       "aide": "",
       "longueur": "long",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Notre consigne améliorée"
     },
     {
       "type": "reponse",
@@ -365,7 +371,8 @@
       "aide": "",
       "longueur": "court",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Attendu du plan d’études"
     },
     {
       "type": "reponse",
@@ -374,7 +381,8 @@
       "aide": "",
       "longueur": "court",
       "mots_cible": 0,
-      "prive": false
+      "prive": false,
+      "titre_pdf": "Indice d’apprentissage interculturel"
     },
     {
       "type": "autocontrole",
@@ -405,7 +413,7 @@
       "type": "lehrplan",
       "id": "t3-6a-lp",
       "titre": "Lehrplan Volksschule Thurgau",
-      "corps": "Cherchez vous-même les passages : la recherche fait partie de la tâche.",
+      "corps": "Cherchez vous-même les passages : la recherche fait partie de la tâche. Les mots « BNE », « Kultur » et « Interkulturelle Verständigung » vous aideront à trouver les passages clés.",
       "liens": [
         {
           "label": "Page d’accueil du plan d’études",
